@@ -228,6 +228,7 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
 * [1.0.1](https://github.com/bazzline/php_component_locator_generator/tree/1.0.1) - not yet released
     * added api
     * fixed broken links
+    * adapted composer.json project name
 * [1.0.0](https://github.com/bazzline/php_component_locator_generator/tree/1.0.0) - released at 31.08.2014
     * initial project start
     * unit tests
