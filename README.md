@@ -3,8 +3,7 @@
 This component easy up locator generation based on configuration files.
 Out of the box, it creates locator from an array configuration file and from propel1 schema.xml files.
 
-@todo
-It is using the net_bazzline/php_component_code_generator component for php code generation.
+It is using the [php code generator component](https://github.com/bazzline/php_component_code_generator) as a robust base for code generation.
 
 The build status of the current master branch is tracked by Travis CI:
 [![Build Status](https://travis-ci.org/bazzline/php_component_locator_generator.png?branch=master)](http://travis-ci.org/bazzline/php_component_locator_generator)
@@ -18,8 +17,7 @@ The versioneye status is:
 Downloads:
 [![Downloads this Month](https://img.shields.io/packagist/dm/net_bazzline/php_component_locator_generator.svg)](https://packagist.org/packages/net_bazzline/php_component_locator_generator)
 
-@todo
-It is also available at [openhub.net](http://www.openhub.net/p/718154).
+It is also available at [openhub.net](http://www.openhub.net/p/718779).
 
 # Why
 
