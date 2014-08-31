@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+
+<database name="example_net_bazzline_component_locator" defaultIdMethod="native">
+    <table name="table_one" phpName="MyTableOne" package="lib.model.table" description="Table-One ">
+        <!-- content -->
+    </table>
+    <table name="table_two" phpName="MyTableTwo" package="lib.model.table" description="Table-Two ">
+        <!-- content -->
+    </table>
+</database>

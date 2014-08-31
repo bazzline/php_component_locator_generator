@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.propelorm.org/reference/schema.html -->
+<!-- http://www.propelorm.org/documentation/02-buildtime.html -->
+<database name="test_net_bazzline_component_locator" defaultIdMethod="native" namespace="My\\Tables">
+    <table name="table_one" phpName="MyTableOne" package="tables" namespace="One" description="Table-One ">
+        <!-- content -->
+    </table>
+    <table name="table_two" phpName="MyTableTwo" package="tables" namespace="Two" description="Table-Two ">
+        <!-- content -->
+    </table>
+</database>
