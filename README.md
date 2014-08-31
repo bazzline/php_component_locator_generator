@@ -218,3 +218,13 @@ The Locator is taking care of the instance pooling.
 * implement validation of used interface- or class names by adding "autoloader class path"
 * implement a flag to create a LocatorInterface out of the written Locator
 * implement usage of symfony/console for "generatorLocator.php" file
+
+# History
+
+* [1.0.1](https://github.com/bazzline/php_component_locator_generator/tree/1.0.0) - not yet released
+* [1.0.0](https://github.com/bazzline/php_component_locator_generator/tree/1.0.0) - released at 31.08.2014
+    * initial project start
+    * unit tests
+    * examples
+    * codebase itself
+    * api description
