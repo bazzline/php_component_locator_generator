@@ -211,6 +211,10 @@ The Locator is taking care of the instance pooling.
     * implement the [MethodBodyBuilderInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/cli/generate/locator/source/Net/Bazzline/Component/Locator/MethodBodyBuilder/MethodBodyBuilderInterface.php) to write your own method body builder
 * uses separate [component](https://github.com/stevleibelt/php_component_code_generator) for php code generation
 
+# API
+
+Thanks to [apigen](https://github.com/apigen/apigen), the api is available in the [document](https://github.com/bazzline/php_component_locator_generator/blob/master/document/index.html) section.
+
 # Future Improvements
 
 * create zf2 module to easy up usage
@@ -221,7 +225,8 @@ The Locator is taking care of the instance pooling.
 
 # History
 
-* [1.0.1](https://github.com/bazzline/php_component_locator_generator/tree/1.0.0) - not yet released
+* [1.0.1](https://github.com/bazzline/php_component_locator_generator/tree/1.0.1) - not yet released
+    * added api
 * [1.0.0](https://github.com/bazzline/php_component_locator_generator/tree/1.0.0) - released at 31.08.2014
     * initial project start
     * unit tests
