@@ -151,7 +151,7 @@ class LocatorGeneratorTest extends LocatorTestCase
         $expectedFileContent = '<?php' . PHP_EOL .
             '/**' . PHP_EOL .
             ' * @author Net\Bazzline\Component\Locator' . PHP_EOL .
-            ' * @since 2014-08-31' . PHP_EOL .
+            ' * @since ' . date('Y-m-d') . PHP_EOL .
             ' */' . PHP_EOL .
             '' . PHP_EOL .
             'namespace My\Namespace;' . PHP_EOL .
