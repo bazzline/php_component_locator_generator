@@ -7,10 +7,14 @@
 
 use Net\Bazzline\Component\Locator\Command;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+//check if is installed as composer component - taken from pdepend
+if (file_exists(__DIR__ . '/../../../autoload.php')) {
+    require_once __DIR__ . '/../../../autoload.php';
+} else {
+    require_once __DIR__ . '/../vendor/autoload.php';
+}
 
 global $argc, $argv;
-
 
 $usageMessage = 'Usage: ' . PHP_EOL .
     basename(__FILE__) . ' <path to configuration file>' . PHP_EOL;
