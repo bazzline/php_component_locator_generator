@@ -217,16 +217,14 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
 
 # Future Improvements
 
-* create zf2 module to easy up usage
+* added unittest for Command
 * add "verify" method to configuration that throws an error if not all mandatory parameters are set
 * implement validation of used interface- or class names by adding "autoloader class path"
 * implement a flag to create a LocatorInterface out of the written Locator
-* implement usage of symfony/console for "generatorLocator.php" file
 
 # History
 
 * [1.1.1](https://github.com/bazzline/php_component_locator_generator/tree/1.1.1) - not yet released
-    * added unittest for Command
 * [1.1.0](https://github.com/bazzline/php_component_locator_generator/tree/1.1.0) - released at 13.09.2014
     * enhanced Command
         * absolute configuration paths are now supported
