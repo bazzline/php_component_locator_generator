@@ -225,8 +225,14 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
 
 # History
 
-* [1.0.2](https://github.com/bazzline/php_component_locator_generator/tree/1.0.2) - not yet released
+* [1.1.1](https://github.com/bazzline/php_component_locator_generator/tree/1.1.1) - not yet released
+    * added unittest for Command
+* [1.1.0](https://github.com/bazzline/php_component_locator_generator/tree/1.1.0) - released at 13.09.2014
+    * enhanced Command
+        * absolute configuration paths are now supported
     * fixed (stupid) broken unittest
+    * fixed error in Command
+        * check if "bootstrap_file" exists in configuration was not well implemented
     * updated dependencies
 * [1.0.1](https://github.com/bazzline/php_component_locator_generator/tree/1.0.1) - released at 03.09.2014
     * added api

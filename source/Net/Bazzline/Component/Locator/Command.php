@@ -53,7 +53,14 @@ class Command
         }
 
         $cwd = getcwd();
-        $pathToConfigurationFile = realpath($cwd . DIRECTORY_SEPARATOR . $this->arguments[1]);
+        $path = $this->arguments[1];
+        $isRelativePath = ($path[0] !== '/');
+
+        if ($isRelativePath) {
+            $pathToConfigurationFile = realpath($cwd . DIRECTORY_SEPARATOR . $path);
+        } else {
+            $pathToConfigurationFile = realpath($path);
+        }
 
         //----begin of validation
         if (!is_file($pathToConfigurationFile)) {
@@ -94,7 +101,7 @@ class Command
             );
         }
 
-        if ($data['bootstrap_file']) {
+        if (isset($data['bootstrap_file'])) {
             if (!file_exists($data['bootstrap_file'])) {
                 throw new Exception(
                     'provided bootstrap file "' . $data['bootstrap_file'] . '" does not exist'
