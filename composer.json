@@ -25,7 +25,7 @@
         "mikey179/vfsstream": "1.4.0",
         "mockery/mockery": "dev-master",
         "phpmd/phpmd": "2.1.1",
-        "phpunit/phpunit": "4.2.5"
+        "phpunit/phpunit": "4.2.6"
     },
     "autoload": {
         "psr-0": {
