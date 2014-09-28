@@ -214,7 +214,7 @@ The Locator is taking care of the instance pooling.
 
 # API
 
-Thanks to [apigen](https://github.com/apigen/apigen), the api is available in the [document](https://github.com/bazzline/php_component_locator_generator/blob/master/document/index.html) section.
+Thanks to [apigen](https://github.com/apigen/apigen), the api is available in the [document](https://github.com/bazzline/php_component_locator_generator/blob/master/document/index.html) section or [online](http://code.bazzline.net/).
 
 # Future Improvements
 
