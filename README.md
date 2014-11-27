@@ -37,7 +37,7 @@ It is also available at [openhub.net](http://www.openhub.net/p/718779).
 
 # Install
 
-## Manuel
+## By Hand
 
     mkdir -p vendor/net_bazzline/php_component_locator_generator
     cd vendor/net_bazzline/php_component_locator_generator
