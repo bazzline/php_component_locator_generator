@@ -106,13 +106,13 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
     )
     {
         //begin of variable definitions
-        $className          = '';
-        $namespace          = $reader->getAttribute('namespace');
-        $phpName            = $reader->getAttribute('phpName');
-        $tableName          = $reader->getAttribute('name');
-        $tableNamespace     = '';
-        $hasPhpName         = (strlen($phpName) > 0);
-        $hasNamespace       = (strlen($namespace) > 0);
+        $fullQualifiedClassName = '';
+        $namespace              = $reader->getAttribute('namespace');
+        $phpName                = $reader->getAttribute('phpName');
+        $tableName              = $reader->getAttribute('name');
+        $tableNamespace         = '';
+        $hasPhpName             = (strlen($phpName) > 0);
+        $hasNamespace           = (strlen($namespace) > 0);
         //end of variable definitions
 
         //begin of class name building
@@ -128,30 +128,38 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
         $hasTableNamespace  = (strlen($tableNamespace) > 0);
 
         if ($hasPhpName) {
-            $className = $phpName;
+            $fullQualifiedClassName = $phpName;
         } else {
             $tableNameAsArray = explode('_', $tableName);
             array_walk($tableNameAsArray, function (&$value) {
                 $value = ucfirst($value);
             });
-            $className .= implode('', $tableNameAsArray);
+            $fullQualifiedClassName .= implode('', $tableNameAsArray);
         }
 
         if ($hasTableNamespace) {
-            $className = $tableNamespace . '\\' . $className;
+            $fullQualifiedClassName = $tableNamespace . '\\' . $fullQualifiedClassName;
         }
 
-        $className = str_replace('\\\\', '\\', $className);
-        $queryClassName = $className . 'Query';
+        $fullQualifiedClassName = str_replace('\\\\', '\\', $fullQualifiedClassName);
+        $fullQualifiedQueryClassName = $fullQualifiedClassName . 'Query';
         //end of class name building
 
         //begin of configuration adaptation
-        $configuration->addInstance($className, false, false, $className, null, $columnClassMethodBodyBuilder);
-        $configuration->addInstance($queryClassName, false, false, $className, null, $queryClassMethodBodyBuilder);
+        $configuration->addInstance($fullQualifiedClassName, false, false, $fullQualifiedClassName, null, $columnClassMethodBodyBuilder);
+        $configuration->addInstance($fullQualifiedQueryClassName, false, false, $fullQualifiedClassName, null, $queryClassMethodBodyBuilder);
 
         if ($hasDifferentNamespaceThanLocator) {
-            $configuration->addUses($className);
-            $configuration->addUses($queryClassName);
+            //we have to remove the first "\" if available
+            $useClassName = ($this->startsWith($fullQualifiedClassName, '\\'))
+                ? substr($fullQualifiedClassName, 1)
+                : $fullQualifiedClassName;
+            $useQueryClassName = ($this->startsWith($fullQualifiedQueryClassName, '\\'))
+                ? substr($fullQualifiedQueryClassName, 1)
+                : $fullQualifiedQueryClassName;
+
+            $configuration->addUses($useClassName);
+            $configuration->addUses($useQueryClassName);
         }
         //end of configuration adaptation
 
@@ -283,5 +291,15 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
         }
 
         return $configuration;
+    }
+
+    /**
+     * @param string $haystack
+     * @param string $needle
+     * @return bool
+     */
+    private function startsWith($haystack, $needle)
+    {
+        return (strncmp($haystack, $needle, strlen($needle)) === 0);
     }
 }

@@ -153,19 +153,19 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
         $namespace = 'Test\Namespace';
         $uses = array(
             array(
-                'class_name'    => '\My\Tables\One\MyTableOne',
+                'class_name'    => 'My\Tables\One\MyTableOne',
                 'alias'         => ''
             ),
             array(
-                'class_name'    => '\My\Tables\One\MyTableOneQuery',
+                'class_name'    => 'My\Tables\One\MyTableOneQuery',
                 'alias'         => ''
             ),
             array(
-                'class_name'    => '\My\Tables\Two\MyTableTwo',
+                'class_name'    => 'My\Tables\Two\MyTableTwo',
                 'alias'         => ''
             ),
             array(
-                'class_name'    => '\My\Tables\Two\MyTableTwoQuery',
+                'class_name'    => 'My\Tables\Two\MyTableTwoQuery',
                 'alias'         => ''
             )
         );
