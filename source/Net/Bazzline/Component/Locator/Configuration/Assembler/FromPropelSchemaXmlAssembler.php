@@ -71,23 +71,32 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
                         $hasRootNamespace = true;
                     }
                 }
-   
-                if ($reader->name === 'table') {
-                    $className = '';
-                    $namespace = $reader->getAttribute('namespace');
-                    $phpName = $reader->getAttribute('phpName');
-                    $tableName = $reader->getAttribute('name');
-                    $tableNamespace = '';
 
+                if ($reader->name === 'table') {
+                    //--begin of variable definitions
+                    $className          = '';
+                    $namespace          = $reader->getAttribute('namespace');
+                    $phpName            = $reader->getAttribute('phpName');
+                    $tableName          = $reader->getAttribute('name');
+                    $tableNamespace     = '';
+
+                    $hasPhpName         = (strlen($phpName) > 0);
+                    $hasNamespace       = (strlen($namespace) > 0);
+                    $hasTableNamespace  = (strlen($tableNamespace) > 0);
+                    //--end of variable definitions
+
+                    //--begin of class name building
                     if ($hasRootNamespace) {
-                        $tableNamespace .= $rootNamespace . '\\';
+                        $tableNamespace .= '\\' . $rootNamespace . '\\';
                     }
 
-                    if (strlen($namespace) > 0) {
+                    if ($hasNamespace) {
                         $tableNamespace .= $namespace . '\\';
                     }
 
-                    if (strlen($phpName) > 0) {
+                    $hasDifferentNamespaceThanLocator = ($locatorNamespace !== $tableNamespace);
+
+                    if ($hasPhpName) {
                         $className = $phpName;
                     } else {
                         $tableNameAsArray = explode('_', $tableName);
@@ -95,20 +104,23 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
                         $className .= implode('', $tableNameAsArray);
                     }
 
-                    if (strlen($tableNamespace) > 0) {
+                    if ($hasTableNamespace) {
                         $className = $tableNamespace . '\\' . $className;
                     }
+
                     $className = str_replace('\\\\', '\\', $className);
-
                     $queryClassName = $className . 'Query';
+                    //--end of class name building
 
+                    //--begin of configuration adaptation
                     $configuration->addInstance($className, false, false, $className, null, $columnClassMethodBodyBuilder);
                     $configuration->addInstance($queryClassName, false, false, $className, null, $queryClassMethodBodyBuilder);
 
-                    if ($locatorNamespace !== $tableNamespace) {
+                    if ($hasDifferentNamespaceThanLocator) {
                         $configuration->addUses($className);
                         $configuration->addUses($queryClassName);
                     }
+                    //--end of configuration adaptation
                 }
             }
         }
