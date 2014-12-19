@@ -6,6 +6,7 @@
 
 namespace Net\Bazzline\Component\Locator\Configuration\Assembler;
 
+use Net\Bazzline\Component\Locator\Configuration;
 use XMLReader;
 
 /**
@@ -23,129 +24,11 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
         $configuration = $this->getConfiguration();
         $pathToSchemaXml = realpath($data['path_to_schema_xml']);
 
-        if (!is_file($pathToSchemaXml)) {
-            throw new RuntimeException(
-                'provided schema xml path "' . $pathToSchemaXml . '" is not a file'
-            );
-        }
+        $this->validatePathToSchemaXml($pathToSchemaXml);
 
-        if (!is_readable($pathToSchemaXml)) {
-            throw new RuntimeException(
-                'file "' . $pathToSchemaXml . '" is not readable'
-            );
-        }
-
-        //set strings
-        $configuration
-            ->setClassName($data['class_name'])
-            ->setFilePath($data['file_path']);
-
-        if (isset($data['method_prefix'])) {
-            $configuration->setMethodPrefix($data['method_prefix']);
-        }
-
-        if (isset($data['namespace'])) {
-            $configuration->setNamespace($data['namespace']);
-        }
-
-        if (isset($data['extends'])) {
-            $configuration->setExtends($data['extends']);
-        }
-
-        $reader = new XMLReader();
-        $reader->open($pathToSchemaXml);
-
-        $columnClassMethodBodyBuilder = (isset($data['column_class_method_body_builder']))
-            ? $data['column_class_method_body_builder'] : null;
-        $hasRootNamespace = false;
-        $locatorNamespace = (isset($data['namespace'])) ? $data['namespace'] : '';
-        $queryClassMethodBodyBuilder = (isset($data['query_class_method_body_builder']))
-            ? $data['query_class_method_body_builder'] : null;
-        $rootNamespace = '';
-
-        while ($reader->read()) {
-            if ($reader->nodeType === XMLREADER::ELEMENT) {
-                if ($reader->name === 'database') {
-                    $rootNamespace = $reader->getAttribute('namespace');
-                    if (strlen($rootNamespace) > 0) {
-                        $hasRootNamespace = true;
-                    }
-                }
-
-                if ($reader->name === 'table') {
-                    //--begin of variable definitions
-                    $className          = '';
-                    $namespace          = $reader->getAttribute('namespace');
-                    $phpName            = $reader->getAttribute('phpName');
-                    $tableName          = $reader->getAttribute('name');
-                    $tableNamespace     = '';
-
-                    $hasPhpName         = (strlen($phpName) > 0);
-                    $hasNamespace       = (strlen($namespace) > 0);
-                    $hasTableNamespace  = (strlen($tableNamespace) > 0);
-                    //--end of variable definitions
-
-                    //--begin of class name building
-                    if ($hasRootNamespace) {
-                        $tableNamespace .= '\\' . $rootNamespace . '\\';
-                    }
-
-                    if ($hasNamespace) {
-                        $tableNamespace .= $namespace . '\\';
-                    }
-
-                    $hasDifferentNamespaceThanLocator = ($locatorNamespace !== $tableNamespace);
-
-                    if ($hasPhpName) {
-                        $className = $phpName;
-                    } else {
-                        $tableNameAsArray = explode('_', $tableName);
-                        array_walk($tableNameAsArray, function (&$value) { $value = ucfirst($value); });
-                        $className .= implode('', $tableNameAsArray);
-                    }
-
-                    if ($hasTableNamespace) {
-                        $className = $tableNamespace . '\\' . $className;
-                    }
-
-                    $className = str_replace('\\\\', '\\', $className);
-                    $queryClassName = $className . 'Query';
-                    //--end of class name building
-
-                    //--begin of configuration adaptation
-                    $configuration->addInstance($className, false, false, $className, null, $columnClassMethodBodyBuilder);
-                    $configuration->addInstance($queryClassName, false, false, $className, null, $queryClassMethodBodyBuilder);
-
-                    if ($hasDifferentNamespaceThanLocator) {
-                        $configuration->addUses($className);
-                        $configuration->addUses($queryClassName);
-                    }
-                    //--end of configuration adaptation
-                }
-            }
-        }
-        $reader->close();
-
-        if (isset($data['implements'])) {
-            foreach ($data['implements'] as $interfaceName) {
-                $configuration->addImplements($interfaceName);
-            }
-        }
-
-        if (isset($data['uses'])) {
-            foreach ($data['uses'] as $key => $uses) {
-                if (!isset($uses['class_name'])) {
-                    throw new RuntimeException(
-                        'use entry with key "' . $key . '" needs to have a key "class_name"'
-                    );
-                }
-
-                $alias = (isset($uses['alias'])) ? $uses['alias'] : '';
-                $className = str_replace('\\\\', '\\', $uses['class_name']);
-
-                $configuration->addUses($className, $alias);
-            }
-        }
+        $configuration = $this->setStringPropertiesToConfiguration($data, $configuration);
+        $configuration = $this->parseSchemaXml($data, $pathToSchemaXml, $configuration);
+        $configuration = $this->setArrayPropertiesToConfiguration($data, $configuration);
 
         $this->setConfiguration($configuration);
     }
@@ -190,5 +73,205 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
             $data,
             $optionalKeysToExpectedValueTyp
         );
+    }
+
+    /**
+     * @param XMLReader $reader
+     * @param boolean $hasRootNamespace
+     * @param string $rootNamespace
+     * @param string $locatorNamespace
+     * @param Configuration $configuration
+     * @param string $columnClassMethodBodyBuilder
+     * @param string $queryClassMethodBodyBuilder
+     * @return Configuration
+     */
+    private function addTableToConfiguration(
+        XMLReader $reader,
+        $hasRootNamespace,
+        $rootNamespace,
+        $locatorNamespace,
+        Configuration $configuration,
+        $columnClassMethodBodyBuilder,
+        $queryClassMethodBodyBuilder
+    )
+    {
+        //--begin of variable definitions
+        $className = '';
+        $namespace = $reader->getAttribute('namespace');
+        $phpName = $reader->getAttribute('phpName');
+        $tableName = $reader->getAttribute('name');
+        $tableNamespace = '';
+        $hasPhpName = (strlen($phpName) > 0);
+        $hasNamespace = (strlen($namespace) > 0);
+        $hasTableNamespace = (strlen($tableNamespace) > 0);
+        //--end of variable definitions
+
+        //--begin of class name building
+        if($hasRootNamespace) {
+            $tableNamespace .= '\\' . $rootNamespace . '\\';
+        }
+
+        if($hasNamespace) {
+            $tableNamespace .= $namespace . '\\';
+        }
+
+        $hasDifferentNamespaceThanLocator = ($locatorNamespace !== $tableNamespace);
+
+        if($hasPhpName) {
+            $className = $phpName;
+        } else {
+            $tableNameAsArray = explode('_', $tableName);
+            array_walk($tableNameAsArray, function (&$value) {
+                $value = ucfirst($value);
+            });
+            $className .= implode('', $tableNameAsArray);
+        }
+
+        if($hasTableNamespace) {
+            $className = $tableNamespace . '\\' . $className;
+        }
+
+        $className = str_replace('\\\\', '\\', $className);
+        $queryClassName = $className . 'Query';
+        //--end of class name building
+
+        //--begin of configuration adaptation
+        $configuration->addInstance($className, false, false, $className, null, $columnClassMethodBodyBuilder);
+        $configuration->addInstance($queryClassName, false, false, $className, null, $queryClassMethodBodyBuilder);
+
+        if($hasDifferentNamespaceThanLocator) {
+            $configuration->addUses($className);
+            $configuration->addUses($queryClassName);
+        }
+        //--end of configuration adaptation
+
+        return $configuration;
+    }
+
+    /**
+     * @param string $pathToSchemaXml
+     * @throws RuntimeException
+     */
+    private function validatePathToSchemaXml($pathToSchemaXml)
+    {
+        if(!is_file($pathToSchemaXml)) {
+            throw new RuntimeException('provided schema xml path "' . $pathToSchemaXml . '" is not a file');
+        }
+        if(!is_readable($pathToSchemaXml)) {
+            throw new RuntimeException('file "' . $pathToSchemaXml . '" is not readable');
+        }
+    }
+
+    /**
+     * @param array $data
+     * @param Configuration $configuration
+     * @return Configuration
+     */
+    private function setStringPropertiesToConfiguration(array $data, Configuration $configuration)
+    {
+        $configuration->setClassName($data['class_name'])->setFilePath($data['file_path']);
+
+        if (isset($data['method_prefix'])) {
+            $configuration->setMethodPrefix($data['method_prefix']);
+        }
+
+        if (isset($data['namespace'])) {
+            $configuration->setNamespace($data['namespace']);
+        }
+
+        if (isset($data['extends'])) {
+            $configuration->setExtends($data['extends']);
+            return $data;
+        }
+
+        return $configuration;
+    }
+
+    /**
+     * @param array $data
+     * @param string $pathToSchemaXml
+     * @param Configuration $configuration
+     * @return Configuration
+     */
+    private function parseSchemaXml(array $data, $pathToSchemaXml, Configuration $configuration)
+    {
+        //--begin of variable definitions
+        //@todo inject XMLReader
+        $reader = new XMLReader();
+        $reader->open($pathToSchemaXml);
+        $columnClassMethodBodyBuilder =
+            (isset($data['column_class_method_body_builder']))
+                ? $data['column_class_method_body_builder']
+                : null;
+        $hasRootNamespace = false;
+        $locatorNamespace = (isset($data['namespace'])) ? $data['namespace'] : '';
+        $queryClassMethodBodyBuilder =
+            (isset($data['query_class_method_body_builder']))
+                ? $data['query_class_method_body_builder']
+                : null;
+        $rootNamespace = '';
+        //--end of variable definitions
+
+        //--begin of xml parsing
+        while ($reader->read()) {
+            if ($reader->nodeType === XMLREADER::ELEMENT) {
+                $nodeIsADatabase = ($reader->name === 'database');
+                $nodeIsATable = ($reader->name === 'table');
+
+                if ($nodeIsADatabase) {
+                    $rootNamespace = $reader->getAttribute('namespace');
+                    if(strlen($rootNamespace) > 0) {
+                        $hasRootNamespace = true;
+                    }
+                }
+
+                if ($nodeIsATable) {
+                    $configuration = $this->addTableToConfiguration(
+                        $reader,
+                        $hasRootNamespace,
+                        $rootNamespace,
+                        $locatorNamespace,
+                        $configuration,
+                        $columnClassMethodBodyBuilder,
+                        $queryClassMethodBodyBuilder
+                    );
+                }
+            }
+        }
+        $reader->close();
+        //--end of xml parsing
+
+        return $configuration;
+    }
+
+    /**
+     * @param array $data
+     * @param Configuration $configuration
+     * @return Configuration
+     * @throws RuntimeException
+     */
+    private function setArrayPropertiesToConfiguration(array $data, Configuration $configuration)
+    {
+        if (isset($data['implements'])) {
+            foreach($data['implements'] as $interfaceName) {
+                $configuration->addImplements($interfaceName);
+            }
+        }
+
+        if (isset($data['uses'])) {
+            foreach ($data['uses'] as $key => $uses) {
+                if (!isset($uses['class_name'])) {
+                    throw new RuntimeException(
+                        'use entry with key "' . $key . '" needs to have a key "class_name"'
+                    );
+                }
+
+                $alias = (isset($uses['alias'])) ? $uses['alias'] : '';
+                $className = str_replace('\\\\', '\\', $uses['class_name']);
+                $configuration->addUses($className, $alias);
+            }
+        }
+
+        return $configuration;
     }
 }
