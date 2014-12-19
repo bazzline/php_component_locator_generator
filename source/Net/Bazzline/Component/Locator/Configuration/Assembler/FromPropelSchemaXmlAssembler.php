@@ -214,9 +214,6 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
     private function mapSchemaXmlPropertiesToConfiguration(array $data, $pathToSchemaXml, Configuration $configuration)
     {
         //begin of variable definitions
-        //@todo inject XMLReader
-        $reader = new XMLReader();
-        $reader->open($pathToSchemaXml);
         $columnClassMethodBodyBuilder =
             (isset($data['column_class_method_body_builder']))
                 ? $data['column_class_method_body_builder']
@@ -227,6 +224,9 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
             (isset($data['query_class_method_body_builder']))
                 ? $data['query_class_method_body_builder']
                 : null;
+        //@todo inject XMLReader
+        $reader = new XMLReader();
+        $reader->open($pathToSchemaXml);
         $rootNamespace = '';
         //end of variable definitions
 
