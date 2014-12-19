@@ -42,7 +42,7 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
         Mockery::close();
     }
 
-    //----begin of configuration namespace
+    //begin of configuration namespace
     /**
      * @return Mockery\MockInterface|\Net\Bazzline\Component\Locator\Configuration\Instance
      */
@@ -66,8 +66,8 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     {
         return new Configuration\Uses();
     }
-    //----end of configuration namespace
-    //----begin of configuration assembler namespace
+    //end of configuration namespace
+    //begin of configuration assembler namespace
     /**
      * @return Mockery\MockInterface|\Net\Bazzline\Component\Locator\Configuration\Assembler\AbstractAssembler
      */
@@ -91,9 +91,9 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     {
         return new Configuration\Assembler\FromPropelSchemaXmlAssembler();
     }
-    //----end of configuration assembler namespace
+    //end of configuration assembler namespace
 
-    //----begin of file exists strategy namespace
+    //begin of file exists strategy namespace
     /**
      * @return Mockery\MockInterface|\Net\Bazzline\Component\Locator\FileExistsStrategy\FileExistsStrategyInterface
      */
@@ -125,9 +125,9 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     {
         return new SuffixWithCurrentTimestampStrategy();
     }
-    //----end of file exists strategy namespace
+    //end of file exists strategy namespace
 
-    //----begin of locator namespace
+    //begin of locator namespace
     /**
      * @return Configuration
      */
@@ -224,12 +224,12 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     {
         return Mockery::mock('Net\Bazzline\Component\Locator\LocatorGenerator');
     }
-    //----end of locator namespace
+    //end of locator namespace
 
-    //----begin of helper
-    //----end of helper
+    //begin of helper
+    //end of helper
 
-    //----begin of generator
+    //begin of generator
     /**
      * @return \Net\Bazzline\Component\CodeGenerator\BlockGenerator
      */
@@ -261,8 +261,8 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     {
         return new Indention();
     }
-    //----end of generator
-    //----begin of generator factory
+    //end of generator
+    //begin of generator factory
     /**
      * @return BlockGeneratorFactory
      */
@@ -310,9 +310,9 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     {
         return new PropertyGeneratorFactory();
     }
-    //----end of generator factory
+    //end of generator factory
 
-    //----begin of MethodBodyBuilder
+    //begin of MethodBodyBuilder
     /**
      * @return Mockery\MockInterface|\Net\Bazzline\Component\Locator\MethodBodyBuilder\AbstractMethodBodyBuilder
      */
@@ -359,5 +359,5 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     {
         return new PropelQueryCreateBuilder();
     }
-    //----end of MethodBodyBuilder
+    //end of MethodBodyBuilder
 }

@@ -62,7 +62,7 @@ class Command
             $pathToConfigurationFile = realpath($path);
         }
 
-        //----begin of validation
+        //begin of validation
         if (!is_file($pathToConfigurationFile)) {
             throw new Exception(
                 'provided path "' . $pathToConfigurationFile . '" is not a file'
@@ -116,7 +116,7 @@ class Command
 
             require_once $data['bootstrap_file'];
         }
-        //----end of validation
+        //end of validation
 
         /**
          * @var \Net\Bazzline\Component\Locator\Configuration\Assembler\AssemblerInterface $assembler
