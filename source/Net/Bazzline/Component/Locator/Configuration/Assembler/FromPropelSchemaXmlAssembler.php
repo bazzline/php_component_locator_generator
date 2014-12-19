@@ -26,9 +26,19 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
 
         $this->validatePathToSchemaXml($pathToSchemaXml);
 
-        $configuration = $this->setStringPropertiesToConfiguration($data, $configuration);
-        $configuration = $this->parseSchemaXml($data, $pathToSchemaXml, $configuration);
-        $configuration = $this->setArrayPropertiesToConfiguration($data, $configuration);
+        $configuration = $this->mapStringPropertiesToConfiguration(
+            $data,
+            $configuration
+        );
+        $configuration = $this->mapSchemaXmlPropertiesToConfiguration(
+            $data,
+            $pathToSchemaXml,
+            $configuration
+        );
+        $configuration = $this->mapArrayPropertiesToConfiguration(
+            $data,
+            $configuration
+        );
 
         $this->setConfiguration($configuration);
     }
@@ -95,29 +105,29 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
         $queryClassMethodBodyBuilder
     )
     {
-        //--begin of variable definitions
-        $className = '';
-        $namespace = $reader->getAttribute('namespace');
-        $phpName = $reader->getAttribute('phpName');
-        $tableName = $reader->getAttribute('name');
-        $tableNamespace = '';
-        $hasPhpName = (strlen($phpName) > 0);
-        $hasNamespace = (strlen($namespace) > 0);
-        $hasTableNamespace = (strlen($tableNamespace) > 0);
-        //--end of variable definitions
+        //begin of variable definitions
+        $className          = '';
+        $namespace          = $reader->getAttribute('namespace');
+        $phpName            = $reader->getAttribute('phpName');
+        $tableName          = $reader->getAttribute('name');
+        $tableNamespace     = '';
+        $hasPhpName         = (strlen($phpName) > 0);
+        $hasNamespace       = (strlen($namespace) > 0);
+        //end of variable definitions
 
-        //--begin of class name building
-        if($hasRootNamespace) {
+        //begin of class name building
+        if ($hasRootNamespace) {
             $tableNamespace .= '\\' . $rootNamespace . '\\';
         }
 
-        if($hasNamespace) {
+        if ($hasNamespace) {
             $tableNamespace .= $namespace . '\\';
         }
 
         $hasDifferentNamespaceThanLocator = ($locatorNamespace !== $tableNamespace);
+        $hasTableNamespace  = (strlen($tableNamespace) > 0);
 
-        if($hasPhpName) {
+        if ($hasPhpName) {
             $className = $phpName;
         } else {
             $tableNameAsArray = explode('_', $tableName);
@@ -127,23 +137,23 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
             $className .= implode('', $tableNameAsArray);
         }
 
-        if($hasTableNamespace) {
+        if ($hasTableNamespace) {
             $className = $tableNamespace . '\\' . $className;
         }
 
         $className = str_replace('\\\\', '\\', $className);
         $queryClassName = $className . 'Query';
-        //--end of class name building
+        //end of class name building
 
-        //--begin of configuration adaptation
+        //begin of configuration adaptation
         $configuration->addInstance($className, false, false, $className, null, $columnClassMethodBodyBuilder);
         $configuration->addInstance($queryClassName, false, false, $className, null, $queryClassMethodBodyBuilder);
 
-        if($hasDifferentNamespaceThanLocator) {
+        if ($hasDifferentNamespaceThanLocator) {
             $configuration->addUses($className);
             $configuration->addUses($queryClassName);
         }
-        //--end of configuration adaptation
+        //end of configuration adaptation
 
         return $configuration;
     }
@@ -154,10 +164,11 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
      */
     private function validatePathToSchemaXml($pathToSchemaXml)
     {
-        if(!is_file($pathToSchemaXml)) {
+        if (!is_file($pathToSchemaXml)) {
             throw new RuntimeException('provided schema xml path "' . $pathToSchemaXml . '" is not a file');
         }
-        if(!is_readable($pathToSchemaXml)) {
+
+        if (!is_readable($pathToSchemaXml)) {
             throw new RuntimeException('file "' . $pathToSchemaXml . '" is not readable');
         }
     }
@@ -167,7 +178,7 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
      * @param Configuration $configuration
      * @return Configuration
      */
-    private function setStringPropertiesToConfiguration(array $data, Configuration $configuration)
+    private function mapStringPropertiesToConfiguration(array $data, Configuration $configuration)
     {
         $configuration->setClassName($data['class_name'])->setFilePath($data['file_path']);
 
@@ -181,7 +192,6 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
 
         if (isset($data['extends'])) {
             $configuration->setExtends($data['extends']);
-            return $data;
         }
 
         return $configuration;
@@ -193,9 +203,9 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
      * @param Configuration $configuration
      * @return Configuration
      */
-    private function parseSchemaXml(array $data, $pathToSchemaXml, Configuration $configuration)
+    private function mapSchemaXmlPropertiesToConfiguration(array $data, $pathToSchemaXml, Configuration $configuration)
     {
-        //--begin of variable definitions
+        //begin of variable definitions
         //@todo inject XMLReader
         $reader = new XMLReader();
         $reader->open($pathToSchemaXml);
@@ -210,9 +220,9 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
                 ? $data['query_class_method_body_builder']
                 : null;
         $rootNamespace = '';
-        //--end of variable definitions
+        //end of variable definitions
 
-        //--begin of xml parsing
+        //begin of xml parsing
         while ($reader->read()) {
             if ($reader->nodeType === XMLREADER::ELEMENT) {
                 $nodeIsADatabase = ($reader->name === 'database');
@@ -239,7 +249,7 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
             }
         }
         $reader->close();
-        //--end of xml parsing
+        //end of xml parsing
 
         return $configuration;
     }
@@ -250,7 +260,7 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
      * @return Configuration
      * @throws RuntimeException
      */
-    private function setArrayPropertiesToConfiguration(array $data, Configuration $configuration)
+    private function mapArrayPropertiesToConfiguration(array $data, Configuration $configuration)
     {
         if (isset($data['implements'])) {
             foreach($data['implements'] as $interfaceName) {

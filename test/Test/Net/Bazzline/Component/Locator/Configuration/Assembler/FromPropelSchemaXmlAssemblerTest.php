@@ -142,8 +142,7 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
         $className = 'TestName';
         $extends = 'Bar';
         $filePath = '/test/name';
-        $implements = array(
-        );
+        $implements = array();
         $instances = array(
             'table_one_class',
             'table_one_query_class',
@@ -153,10 +152,22 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
         $methodPrefix = 'test';
         $namespace = 'Test\Namespace';
         $uses = array(
-            array('class_name' => 'My\Tables\One\MyTableOne', 'alias' => ''),
-            array('class_name' => 'My\Tables\One\MyTableOneQuery', 'alias' => ''),
-            array('class_name' => 'My\Tables\Two\MyTableTwo', 'alias' => ''),
-            array('class_name' => 'My\Tables\Two\MyTableTwoQuery', 'alias' => '')
+            array(
+                'class_name'    => '\My\Tables\One\MyTableOne',
+                'alias'         => ''
+            ),
+            array(
+                'class_name'    => '\My\Tables\One\MyTableOneQuery',
+                'alias'         => ''
+            ),
+            array(
+                'class_name'    => '\My\Tables\Two\MyTableTwo',
+                'alias'         => ''
+            ),
+            array(
+                'class_name'    => '\My\Tables\Two\MyTableTwoQuery',
+                'alias'         => ''
+            )
         );
 
         $configuration = $this->getConfiguration();
@@ -174,6 +185,7 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
         $assembler->assemble($data);
 
         $expectedUseCollection = array();
+
         foreach ($uses as $use) {
             $item = $this->getUses();
             $item->setAlias($use['alias']);
