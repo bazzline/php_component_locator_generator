@@ -32,7 +32,8 @@ class Command
     {
         if (count($arguments) !== 2) {
             throw new Exception(
-                'called with invalid number of arguments'
+                'called with invalid number of arguments' . PHP_EOL .
+                '   ' . basename(__FILE__) . ' <path to configuration file>'
             );
         }
 
@@ -52,8 +53,8 @@ class Command
             );
         }
 
-        $cwd = getcwd();
-        $path = $this->arguments[1];
+        $cwd            = getcwd();
+        $path           = $this->arguments[1];
         $isRelativePath = ($path[0] !== '/');
 
         if ($isRelativePath) {
