@@ -106,7 +106,6 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
     )
     {
         //begin of variable definitions
-        $fullQualifiedClassName = '';
         $namespace              = $reader->getAttribute('namespace');
         $phpName                = $reader->getAttribute('phpName');
         $tableName              = $reader->getAttribute('name');
@@ -126,28 +125,33 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
 
         $hasDifferentNamespaceThanLocator = ($locatorNamespace !== $tableNamespace);
         $hasTableNamespace  = (strlen($tableNamespace) > 0);
-
-        if ($hasPhpName) {
-            $fullQualifiedClassName = $phpName;
-        } else {
-            $tableNameAsArray = explode('_', $tableName);
-            array_walk($tableNameAsArray, function (&$value) {
-                $value = ucfirst($value);
-            });
-            $fullQualifiedClassName .= implode('', $tableNameAsArray);
-        }
-
-        if ($hasTableNamespace) {
-            $fullQualifiedClassName = $tableNamespace . '\\' . $fullQualifiedClassName;
-        }
-
-        $fullQualifiedClassName = str_replace('\\\\', '\\', $fullQualifiedClassName);
+        $fullQualifiedClassName = $this->createFullQualifiedClassName(
+            $hasPhpName,
+            $phpName,
+            $tableName,
+            $hasTableNamespace,
+            $tableNamespace
+        );
         $fullQualifiedQueryClassName = $fullQualifiedClassName . 'Query';
         //end of class name building
 
         //begin of configuration adaptation
-        $configuration->addInstance($fullQualifiedClassName, false, false, $fullQualifiedClassName, null, $columnClassMethodBodyBuilder);
-        $configuration->addInstance($fullQualifiedQueryClassName, false, false, $fullQualifiedClassName, null, $queryClassMethodBodyBuilder);
+        $configuration->addInstance(
+            $fullQualifiedClassName,
+            false,
+            false,
+            $fullQualifiedClassName,
+            null,
+            $columnClassMethodBodyBuilder
+        );
+        $configuration->addInstance(
+            $fullQualifiedQueryClassName,
+            false,
+            false,
+            $fullQualifiedClassName,
+            null,
+            $queryClassMethodBodyBuilder
+        );
 
         if ($hasDifferentNamespaceThanLocator) {
             //we have to remove the first "\" if available
@@ -301,5 +305,36 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
     private function startsWith($haystack, $needle)
     {
         return (strncmp($haystack, $needle, strlen($needle)) === 0);
+    }
+
+    /**
+     * @param boolean $hasPhpName
+     * @param string $phpName
+     * @param string $tableName
+     * @param boolean $hasTableNamespace
+     * @param string $tableNamespace
+     * @return mixed|string
+     */
+    private function createFullQualifiedClassName($hasPhpName, $phpName, $tableName, $hasTableNamespace, $tableNamespace)
+    {
+        $fullQualifiedClassName = '';
+
+        if ($hasPhpName) {
+            $fullQualifiedClassName = $phpName;
+        } else {
+            $tableNameAsArray = explode('_', $tableName);
+            array_walk($tableNameAsArray, function (&$value) {
+                $value = ucfirst($value);
+            });
+            $fullQualifiedClassName .= implode('', $tableNameAsArray);
+        }
+
+        if ($hasTableNamespace) {
+            $fullQualifiedClassName = $tableNamespace . '\\' . $fullQualifiedClassName;
+        }
+
+        $fullQualifiedClassName = str_replace('\\\\', '\\', $fullQualifiedClassName);
+
+        return $fullQualifiedClassName;
     }
 }
