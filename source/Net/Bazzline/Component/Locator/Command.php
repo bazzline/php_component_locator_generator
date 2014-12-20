@@ -30,13 +30,7 @@ class Command
      */
     public function setArguments(array $arguments)
     {
-        if (count($arguments) !== 2) {
-            throw new Exception(
-                'called with invalid number of arguments' . PHP_EOL .
-                '   ' . basename(__FILE__) . ' <path to configuration file>'
-            );
-        }
-
+        $this->validateArguments($arguments);
         $this->arguments = $arguments;
     }
 
@@ -45,6 +39,25 @@ class Command
      */
     public function execute()
     {
+        $this->validateEnvironment();
+        $pathToConfigurationFile = $this->buildPathToConfigurationFromArguments();
+        $data = $this->buildDataFromPathToConfigurationFile($pathToConfigurationFile);
+        $this->generate($data);
+    }
+
+    /**
+     * @return Configuration
+     */
+    public function getConfiguration()
+    {
+        return $this->configuration;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function validateEnvironment()
+    {
         $isNotCalledFromCommandLineInterface = (PHP_SAPI !== 'cli');
 
         if ($isNotCalledFromCommandLineInterface) {
@@ -52,7 +65,24 @@ class Command
                 'This script can only be called from the command line'
             );
         }
+    }
 
+    /**
+     * @param array $arguments
+     * @throws Exception
+     */
+    private function validateArguments(array $arguments)
+    {
+        if(count($arguments) !== 2) {
+            throw new Exception('called with invalid number of arguments' . PHP_EOL . '   ' . basename(__FILE__) . ' <path to configuration file>');
+        }
+    }
+
+    /**
+     * @return string
+     */
+    private function buildPathToConfigurationFromArguments()
+    {
         $cwd            = getcwd();
         $path           = $this->arguments[1];
         $isRelativePath = ($path[0] !== '/');
@@ -63,7 +93,16 @@ class Command
             $pathToConfigurationFile = realpath($path);
         }
 
-        //begin of validation
+        return $pathToConfigurationFile;
+    }
+
+    /**
+     * @param string $pathToConfigurationFile
+     * @return mixed
+     * @throws Exception
+     */
+    private function buildDataFromPathToConfigurationFile($pathToConfigurationFile)
+    {
         if (!is_file($pathToConfigurationFile)) {
             throw new Exception(
                 'provided path "' . $pathToConfigurationFile . '" is not a file'
@@ -117,16 +156,24 @@ class Command
 
             require_once $data['bootstrap_file'];
         }
-        //end of validation
 
+        return $data;
+    }
+
+    /**
+     * @param $data
+     * @throws RuntimeException
+     */
+    private function generate($data)
+    {
         /**
          * @var \Net\Bazzline\Component\Locator\Configuration\Assembler\AssemblerInterface $assembler
          * @var \Net\Bazzline\Component\Locator\FileExistsStrategy\FileExistsStrategyInterface $fileExistsStrategy
          */
-        $assembler = new $data['assembler']();
-        $configurationFactory = new ConfigurationFactory();
-        $fileExistsStrategy = new $data['file_exists_strategy']();
-        $generatorFactory = new GeneratorFactory();
+        $assembler              = new $data['assembler']();
+        $configurationFactory   = new ConfigurationFactory();
+        $fileExistsStrategy     = new $data['file_exists_strategy']();
+        $generatorFactory       = new GeneratorFactory();
 
         $this->configuration = $configurationFactory->create();
         $generator = $generatorFactory->create();
@@ -137,13 +184,5 @@ class Command
         $generator->setConfiguration($assembler->getConfiguration());
         $generator->setFileExistsStrategy($fileExistsStrategy);
         $generator->generate();
-    }
-
-    /**
-     * @return Configuration
-     */
-    public function getConfiguration()
-    {
-        return $this->configuration;
     }
 } 
