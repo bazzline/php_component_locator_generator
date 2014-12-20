@@ -21,8 +21,19 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
      */
     protected function map($data)
     {
+        //begin of variable definitions
+        $columnClassMethodBodyBuilder =
+            (isset($data['column_class_method_body_builder']))
+                ? $data['column_class_method_body_builder']
+                : null;
         $configuration = $this->getConfiguration();
+        $locatorNamespace = (isset($data['namespace'])) ? $data['namespace'] : '';
         $pathToSchemaXml = realpath($data['path_to_schema_xml']);
+        $queryClassMethodBodyBuilder =
+            (isset($data['query_class_method_body_builder']))
+                ? $data['query_class_method_body_builder']
+                : null;
+        //end of variable definitions
 
         $this->validatePathToSchemaXml($pathToSchemaXml);
 
@@ -31,9 +42,11 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
             $configuration
         );
         $configuration = $this->mapSchemaXmlPropertiesToConfiguration(
-            $data,
             $pathToSchemaXml,
-            $configuration
+            $configuration,
+            $columnClassMethodBodyBuilder,
+            $locatorNamespace,
+            $queryClassMethodBodyBuilder
         );
         $configuration = $this->mapArrayPropertiesToConfiguration(
             $data,
@@ -210,24 +223,23 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
     }
 
     /**
-     * @param array $data
      * @param string $pathToSchemaXml
      * @param Configuration $configuration
+     * @param string $columnClassMethodBodyBuilder
+     * @param string $locatorNamespace
+     * @param string $queryClassMethodBodyBuilder
      * @return Configuration
      */
-    private function mapSchemaXmlPropertiesToConfiguration(array $data, $pathToSchemaXml, Configuration $configuration)
+    private function mapSchemaXmlPropertiesToConfiguration(
+        $pathToSchemaXml,
+        Configuration $configuration,
+        $columnClassMethodBodyBuilder,
+        $locatorNamespace,
+        $queryClassMethodBodyBuilder
+    )
     {
         //begin of variable definitions
-        $columnClassMethodBodyBuilder =
-            (isset($data['column_class_method_body_builder']))
-                ? $data['column_class_method_body_builder']
-                : null;
         $hasRootNamespace = false;
-        $locatorNamespace = (isset($data['namespace'])) ? $data['namespace'] : '';
-        $queryClassMethodBodyBuilder =
-            (isset($data['query_class_method_body_builder']))
-                ? $data['query_class_method_body_builder']
-                : null;
         //@todo inject XMLReader
         $reader = new XMLReader();
         $reader->open($pathToSchemaXml);
