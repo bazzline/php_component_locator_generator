@@ -199,30 +199,6 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
     }
 
     /**
-     * @param array $data
-     * @param Configuration $configuration
-     * @return Configuration
-     */
-    private function mapStringPropertiesToConfiguration(array $data, Configuration $configuration)
-    {
-        $configuration->setClassName($data['class_name'])->setFilePath($data['file_path']);
-
-        if (isset($data['method_prefix'])) {
-            $configuration->setMethodPrefix($data['method_prefix']);
-        }
-
-        if (isset($data['namespace'])) {
-            $configuration->setNamespace($data['namespace']);
-        }
-
-        if (isset($data['extends'])) {
-            $configuration->setExtends($data['extends']);
-        }
-
-        return $configuration;
-    }
-
-    /**
      * @param string $pathToSchemaXml
      * @param Configuration $configuration
      * @param string $columnClassMethodBodyBuilder

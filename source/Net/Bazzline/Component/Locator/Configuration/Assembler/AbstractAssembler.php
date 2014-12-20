@@ -151,4 +151,28 @@ abstract class AbstractAssembler implements AssemblerInterface
             }
         }
     }
+
+    /**
+     * @param array $data
+     * @param Configuration $configuration
+     * @return Configuration
+     */
+    protected function mapStringPropertiesToConfiguration(array $data, Configuration $configuration)
+    {
+        $configuration->setClassName($data['class_name'])->setFilePath($data['file_path']);
+
+        if (isset($data['method_prefix'])) {
+            $configuration->setMethodPrefix($data['method_prefix']);
+        }
+
+        if (isset($data['namespace'])) {
+            $configuration->setNamespace($data['namespace']);
+        }
+
+        if (isset($data['extends'])) {
+            $configuration->setExtends($data['extends']);
+        }
+
+        return $configuration;
+    }
 }
