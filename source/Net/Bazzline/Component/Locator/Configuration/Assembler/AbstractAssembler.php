@@ -82,24 +82,8 @@ abstract class AbstractAssembler implements AssemblerInterface
                     'data array must contain content for key "' . $key . '"'
                 );
             }
-            $exceptionMessage = 'value of key "' . $key . '" must be of type "' . $expectedType . '"';
 
-            switch ($expectedType) {
-                case 'array':
-                    if (!is_array($data[$key])) {
-                        throw new InvalidArgumentException(
-                            $exceptionMessage
-                        );
-                    }
-                    break;
-                case 'string':
-                    if (!is_string($data[$key])) {
-                        throw new InvalidArgumentException(
-                            $exceptionMessage
-                        );
-                    }
-                    break;
-            }
+            $this->validateExpectedDataKeyType($data, $key, $expectedType);
         }
     }
 
@@ -112,24 +96,7 @@ abstract class AbstractAssembler implements AssemblerInterface
     {
         foreach ($keysToExpectedValueType as $key => $expectedType) {
             if (isset($data[$key])) {
-                $exceptionMessage = 'value of key "' . $key . '" must be of type "' . $expectedType . '" when set';
-
-                switch ($expectedType) {
-                    case 'array':
-                        if (!is_array($data[$key])) {
-                            throw new InvalidArgumentException(
-                                $exceptionMessage
-                            );
-                        }
-                        break;
-                    case 'string':
-                        if (!is_string($data[$key])) {
-                            throw new InvalidArgumentException(
-                                $exceptionMessage
-                            );
-                        }
-                        break;
-                }
+                $this->validateExpectedDataKeyType($data, $key, $expectedType);
             }
         }
     }
@@ -174,5 +141,28 @@ abstract class AbstractAssembler implements AssemblerInterface
         }
 
         return $configuration;
+    }
+
+    /**
+     * @param array $data
+     * @param string $key
+     * @param string $expectedType
+     */
+    private function validateExpectedDataKeyType(array $data, $key, $expectedType)
+    {
+        $exceptionMessage = 'value of key "' . $key . '" must be of type "' . $expectedType . '" when set';
+
+        switch ($expectedType) {
+            case 'array':
+                if (!is_array($data[$key])) {
+                    throw new InvalidArgumentException($exceptionMessage);
+                }
+                break;
+            case 'string':
+                if (!is_string($data[$key])) {
+                    throw new InvalidArgumentException($exceptionMessage);
+                }
+                break;
+        }
     }
 }
