@@ -110,7 +110,7 @@ class GeneratorTest extends LocatorTestCase
             ->twice();
         $configuration->shouldReceive('hasFactoryInstances')
             ->andReturn($hasFactoryInstance)
-            ->twice();
+            ->once();
         $configuration->shouldReceive('hasSharedInstances')
             ->andReturn($hasSharedInstances)
             ->atMost();
@@ -123,21 +123,6 @@ class GeneratorTest extends LocatorTestCase
             ->once();
         $locatorGenerator->shouldReceive('generate')
             ->once();
-
-        if ($hasFactoryInstance) {
-            $factoryInterfaceGenerator = $this->getMockOfFactoryInterfaceGenerator();
-
-            $factoryInterfaceGenerator->shouldReceive('setConfiguration')
-                ->with($configuration)
-                ->once();
-            $factoryInterfaceGenerator->shouldReceive('setFileExistsStrategy')
-                ->with($fileExistsStrategy)
-                ->once();
-            $factoryInterfaceGenerator->shouldReceive('generate')
-                ->once();
-
-            $generator->setFactoryInterfaceGenerator($factoryInterfaceGenerator);
-        }
 
         if ($hasFactoryInstance || $hasSharedInstances) {
             $invalidArgumentExceptionGenerator = $this->getMockOfInvalidArgumentExceptionGenerator();

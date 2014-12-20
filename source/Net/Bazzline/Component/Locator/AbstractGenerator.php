@@ -61,11 +61,11 @@ abstract class AbstractGenerator implements GeneratorInterface
                     ->setFileName($fileName)
                     ->setFilePath($filePath)
                     ->execute();
-            } else {
-                throw new RuntimeException(
-                    'file "' . $fullQualifiedFilePath . '" already exists'
-                );
             }
+
+            throw new RuntimeException(
+                'file "' . $fullQualifiedFilePath . '" already exists'
+            );
         }
     }
 

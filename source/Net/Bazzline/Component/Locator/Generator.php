@@ -78,12 +78,6 @@ class Generator extends AbstractGenerator
         $this->locatorGenerator->setFileExistsStrategy($this->fileExistsStrategy);
         $this->locatorGenerator->generate();
 
-        if ($this->configuration->hasFactoryInstances()) {
-            $this->factoryInterfaceGenerator->setConfiguration($this->configuration);
-            $this->factoryInterfaceGenerator->setFileExistsStrategy($this->fileExistsStrategy);
-            $this->factoryInterfaceGenerator->generate();
-        }
-
         if (($this->configuration->hasFactoryInstances())
             || ($this->configuration->hasSharedInstances())) {
             $this->invalidArgumentExceptionGenerator->setConfiguration($this->configuration);
