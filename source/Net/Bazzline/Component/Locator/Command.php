@@ -98,64 +98,18 @@ class Command
 
     /**
      * @param string $pathToConfigurationFile
-     * @return mixed
+     * @return array
      * @throws Exception
      */
     private function buildDataFromPathToConfigurationFile($pathToConfigurationFile)
     {
-        if (!is_file($pathToConfigurationFile)) {
-            throw new Exception(
-                'provided path "' . $pathToConfigurationFile . '" is not a file'
-            );
-        }
-
-        if (!is_readable($pathToConfigurationFile)) {
-            throw new Exception(
-                'file "' . $pathToConfigurationFile . '" is not readable'
-            );
-        }
+        $this->validatePathToConfigurationFile($pathToConfigurationFile);
 
         $data = require_once $pathToConfigurationFile;
 
-        if (!isset($data['assembler'])) {
-            throw new Exception(
-                'data array must contain content for key "assembler"'
-            );
-        }
-
-        if (!class_exists($data['assembler'])) {
-            throw new Exception(
-                'provided assembler "' . $data['assembler'] . '" does not exist'
-            );
-        }
-
-        if (!isset($data['file_exists_strategy'])) {
-            throw new Exception(
-                'data array must contain content for key "file_exists_strategy"'
-            );
-        }
-
-        if (!class_exists($data['file_exists_strategy'])) {
-            throw new Exception(
-                'provided file exists strategy "' . $data['file_exists_strategy'] . '" does not exist'
-            );
-        }
-
-        if (isset($data['bootstrap_file'])) {
-            if (!file_exists($data['bootstrap_file'])) {
-                throw new Exception(
-                    'provided bootstrap file "' . $data['bootstrap_file'] . '" does not exist'
-                );
-            }
-
-            if (!is_readable($data['bootstrap_file'])) {
-                throw new Exception(
-                    'provided bootstrap file "' . $data['bootstrap_file'] . '" is not readable'
-                );
-            }
-
-            require_once $data['bootstrap_file'];
-        }
+        $this->validateAssembler($data);
+        $this->validateFileExistsStrategy($data);
+        $this->validateBootstrapFile($data);
 
         return $data;
     }
@@ -184,5 +138,85 @@ class Command
         $generator->setConfiguration($assembler->getConfiguration());
         $generator->setFileExistsStrategy($fileExistsStrategy);
         $generator->generate();
+    }
+
+    /**
+     * @param $pathToConfigurationFile
+     * @throws Exception
+     */
+    private function validatePathToConfigurationFile($pathToConfigurationFile)
+    {
+        if( !is_file($pathToConfigurationFile)) {
+            throw new Exception(
+                'provided path "' . $pathToConfigurationFile . '" is not a file'
+            );
+        }
+
+        if (!is_readable($pathToConfigurationFile)) {
+            throw new Exception(
+                'file "' . $pathToConfigurationFile . '" is not readable'
+            );
+        }
+    }
+
+    /**
+     * @param array $data
+     * @throws Exception
+     */
+    private function validateAssembler(array $data)
+    {
+        if (!isset($data['assembler'])) {
+            throw new Exception(
+                'data array must contain content for key "assembler"'
+            );
+        }
+
+        if (!class_exists($data['assembler'])) {
+            throw new Exception(
+                'provided assembler "' . $data['assembler'] . '" does not exist'
+            );
+        }
+    }
+
+    /**
+     * @param array $data
+     * @throws Exception
+     */
+    private function validateFileExistsStrategy(array $data)
+    {
+        if (!isset($data['file_exists_strategy'])) {
+            throw new Exception(
+                'data array must contain content for key "file_exists_strategy"'
+            );
+        }
+
+        if (!class_exists($data['file_exists_strategy'])) {
+            throw new Exception(
+                'provided file exists strategy "' . $data['file_exists_strategy'] . '" does not exist'
+            );
+        }
+    }
+
+    /**
+     * @param array $data
+     * @throws Exception
+     */
+    private function validateBootstrapFile(array $data)
+    {
+        if (isset($data['bootstrap_file'])) {
+            if (!file_exists($data['bootstrap_file'])) {
+                throw new Exception(
+                    'provided bootstrap file "' . $data['bootstrap_file'] . '" does not exist'
+                );
+            }
+
+            if (!is_readable($data['bootstrap_file'])) {
+                throw new Exception(
+                    'provided bootstrap file "' . $data['bootstrap_file'] . '" is not readable'
+                );
+            }
+
+            require_once $data['bootstrap_file'];
+        }
     }
 } 
