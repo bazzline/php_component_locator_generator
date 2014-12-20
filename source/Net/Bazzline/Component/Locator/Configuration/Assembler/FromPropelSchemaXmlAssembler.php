@@ -7,6 +7,7 @@
 namespace Net\Bazzline\Component\Locator\Configuration\Assembler;
 
 use Net\Bazzline\Component\Locator\Configuration;
+use Net\Bazzline\Component\Locator\Configuration\Validator\ReadableFilePath;
 use XMLReader;
 
 /**
@@ -35,7 +36,9 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
                 : null;
         //end of variable definitions
 
-        $this->validatePathToSchemaXml($pathToSchemaXml);
+        //@todo inject
+        $validator = new ReadableFilePath();
+        $validator->validate($pathToSchemaXml);
 
         $configuration = $this->mapStringPropertiesToConfiguration(
             $data,
@@ -181,21 +184,6 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
         //end of configuration adaptation
 
         return $configuration;
-    }
-
-    /**
-     * @param string $pathToSchemaXml
-     * @throws RuntimeException
-     */
-    private function validatePathToSchemaXml($pathToSchemaXml)
-    {
-        if (!is_file($pathToSchemaXml)) {
-            throw new RuntimeException('provided schema xml path "' . $pathToSchemaXml . '" is not a file');
-        }
-
-        if (!is_readable($pathToSchemaXml)) {
-            throw new RuntimeException('file "' . $pathToSchemaXml . '" is not readable');
-        }
     }
 
     /**

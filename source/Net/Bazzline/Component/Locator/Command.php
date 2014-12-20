@@ -7,6 +7,7 @@
 namespace Net\Bazzline\Component\Locator;
 
 use Exception;
+use Net\Bazzline\Component\Locator\Configuration\Validator\ReadableFilePath;
 
 /**
  * Class Command
@@ -73,8 +74,10 @@ class Command
      */
     private function validateArguments(array $arguments)
     {
-        if(count($arguments) !== 2) {
-            throw new Exception('called with invalid number of arguments' . PHP_EOL . '   ' . basename(__FILE__) . ' <path to configuration file>');
+        if (count($arguments) !== 2) {
+            throw new Exception(
+                'called with invalid number of arguments' . PHP_EOL . '   ' . basename(__FILE__) . ' <path to configuration file>'
+            );
         }
     }
 
@@ -103,7 +106,9 @@ class Command
      */
     private function buildDataFromPathToConfigurationFile($pathToConfigurationFile)
     {
-        $this->validatePathToConfigurationFile($pathToConfigurationFile);
+        //@todo inject
+        $validator = new ReadableFilePath();
+        $validator->validate($pathToConfigurationFile);
 
         $data = require_once $pathToConfigurationFile;
 
@@ -138,25 +143,6 @@ class Command
         $generator->setConfiguration($assembler->getConfiguration());
         $generator->setFileExistsStrategy($fileExistsStrategy);
         $generator->generate();
-    }
-
-    /**
-     * @param $pathToConfigurationFile
-     * @throws Exception
-     */
-    private function validatePathToConfigurationFile($pathToConfigurationFile)
-    {
-        if( !is_file($pathToConfigurationFile)) {
-            throw new Exception(
-                'provided path "' . $pathToConfigurationFile . '" is not a file'
-            );
-        }
-
-        if (!is_readable($pathToConfigurationFile)) {
-            throw new Exception(
-                'file "' . $pathToConfigurationFile . '" is not readable'
-            );
-        }
     }
 
     /**
