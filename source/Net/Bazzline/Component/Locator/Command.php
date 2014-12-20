@@ -7,6 +7,7 @@
 namespace Net\Bazzline\Component\Locator;
 
 use Exception;
+use Net\Bazzline\Component\Locator\Configuration\Validator\ArrayKeyIsValidClassName;
 use Net\Bazzline\Component\Locator\Configuration\Validator\ReadableFilePath;
 
 /**
@@ -107,13 +108,15 @@ class Command
     private function buildDataFromPathToConfigurationFile($pathToConfigurationFile)
     {
         //@todo inject
-        $validator = new ReadableFilePath();
-        $validator->validate($pathToConfigurationFile);
+        $pathValidator  = new ReadableFilePath();
+        $classValidator = new ArrayKeyIsValidClassName();
+
+        $pathValidator->validate($pathToConfigurationFile);
 
         $data = require_once $pathToConfigurationFile;
 
-        $this->validateAssembler($data);
-        $this->validateFileExistsStrategy($data);
+        $classValidator->validate($data, 'assembler');
+        $classValidator->validate($data, 'file_exists_strategy');
         $this->validateBootstrapFile($data);
 
         return $data;
@@ -143,44 +146,6 @@ class Command
         $generator->setConfiguration($assembler->getConfiguration());
         $generator->setFileExistsStrategy($fileExistsStrategy);
         $generator->generate();
-    }
-
-    /**
-     * @param array $data
-     * @throws Exception
-     */
-    private function validateAssembler(array $data)
-    {
-        if (!isset($data['assembler'])) {
-            throw new Exception(
-                'data array must contain content for key "assembler"'
-            );
-        }
-
-        if (!class_exists($data['assembler'])) {
-            throw new Exception(
-                'provided assembler "' . $data['assembler'] . '" does not exist'
-            );
-        }
-    }
-
-    /**
-     * @param array $data
-     * @throws Exception
-     */
-    private function validateFileExistsStrategy(array $data)
-    {
-        if (!isset($data['file_exists_strategy'])) {
-            throw new Exception(
-                'data array must contain content for key "file_exists_strategy"'
-            );
-        }
-
-        if (!class_exists($data['file_exists_strategy'])) {
-            throw new Exception(
-                'provided file exists strategy "' . $data['file_exists_strategy'] . '" does not exist'
-            );
-        }
     }
 
     /**
