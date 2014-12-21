@@ -1,6 +1,8 @@
 filter:
   paths:
     - source/*
+  excluded_paths:
+    - vendor/*
 
 checks:
   php:
