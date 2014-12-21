@@ -472,7 +472,13 @@ class LocatorGenerator extends AbstractGenerator
      * @param MethodGeneratorFactory $methodGeneratorFactory
      * @return ClassGenerator
      */
-    private function addInstanceFetching(BlockGeneratorFactory $blockGeneratorFactory, ClassGenerator $classGenerator, Configuration $configuration, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory)
+    private function addInstanceFetching(
+        BlockGeneratorFactory $blockGeneratorFactory,
+        ClassGenerator $classGenerator,
+        Configuration $configuration,
+        DocumentationGeneratorFactory $documentationGeneratorFactory,
+        MethodGeneratorFactory $methodGeneratorFactory
+    )
     {
         foreach ($configuration->getInstances() as $instance) {
             $body = $blockGeneratorFactory->create();
@@ -490,6 +496,7 @@ class LocatorGenerator extends AbstractGenerator
             } else {
                 $methodName = (str_replace('\\', '' , $instance->getClassName()));
             }
+
             $methodName = $configuration->getMethodPrefix() . ucfirst($methodName);
 
             $method->setDocumentation($documentation);
