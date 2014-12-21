@@ -225,12 +225,13 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
 
 # History
 
-* [1.2.1](https://github.com/bazzline/php_component_locator_generator/tree/1.2.1) - not yet released
+* [1.2.2](https://github.com/bazzline/php_component_locator_generator/tree/1.2.2) - not yet released
+    * easy up usage of examples
+* [1.2.1](https://github.com/bazzline/php_component_locator_generator/tree/1.2.1) - released at 21.12.2014
     * updated api
     * refactored Command
     * refactored FromArrayAssembler
     * refactored FromPropelSchemaXmlAssembler
-    * easy up usage of examples
 * [1.2.0](https://github.com/bazzline/php_component_locator_generator/tree/1.2.0) - released at 20.12.2014
     * fixed bug in propel name space FromPropelSchemaXmlAssembler
     * refactored FromPropelSchemaXmlAssembler
