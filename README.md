@@ -226,7 +226,8 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
 # History
 
 * [1.3.1](https://github.com/bazzline/php_component_locator_generator/tree/1.3.1) - not yet released
-    * easy up usage of examples
+    * easy up usage of examples (by adding a "run.php" in the directories
+    * added example for "method_name_without_namespace"
 * [1.3.0](https://github.com/bazzline/php_component_locator_generator/tree/1.3.0) - released at 22.12.2014
     * implemented "method_name_without_namespace" option in "FromPropelSchemaXmlAssembler" ("createMyTable" instead of "createMyNamespaceMyTable")
 * [1.2.1](https://github.com/bazzline/php_component_locator_generator/tree/1.2.1) - released at 21.12.2014
