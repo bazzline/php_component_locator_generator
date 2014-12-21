@@ -23,6 +23,8 @@ return array(
     'query_class_method_body_builder' => '\Net\Bazzline\Component\Locator\MethodBodyBuilder\PropelQueryCreateBuilder',
     //prefix for the instance fetching
     'method_prefix' => 'create',
+    //shorten the method name
+    'method_name_without_namespace' => true,
     'namespace' => 'Application\Service',
     'path_to_schema_xml' => __DIR__ . '/schema.xml',
     //add use statements here

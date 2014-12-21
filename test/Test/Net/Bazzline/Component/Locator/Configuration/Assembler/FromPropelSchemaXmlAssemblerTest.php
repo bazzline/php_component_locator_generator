@@ -11,6 +11,7 @@ use Test\Net\Bazzline\Component\Locator\LocatorTestCase;
 /**
  * Class FromPropelSchemaXmlAssemblerTest
  * @package Test\Net\Bazzline\Component\Locator\Configuration\Assembler
+ * @todo implement test for option "method_name_without_namespace"
  */
 class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
 {

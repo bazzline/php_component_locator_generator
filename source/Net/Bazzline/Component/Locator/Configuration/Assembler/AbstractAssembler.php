@@ -163,6 +163,11 @@ abstract class AbstractAssembler implements AssemblerInterface
                     throw new InvalidArgumentException($exceptionMessage);
                 }
                 break;
+            case 'bolean':
+                if (!is_bool($data[$key])) {
+                    throw new InvalidArgumentException($exceptionMessage);
+                }
+                break;
         }
     }
 }
