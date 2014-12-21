@@ -8,20 +8,14 @@ namespace Net\Bazzline\Component\Locator\MethodBodyBuilder;
 
 use Net\Bazzline\Component\CodeGenerator\BlockGenerator;
 use Net\Bazzline\Component\CodeGenerator\DocumentationGenerator;
-use Net\Bazzline\Component\Locator\Configuration\Instance;
+use Net\Bazzline\Component\Locator\InstanceDependentInterface;
 
 /**
  * Interface MethodBodyBuilderInterface
  * @package Net\Bazzline\Component\Locator\MethodBodyBuilder
  */
-interface MethodBodyBuilderInterface
+interface MethodBodyBuilderInterface extends InstanceDependentInterface
 {
-    /**
-     * @param Instance $instance
-     * @return $this
-     */
-    public function setInstance(Instance $instance);
-
     /**
      * @param BlockGenerator $body
      * @return BlockGenerator
