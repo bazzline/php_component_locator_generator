@@ -32,6 +32,8 @@
 						<ul>
 				<li><a href="namespace-Net.Bazzline.Component.Locator.Configuration.Assembler.html">Assembler</a>
 						</li>
+				<li><a href="namespace-Net.Bazzline.Component.Locator.Configuration.Validator.html">Validator</a>
+						</li>
 							</ul></li>
 				<li><a href="namespace-Net.Bazzline.Component.Locator.FileExistsStrategy.html">FileExistsStrategy</a>
 						</li>
@@ -64,6 +66,7 @@
 			<ul>
 				<li><a href="class-Net.Bazzline.Component.Locator.FactoryInterface.html">FactoryInterface</a></li>
 				<li><a href="class-Net.Bazzline.Component.Locator.GeneratorInterface.html">GeneratorInterface</a></li>
+				<li><a href="class-Net.Bazzline.Component.Locator.InstanceDependentInterface.html">InstanceDependentInterface</a></li>
 				<li><a href="class-Net.Bazzline.Component.Locator.LocatorInterface.html">LocatorInterface</a></li>
 			</ul>
 
@@ -174,11 +177,11 @@
 </span><span id="61" class="l"><a class="l" href="#61">61: </a>                    -&gt;setFileName(<span class="php-var">$fileName</span>)
 </span><span id="62" class="l"><a class="l" href="#62">62: </a>                    -&gt;setFilePath(<span class="php-var">$filePath</span>)
 </span><span id="63" class="l"><a class="l" href="#63">63: </a>                    -&gt;execute();
-</span><span id="64" class="l"><a class="l" href="#64">64: </a>            } <span class="php-keyword1">else</span> {
-</span><span id="65" class="l"><a class="l" href="#65">65: </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> RuntimeException(
-</span><span id="66" class="l"><a class="l" href="#66">66: </a>                    <span class="php-quote">'file &quot;'</span> . <span class="php-var">$fullQualifiedFilePath</span> . <span class="php-quote">'&quot; already exists'</span>
-</span><span id="67" class="l"><a class="l" href="#67">67: </a>                );
-</span><span id="68" class="l"><a class="l" href="#68">68: </a>            }
+</span><span id="64" class="l"><a class="l" href="#64">64: </a>            }
+</span><span id="65" class="l"><a class="l" href="#65">65: </a>
+</span><span id="66" class="l"><a class="l" href="#66">66: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> RuntimeException(
+</span><span id="67" class="l"><a class="l" href="#67">67: </a>                <span class="php-quote">'file &quot;'</span> . <span class="php-var">$fullQualifiedFilePath</span> . <span class="php-quote">'&quot; already exists'</span>
+</span><span id="68" class="l"><a class="l" href="#68">68: </a>            );
 </span><span id="69" class="l"><a class="l" href="#69">69: </a>        }
 </span><span id="70" class="l"><a class="l" href="#70">70: </a>    }
 </span><span id="71" class="l"><a class="l" href="#71">71: </a>
@@ -203,6 +206,6 @@
 </div>
 </div>
 <script src="resources/combined.js?2468323958"></script>
-<script src="elementlist.js?2838130171"></script>
+<script src="elementlist.js?1051234268"></script>
 </body>
 </html>

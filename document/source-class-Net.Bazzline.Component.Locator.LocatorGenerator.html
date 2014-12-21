@@ -32,6 +32,8 @@
 						<ul>
 				<li><a href="namespace-Net.Bazzline.Component.Locator.Configuration.Assembler.html">Assembler</a>
 						</li>
+				<li><a href="namespace-Net.Bazzline.Component.Locator.Configuration.Validator.html">Validator</a>
+						</li>
 							</ul></li>
 				<li><a href="namespace-Net.Bazzline.Component.Locator.FileExistsStrategy.html">FileExistsStrategy</a>
 						</li>
@@ -64,6 +66,7 @@
 			<ul>
 				<li><a href="class-Net.Bazzline.Component.Locator.FactoryInterface.html">FactoryInterface</a></li>
 				<li><a href="class-Net.Bazzline.Component.Locator.GeneratorInterface.html">GeneratorInterface</a></li>
+				<li><a href="class-Net.Bazzline.Component.Locator.InstanceDependentInterface.html">InstanceDependentInterface</a></li>
 				<li><a href="class-Net.Bazzline.Component.Locator.LocatorInterface.html">LocatorInterface</a></li>
 			</ul>
 
@@ -585,36 +588,43 @@
 </span></span><span id="472" class="l"><a class="l" href="#472">472: </a><span class="php-comment">     * @param MethodGeneratorFactory $methodGeneratorFactory
 </span></span><span id="473" class="l"><a class="l" href="#473">473: </a><span class="php-comment">     * @return ClassGenerator
 </span></span><span id="474" class="l"><a class="l" href="#474">474: </a><span class="php-comment">     */</span>
-</span><span id="475" class="l"><a class="l" href="#475">475: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a id="_addInstanceFetching" href="#_addInstanceFetching">addInstanceFetching</a>(BlockGeneratorFactory <span class="php-var">$blockGeneratorFactory</span>, ClassGenerator <span class="php-var">$classGenerator</span>, Configuration <span class="php-var">$configuration</span>, DocumentationGeneratorFactory <span class="php-var">$documentationGeneratorFactory</span>, MethodGeneratorFactory <span class="php-var">$methodGeneratorFactory</span>)
-</span><span id="476" class="l"><a class="l" href="#476">476: </a>    {
-</span><span id="477" class="l"><a class="l" href="#477">477: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$configuration</span>-&gt;getInstances() <span class="php-keyword1">as</span> <span class="php-var">$instance</span>) {
-</span><span id="478" class="l"><a class="l" href="#478">478: </a>            <span class="php-var">$body</span> = <span class="php-var">$blockGeneratorFactory</span>-&gt;create();
-</span><span id="479" class="l"><a class="l" href="#479">479: </a>            <span class="php-var">$documentation</span> = <span class="php-var">$documentationGeneratorFactory</span>-&gt;create();
-</span><span id="480" class="l"><a class="l" href="#480">480: </a>            <span class="php-var">$method</span> = <span class="php-var">$methodGeneratorFactory</span>-&gt;create();
-</span><span id="481" class="l"><a class="l" href="#481">481: </a>            <span class="php-var">$methodBuilder</span> = <span class="php-var">$instance</span>-&gt;getMethodBodyBuilder();
-</span><span id="482" class="l"><a class="l" href="#482">482: </a>            <span class="php-var">$returnValue</span> = (<span class="php-var">$instance</span>-&gt;hasReturnValue()) ? <span class="php-var">$instance</span>-&gt;getReturnValue() : <span class="php-var">$instance</span>-&gt;getClassName();
-</span><span id="483" class="l"><a class="l" href="#483">483: </a>
-</span><span id="484" class="l"><a class="l" href="#484">484: </a>            <span class="php-var">$body</span> = <span class="php-var">$methodBuilder</span>-&gt;build(<span class="php-var">$body</span>);
-</span><span id="485" class="l"><a class="l" href="#485">485: </a>            <span class="php-var">$documentation</span> = <span class="php-var">$methodBuilder</span>-&gt;extend(<span class="php-var">$documentation</span>);
-</span><span id="486" class="l"><a class="l" href="#486">486: </a>            <span class="php-var">$method</span>-&gt;setBody(<span class="php-var">$body</span>, <span class="php-keyword1">array</span>(<span class="php-var">$returnValue</span>));
-</span><span id="487" class="l"><a class="l" href="#487">487: </a>
-</span><span id="488" class="l"><a class="l" href="#488">488: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$instance</span>-&gt;hasAlias()) {
-</span><span id="489" class="l"><a class="l" href="#489">489: </a>                <span class="php-var">$methodName</span> = <span class="php-var">$instance</span>-&gt;getAlias();
-</span><span id="490" class="l"><a class="l" href="#490">490: </a>            } <span class="php-keyword1">else</span> {
-</span><span id="491" class="l"><a class="l" href="#491">491: </a>                <span class="php-var">$methodName</span> = (<span class="php-keyword2">str_replace</span>(<span class="php-quote">'\\'</span>, <span class="php-quote">''</span> , <span class="php-var">$instance</span>-&gt;getClassName()));
-</span><span id="492" class="l"><a class="l" href="#492">492: </a>            }
-</span><span id="493" class="l"><a class="l" href="#493">493: </a>            <span class="php-var">$methodName</span> = <span class="php-var">$configuration</span>-&gt;getMethodPrefix() . <span class="php-keyword2">ucfirst</span>(<span class="php-var">$methodName</span>);
-</span><span id="494" class="l"><a class="l" href="#494">494: </a>
-</span><span id="495" class="l"><a class="l" href="#495">495: </a>            <span class="php-var">$method</span>-&gt;setDocumentation(<span class="php-var">$documentation</span>);
-</span><span id="496" class="l"><a class="l" href="#496">496: </a>            <span class="php-var">$method</span>-&gt;setName(<span class="php-var">$methodName</span>);
-</span><span id="497" class="l"><a class="l" href="#497">497: </a>            <span class="php-var">$method</span>-&gt;markAsPublic();
-</span><span id="498" class="l"><a class="l" href="#498">498: </a>
-</span><span id="499" class="l"><a class="l" href="#499">499: </a>            <span class="php-var">$classGenerator</span>-&gt;addMethod(<span class="php-var">$method</span>);
-</span><span id="500" class="l"><a class="l" href="#500">500: </a>        }
+</span><span id="475" class="l"><a class="l" href="#475">475: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a id="_addInstanceFetching" href="#_addInstanceFetching">addInstanceFetching</a>(
+</span><span id="476" class="l"><a class="l" href="#476">476: </a>        BlockGeneratorFactory <span class="php-var">$blockGeneratorFactory</span>,
+</span><span id="477" class="l"><a class="l" href="#477">477: </a>        ClassGenerator <span class="php-var">$classGenerator</span>,
+</span><span id="478" class="l"><a class="l" href="#478">478: </a>        Configuration <span class="php-var">$configuration</span>,
+</span><span id="479" class="l"><a class="l" href="#479">479: </a>        DocumentationGeneratorFactory <span class="php-var">$documentationGeneratorFactory</span>,
+</span><span id="480" class="l"><a class="l" href="#480">480: </a>        MethodGeneratorFactory <span class="php-var">$methodGeneratorFactory</span>
+</span><span id="481" class="l"><a class="l" href="#481">481: </a>    )
+</span><span id="482" class="l"><a class="l" href="#482">482: </a>    {
+</span><span id="483" class="l"><a class="l" href="#483">483: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$configuration</span>-&gt;getInstances() <span class="php-keyword1">as</span> <span class="php-var">$instance</span>) {
+</span><span id="484" class="l"><a class="l" href="#484">484: </a>            <span class="php-var">$body</span> = <span class="php-var">$blockGeneratorFactory</span>-&gt;create();
+</span><span id="485" class="l"><a class="l" href="#485">485: </a>            <span class="php-var">$documentation</span> = <span class="php-var">$documentationGeneratorFactory</span>-&gt;create();
+</span><span id="486" class="l"><a class="l" href="#486">486: </a>            <span class="php-var">$method</span> = <span class="php-var">$methodGeneratorFactory</span>-&gt;create();
+</span><span id="487" class="l"><a class="l" href="#487">487: </a>            <span class="php-var">$methodBuilder</span> = <span class="php-var">$instance</span>-&gt;getMethodBodyBuilder();
+</span><span id="488" class="l"><a class="l" href="#488">488: </a>            <span class="php-var">$returnValue</span> = (<span class="php-var">$instance</span>-&gt;hasReturnValue()) ? <span class="php-var">$instance</span>-&gt;getReturnValue() : <span class="php-var">$instance</span>-&gt;getClassName();
+</span><span id="489" class="l"><a class="l" href="#489">489: </a>
+</span><span id="490" class="l"><a class="l" href="#490">490: </a>            <span class="php-var">$body</span> = <span class="php-var">$methodBuilder</span>-&gt;build(<span class="php-var">$body</span>);
+</span><span id="491" class="l"><a class="l" href="#491">491: </a>            <span class="php-var">$documentation</span> = <span class="php-var">$methodBuilder</span>-&gt;extend(<span class="php-var">$documentation</span>);
+</span><span id="492" class="l"><a class="l" href="#492">492: </a>            <span class="php-var">$method</span>-&gt;setBody(<span class="php-var">$body</span>, <span class="php-keyword1">array</span>(<span class="php-var">$returnValue</span>));
+</span><span id="493" class="l"><a class="l" href="#493">493: </a>
+</span><span id="494" class="l"><a class="l" href="#494">494: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$instance</span>-&gt;hasAlias()) {
+</span><span id="495" class="l"><a class="l" href="#495">495: </a>                <span class="php-var">$methodName</span> = <span class="php-var">$instance</span>-&gt;getAlias();
+</span><span id="496" class="l"><a class="l" href="#496">496: </a>            } <span class="php-keyword1">else</span> {
+</span><span id="497" class="l"><a class="l" href="#497">497: </a>                <span class="php-var">$methodName</span> = (<span class="php-keyword2">str_replace</span>(<span class="php-quote">'\\'</span>, <span class="php-quote">''</span> , <span class="php-var">$instance</span>-&gt;getClassName()));
+</span><span id="498" class="l"><a class="l" href="#498">498: </a>            }
+</span><span id="499" class="l"><a class="l" href="#499">499: </a>
+</span><span id="500" class="l"><a class="l" href="#500">500: </a>            <span class="php-var">$methodName</span> = <span class="php-var">$configuration</span>-&gt;getMethodPrefix() . <span class="php-keyword2">ucfirst</span>(<span class="php-var">$methodName</span>);
 </span><span id="501" class="l"><a class="l" href="#501">501: </a>
-</span><span id="502" class="l"><a class="l" href="#502">502: </a>        <span class="php-keyword1">return</span> <span class="php-var">$classGenerator</span>;
-</span><span id="503" class="l"><a class="l" href="#503">503: </a>    }
-</span><span id="504" class="l"><a class="l" href="#504">504: </a>}</span></code></pre>
+</span><span id="502" class="l"><a class="l" href="#502">502: </a>            <span class="php-var">$method</span>-&gt;setDocumentation(<span class="php-var">$documentation</span>);
+</span><span id="503" class="l"><a class="l" href="#503">503: </a>            <span class="php-var">$method</span>-&gt;setName(<span class="php-var">$methodName</span>);
+</span><span id="504" class="l"><a class="l" href="#504">504: </a>            <span class="php-var">$method</span>-&gt;markAsPublic();
+</span><span id="505" class="l"><a class="l" href="#505">505: </a>
+</span><span id="506" class="l"><a class="l" href="#506">506: </a>            <span class="php-var">$classGenerator</span>-&gt;addMethod(<span class="php-var">$method</span>);
+</span><span id="507" class="l"><a class="l" href="#507">507: </a>        }
+</span><span id="508" class="l"><a class="l" href="#508">508: </a>
+</span><span id="509" class="l"><a class="l" href="#509">509: </a>        <span class="php-keyword1">return</span> <span class="php-var">$classGenerator</span>;
+</span><span id="510" class="l"><a class="l" href="#510">510: </a>    }
+</span><span id="511" class="l"><a class="l" href="#511">511: </a>}</span></code></pre>
 
 	<div id="footer">
 		Locator Generator by Bazzline API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
@@ -622,6 +632,6 @@
 </div>
 </div>
 <script src="resources/combined.js?2468323958"></script>
-<script src="elementlist.js?2838130171"></script>
+<script src="elementlist.js?1051234268"></script>
 </body>
 </html>
