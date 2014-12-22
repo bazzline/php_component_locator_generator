@@ -1,5 +1,5 @@
-<?php
 #!/bin/php
+<?php
 /**
  * @author stev leibelt <artodeto@bazzline.net>
  * @since 2014-06-10 
