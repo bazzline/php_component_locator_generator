@@ -53,6 +53,7 @@ abstract class AbstractStrategy implements FileExistsStrategyInterface
                 'provided path "' . $path . '" has to be a directory'
             );
         }
+
         if (!is_writable($path)) {
             throw new InvalidArgumentException(
                 'provided path "' . $path . '" has to be writable'
