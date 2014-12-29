@@ -66,6 +66,9 @@ class FactoryInterfaceGeneratorTest extends LocatorTestCase
         $configuration->shouldReceive('getFilePath')
             ->twice()
             ->andReturn($root->url());
+        $configuration->shouldReceive('getFileNameExtension')
+            ->once()
+            ->andReturn('.php');
         $configuration->shouldReceive('getNamespace')
             ->once()
             ->andReturn($namespace);
