@@ -38,6 +38,17 @@ class ConfigurationTest extends LocatorTestCase
         $this->assertNull($configuration->getFilePath());
     }
 
+    public function testGetFileNameExtension()
+    {
+        $configuration = $this->getConfiguration();
+        $expectedExtension = '.php';
+
+        $this->assertEquals(
+            $expectedExtension,
+            $configuration->getFileNameExtension()
+        );
+    }
+
     public function testGetFilePath()
     {
         $configuration = $this->getConfiguration();
