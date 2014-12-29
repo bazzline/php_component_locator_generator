@@ -125,7 +125,7 @@ class Configuration
     public function setClassName($name)
     {
         $this->className = (string) $name;
-        $this->fileName = $this->className . '.php';
+        $this->fileName = $this->className . $this->getFileNameExtension();
 
         return $this;
     }
@@ -136,6 +136,14 @@ class Configuration
     public function getFileName()
     {
         return $this->fileName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileNameExtension()
+    {
+        return '.php';
     }
 
     /**
