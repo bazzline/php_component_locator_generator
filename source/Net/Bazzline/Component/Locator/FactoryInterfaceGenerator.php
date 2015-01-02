@@ -20,17 +20,18 @@ use Net\Bazzline\Component\CodeGenerator\FileGenerator;
 class FactoryInterfaceGenerator extends AbstractInterfaceGenerator
 {
     /**
+     * @param string $name
      * @param ClassGenerator $classGenerator
      * @param Configuration $configuration
      * @param DocumentationGeneratorFactory $documentationGeneratorFactory
      * @param MethodGeneratorFactory $methodGeneratorFactory
      * @return ClassGenerator
      */
-    protected function createInterface(ClassGenerator $classGenerator, Configuration $configuration, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory)
+    protected function createInterface($name, ClassGenerator $classGenerator, Configuration $configuration, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory)
     {
         $classGenerator->markAsInterface();
         $classGenerator->setDocumentation($documentationGeneratorFactory->create());
-        $classGenerator->setName('FactoryInterface');
+        $classGenerator->setName($name);
 
         if ($configuration->hasNamespace()) {
             $classGenerator->setNamespace($configuration->getNamespace());

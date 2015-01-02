@@ -90,31 +90,39 @@ abstract class AbstractInterfaceGenerator extends AbstractGenerator
     final public function generate()
     {
         $this->generateInterface(
-            $this->getInterfaceName() .
+            $this->getInterfaceName(),
             $this->configuration->getFileNameExtension()
         );
     }
 
     /**
+     * @param string $name
      * @param ClassGenerator $classGenerator
      * @param Configuration $configuration
      * @param DocumentationGeneratorFactory $documentationGeneratorFactory
      * @param MethodGeneratorFactory $methodGeneratorFactory
      * @return ClassGenerator
      */
-    abstract protected function createInterface(ClassGenerator $classGenerator, Configuration $configuration, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory);
+    abstract protected function createInterface($name, ClassGenerator $classGenerator, Configuration $configuration, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory);
 
     /**
      * @return string
      */
     abstract protected function getInterfaceName();
 
-    protected function generateInterface($fileName)
+    /**
+     * @param string $name
+     * @param string $extension
+     * @throws RuntimeException
+     */
+    protected function generateInterface($name, $extension)
     {
+        $fileName = $name . $extension;
         $this->moveOldFileIfExists($this->configuration->getFilePath(), $fileName);
 
         $fileGenerator = $this->createFile($this->fileGeneratorFactory->create());
         $classGenerator = $this->createInterface(
+            $name,
             $this->classGeneratorFactory->create(),
             $this->configuration,
             $this->documentationGeneratorFactory,
@@ -138,7 +146,7 @@ abstract class AbstractInterfaceGenerator extends AbstractGenerator
         $fileGenerator->addFileContent(
             array(
                 '/**',
-                ' * @author Net\Bazzline\Component\Locator',
+                ' * @author ' . $this->getAuthorString(),
                 ' * @since ' . date('Y-m-d'),
                 ' */'
             )

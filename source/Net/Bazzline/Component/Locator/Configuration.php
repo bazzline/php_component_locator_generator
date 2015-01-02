@@ -20,6 +20,7 @@ use Net\Bazzline\Component\Locator\MethodBodyBuilder\NewInstanceBuilder;
  */
 class Configuration
 {
+    //begin of properties
     /**
      * @var string
      */
@@ -109,7 +110,9 @@ class Configuration
      * @var Uses
      */
     private $uses;
+    //end of properties
 
+    //begin of public methods
     /**
      * @return null|string
      */
@@ -442,6 +445,17 @@ class Configuration
     }
 
     /**
+     * @return bool
+     */
+    public function shouldWeCreateALocatorGeneratorInterface()
+    {
+        //@todo
+        return true;
+    }
+    //end of public methods
+
+    //begin of private methods
+    /**
      * @return Uses
      */
     private function getNewUses()
@@ -516,4 +530,5 @@ class Configuration
 
         return $this->methodBodyBuilderInstancePool[$key];
     }
+    //end of private methods
 }

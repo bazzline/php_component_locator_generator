@@ -82,4 +82,12 @@ abstract class AbstractGenerator implements GeneratorInterface
             );
         }
     }
+
+    /**
+     * @return string
+     */
+    protected function getAuthorString()
+    {
+        return 'Net\Bazzline\Component\Locator';
+    }
 }

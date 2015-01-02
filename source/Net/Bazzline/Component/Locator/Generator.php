@@ -22,6 +22,9 @@ class Generator extends AbstractGenerator
     /** @var LocatorGenerator */
     private $locatorGenerator;
 
+    /** @var LocatorInterfaceGenerator */
+    private $locatorInterfaceGenerator;
+
     /**
      * @param \Net\Bazzline\Component\Locator\FactoryInterfaceGenerator $factoryInterfaceGenerator
      * @return $this
@@ -56,33 +59,59 @@ class Generator extends AbstractGenerator
     }
 
 
+    /**
+     * @param \Net\Bazzline\Component\Locator\LocatorInterfaceGenerator $locatorInterfaceGenerator
+     * @return $this
+     */
+    public function setLocatorInterfaceGenerator(LocatorInterfaceGenerator $locatorInterfaceGenerator)
+    {
+        $this->locatorInterfaceGenerator = $locatorInterfaceGenerator;
+
+        return $this;
+    }
 
     /**
      * @throws RuntimeException
      */
     public function generate()
     {
-        if (!is_dir($this->configuration->getFilePath())) {
+        //start of dependencies
+        $configuration                      = $this->configuration;
+        $fileExistsStrategy                 = $this->fileExistsStrategy;
+        $invalidArgumentExceptionGenerator  = $this->invalidArgumentExceptionGenerator;
+        $locatorGenerator                   = $this->locatorGenerator;
+        $locatorInterfaceGenerator          = $this->locatorInterfaceGenerator;
+        //end of dependencies
+
+        //start of validation
+        if (!is_dir($configuration->getFilePath())) {
             throw new RuntimeException(
-                'provided path "' . $this->configuration->getFilePath() . '" is not a directory'
+                'provided path "' . $configuration->getFilePath() . '" is not a directory'
             );
         }
 
-        if (!is_writable($this->configuration->getFilePath())) {
+        if (!is_writable($configuration->getFilePath())) {
             throw new RuntimeException(
-                'provided directory "' . $this->configuration->getFilePath() . '" is not writable'
+                'provided directory "' . $configuration->getFilePath() . '" is not writable'
             );
         }
+        //start of validation
 
-        $this->locatorGenerator->setConfiguration($this->configuration);
-        $this->locatorGenerator->setFileExistsStrategy($this->fileExistsStrategy);
-        $this->locatorGenerator->generate();
+        $locatorGenerator->setConfiguration($configuration);
+        $locatorGenerator->setFileExistsStrategy($fileExistsStrategy);
+        $locatorGenerator->generate();
 
-        if (($this->configuration->hasFactoryInstances())
-            || ($this->configuration->hasSharedInstances())) {
-            $this->invalidArgumentExceptionGenerator->setConfiguration($this->configuration);
-            $this->invalidArgumentExceptionGenerator->setFileExistsStrategy($this->fileExistsStrategy);
-            $this->invalidArgumentExceptionGenerator->generate();
+        if (($configuration->hasFactoryInstances())
+            || ($configuration->hasSharedInstances())) {
+            $invalidArgumentExceptionGenerator->setConfiguration($configuration);
+            $invalidArgumentExceptionGenerator->setFileExistsStrategy($fileExistsStrategy);
+            $invalidArgumentExceptionGenerator->generate();
+        }
+
+        if ($configuration->shouldWeCreateALocatorGeneratorInterface()) {
+            $locatorInterfaceGenerator->setConfiguration($this->configuration);
+            $locatorInterfaceGenerator->setFileExistsStrategy($this->fileExistsStrategy);
+            $locatorInterfaceGenerator->generate();
         }
     }
 }
