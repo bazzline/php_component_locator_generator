@@ -20,17 +20,6 @@ use Net\Bazzline\Component\CodeGenerator\FileGenerator;
 class FactoryInterfaceGenerator extends AbstractInterfaceGenerator
 {
     /**
-     * @throws RuntimeException
-     */
-    public function generate()
-    {
-        $this->generateInterface(
-            'FactoryInterface'.
-            $this->configuration->getFileNameExtension()
-        );
-    }
-
-    /**
      * @param ClassGenerator $classGenerator
      * @param Configuration $configuration
      * @param DocumentationGeneratorFactory $documentationGeneratorFactory
@@ -66,5 +55,13 @@ class FactoryInterfaceGenerator extends AbstractInterfaceGenerator
         $classGenerator->addMethod($create);
 
         return $classGenerator;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getInterfaceName()
+    {
+        return 'FactoryInterface';
     }
 }

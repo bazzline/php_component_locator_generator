@@ -85,6 +85,17 @@ abstract class AbstractInterfaceGenerator extends AbstractGenerator
     }
 
     /**
+     * @throws RuntimeException
+     */
+    final public function generate()
+    {
+        $this->generateInterface(
+            $this->getInterfaceName() .
+            $this->configuration->getFileNameExtension()
+        );
+    }
+
+    /**
      * @param ClassGenerator $classGenerator
      * @param Configuration $configuration
      * @param DocumentationGeneratorFactory $documentationGeneratorFactory
@@ -92,6 +103,11 @@ abstract class AbstractInterfaceGenerator extends AbstractGenerator
      * @return ClassGenerator
      */
     abstract protected function createInterface(ClassGenerator $classGenerator, Configuration $configuration, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory);
+
+    /**
+     * @return string
+     */
+    abstract protected function getInterfaceName();
 
     protected function generateInterface($fileName)
     {
