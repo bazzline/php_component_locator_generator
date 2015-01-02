@@ -97,6 +97,9 @@ class Generator extends AbstractGenerator
         }
         //start of validation
 
+        //@todo why not add a "shouldBeGenerated" so that the generator can
+        // decide on its own if it should be generated
+        //than we could simple write a "foreach generators as generator ..."
         $locatorGenerator->setConfiguration($configuration);
         $locatorGenerator->setFileExistsStrategy($fileExistsStrategy);
         $locatorGenerator->generate();
