@@ -40,7 +40,7 @@ class GeneratorFactory
         $propertyGeneratorFactory       = new PropertyGeneratorFactory();
 
         $factoryInterfaceGenerator
-            ->setClassGeneratorFactory($classGeneratorFactory)
+            ->setInterfaceGeneratorFactory($classGeneratorFactory)
             ->setDocumentationGeneratorFactory($documentationGeneratorFactory)
             ->setFileGeneratorFactory($fileGeneratorFactory)
             ->setMethodGeneratorFactory($methodGeneratorFactory);
@@ -59,7 +59,7 @@ class GeneratorFactory
             ->setPropertyGeneratorFactory($propertyGeneratorFactory);
 
         $locatorInterfaceGenerator
-            ->setClassGeneratorFactory($classGeneratorFactory)
+            ->setInterfaceGeneratorFactory($classGeneratorFactory)
             ->setDocumentationGeneratorFactory($documentationGeneratorFactory)
             ->setFileGeneratorFactory($fileGeneratorFactory)
             ->setMethodGeneratorFactory($methodGeneratorFactory);

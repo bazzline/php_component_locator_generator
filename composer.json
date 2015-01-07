@@ -18,7 +18,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
-        "net_bazzline/php_component_code_generator": "1.0.1"
+        "net_bazzline/php_component_code_generator": "1.1.0"
     },
     "require-dev": {
         "apigen/apigen": "2.8.1",

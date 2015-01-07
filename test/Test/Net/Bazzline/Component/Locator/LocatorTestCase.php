@@ -12,6 +12,7 @@ use Net\Bazzline\Component\CodeGenerator\Factory\BlockGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\ClassGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\FileGeneratorFactory;
+use Net\Bazzline\Component\CodeGenerator\Factory\InterfaceGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\PropertyGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Indention;
@@ -277,6 +278,14 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     protected function getClassGeneratorFactory()
     {
         return new ClassGeneratorFactory();
+    }
+
+    /**
+     * @return InterfaceGeneratorFactory
+     */
+    protected function getInterfaceGeneratorFactory()
+    {
+        return new InterfaceGeneratorFactory();
     }
 
     /**
