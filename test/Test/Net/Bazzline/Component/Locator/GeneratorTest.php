@@ -77,27 +77,32 @@ class GeneratorTest extends LocatorTestCase
             'just locator generator' => array(
                 'hasFactoryInstances'               => false,
                 'hasSharedInstances'                => false,
-                'createLocatorGeneratorInterface'  => false
+                'createLocatorGeneratorInterface'   => false
             ),
             'with factory interface' => array(
                 'hasFactoryInstances'               => true,
                 'hasSharedInstances'                => false,
-                'createLocatorGeneratorInterface'  => false
+                'createLocatorGeneratorInterface'   => false
             ),
             'with shared instances' => array(
                 'hasFactoryInstances'               => false,
                 'hasSharedInstances'                => true,
-                'createLocatorGeneratorInterface'  => false
+                'createLocatorGeneratorInterface'   => false
             ),
             'with interface generation' => array(
                 'hasFactoryInstances'               => false,
                 'hasSharedInstances'                => false,
-                'createLocatorGeneratorInterface'   => false
+                'createLocatorGeneratorInterface'   => true
             ),
             'with factory interface and shared instances' => array(
                 'hasFactoryInstances'               => true,
                 'hasSharedInstances'                => true,
                 'createLocatorGeneratorInterface'   => false
+            ),
+            'with all' => array(
+                'hasFactoryInstances'               => true,
+                'hasSharedInstances'                => true,
+                'createLocatorGeneratorInterface'   => true
             )
         );
     }
@@ -110,6 +115,7 @@ class GeneratorTest extends LocatorTestCase
      */
     public function testGenerate($hasFactoryInstance, $hasSharedInstances, $createLocatorGeneratorInterface)
     {
+echo var_export(array($hasFactoryInstance, $hasSharedInstances, $createLocatorGeneratorInterface), true) . PHP_EOL;
         $generator          = $this->getGenerator();
         $configuration      = $this->getMockOfConfiguration();
         $fileExistsStrategy = $this->getMockOfFileExistsStrategyInterface();
