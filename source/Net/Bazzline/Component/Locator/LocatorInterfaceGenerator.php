@@ -6,7 +6,7 @@
 
 namespace Net\Bazzline\Component\Locator;
 
-use Net\Bazzline\Component\CodeGenerator\ClassGenerator;
+use Net\Bazzline\Component\CodeGenerator\InterfaceGenerator;
 use Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
 
@@ -18,20 +18,19 @@ class LocatorInterfaceGenerator extends AbstractInterfaceGenerator
 {
     /**
      * @param string $name
-     * @param ClassGenerator $classGenerator
+     * @param InterfaceGenerator $interfaceGenerator
      * @param Configuration $configuration
      * @param DocumentationGeneratorFactory $documentationGeneratorFactory
      * @param MethodGeneratorFactory $methodGeneratorFactory
-     * @return ClassGenerator
+     * @return InterfaceGenerator
      */
-    protected function createInterface($name, ClassGenerator $classGenerator, Configuration $configuration, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory)
+    protected function createInterface($name, InterfaceGenerator $interfaceGenerator, Configuration $configuration, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory)
     {
-        $classGenerator->markAsInterface();
-        $classGenerator->setDocumentation($documentationGeneratorFactory->create());
-        $classGenerator->setName($name);
+        $interfaceGenerator->setDocumentation($documentationGeneratorFactory->create());
+        $interfaceGenerator->setName($name);
 
         if ($configuration->hasNamespace()) {
-            $classGenerator->setNamespace($configuration->getNamespace());
+            $interfaceGenerator->setNamespace($configuration->getNamespace());
         }
 
         if ($configuration->hasImplements()) {
@@ -39,7 +38,7 @@ class LocatorInterfaceGenerator extends AbstractInterfaceGenerator
                 //@todo bug!
                 //if the class generator is an interface, we have to add
                 // multiple extends
-                $classGenerator->addImplements($interfaceName);
+                $interfaceGenerator->addImplements($interfaceName);
             }
         }
 
@@ -62,11 +61,11 @@ class LocatorInterfaceGenerator extends AbstractInterfaceGenerator
                 $method->markAsHasNoBody();
                 $method->getDocumentation()->setReturn(array($returnValue));
 
-                $classGenerator->addMethod($method);
+                $interfaceGenerator->addMethod($method);
             }
         }
 
-        return $classGenerator;
+        return $interfaceGenerator;
     }
 
     /**

@@ -42,6 +42,11 @@ class Configuration
     private $className;
 
     /**
+     * @var bool
+     */
+    private $createLocatorGeneratorInterface = false;
+
+    /**
      * @var FetchFromFactoryInstancePoolBuilder
      */
     private $fetchFromFactoryInstancePoolBuilder;
@@ -129,6 +134,25 @@ class Configuration
     {
         $this->className = (string) $name;
         $this->fileName = $this->className . $this->getFileNameExtension();
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function createLocatorGeneratorInterface()
+    {
+        return $this->createLocatorGeneratorInterface;
+    }
+
+    /**
+     * @param bool $flag
+     * @return $this
+     */
+    public function setCreateLocatorGeneratorInterface($flag = false)
+    {
+        $this->createLocatorGeneratorInterface = (bool) $flag;
 
         return $this;
     }
@@ -442,15 +466,6 @@ class Configuration
         $this->newInstanceBuilder = $newInstanceBuilder;
 
         return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function shouldWeCreateALocatorGeneratorInterface()
-    {
-        //@todo
-        return true;
     }
     //end of public methods
 

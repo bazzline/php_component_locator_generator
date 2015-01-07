@@ -128,7 +128,7 @@ abstract class AbstractInterfaceGenerator extends AbstractGenerator
             $this->methodGeneratorFactory
         );
 
-        $fileGenerator->addClass($interfaceGenerator);
+        $fileGenerator->addInterface($interfaceGenerator);
         $fileContent = $fileGenerator->generate();
 
         $fullQualifiedPathName = $this->configuration->getFilePath() .

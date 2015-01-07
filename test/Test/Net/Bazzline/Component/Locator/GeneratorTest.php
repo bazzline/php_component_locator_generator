@@ -75,20 +75,29 @@ class GeneratorTest extends LocatorTestCase
     {
         return array(
             'just locator generator' => array(
-                'hasFactoryInstances' => false,
-                'hasSharedInstances' => false
+                'hasFactoryInstances'               => false,
+                'hasSharedInstances'                => false,
+                'createLocatorGeneratorInterface'  => false
             ),
             'with factory interface' => array(
-                'hasFactoryInstances' => true,
-                'hasSharedInstances' => false
+                'hasFactoryInstances'               => true,
+                'hasSharedInstances'                => false,
+                'createLocatorGeneratorInterface'  => false
             ),
             'with shared instances' => array(
-                'hasFactoryInstances' => false,
-                'hasSharedInstances' => true
+                'hasFactoryInstances'               => false,
+                'hasSharedInstances'                => true,
+                'createLocatorGeneratorInterface'  => false
+            ),
+            'with interface generation' => array(
+                'hasFactoryInstances'               => false,
+                'hasSharedInstances'                => false,
+                'createLocatorGeneratorInterface'   => false
             ),
             'with factory interface and shared instances' => array(
-                'hasFactoryInstances' => true,
-                'hasSharedInstances' => true
+                'hasFactoryInstances'               => true,
+                'hasSharedInstances'                => true,
+                'createLocatorGeneratorInterface'   => false
             )
         );
     }
@@ -97,13 +106,14 @@ class GeneratorTest extends LocatorTestCase
      * @dataProvider generateTestDataProvider
      * @param bool $hasFactoryInstance
      * @param bool $hasSharedInstances
+     * @param bool $createLocatorGeneratorInterface
      */
-    public function testGenerate($hasFactoryInstance, $hasSharedInstances)
+    public function testGenerate($hasFactoryInstance, $hasSharedInstances, $createLocatorGeneratorInterface)
     {
-        $generator = $this->getGenerator();
-        $configuration = $this->getMockOfConfiguration();
+        $generator          = $this->getGenerator();
+        $configuration      = $this->getMockOfConfiguration();
         $fileExistsStrategy = $this->getMockOfFileExistsStrategyInterface();
-        $locatorGenerator = $this->getMockOfLocatorGenerator();
+        $locatorGenerator   = $this->getMockOfLocatorGenerator();
 
         $configuration->shouldReceive('getFilePath')
             ->andReturn(sys_get_temp_dir())
@@ -113,7 +123,10 @@ class GeneratorTest extends LocatorTestCase
             ->once();
         $configuration->shouldReceive('hasSharedInstances')
             ->andReturn($hasSharedInstances)
-            ->atMost();
+            ->atMost(2);
+        $configuration->shouldReceive('createLocatorGeneratorInterface')
+            ->andReturn($createLocatorGeneratorInterface)
+            ->once();
 
         $locatorGenerator->shouldReceive('setConfiguration')
             ->with($configuration)
@@ -137,6 +150,21 @@ class GeneratorTest extends LocatorTestCase
                 ->once();
 
             $generator->setInvalidArgumentExceptionGenerator($invalidArgumentExceptionGenerator);
+        }
+
+        if ($createLocatorGeneratorInterface) {
+            $interfaceGenerator = $this->getMockOfLocatorInterfaceGenerator();
+
+            $interfaceGenerator->shouldReceive('setConfiguration')
+                ->with($configuration)
+                ->once();
+            $interfaceGenerator->shouldReceive('setFileExistsStrategy')
+                ->with($fileExistsStrategy)
+                ->once();
+            $interfaceGenerator->shouldReceive('generate')
+                ->once();
+
+            $generator->setLocatorInterfaceGenerator($interfaceGenerator);
         }
 
         $generator->setConfiguration($configuration);

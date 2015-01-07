@@ -111,7 +111,7 @@ class Generator extends AbstractGenerator
             $invalidArgumentExceptionGenerator->generate();
         }
 
-        if ($configuration->shouldWeCreateALocatorGeneratorInterface()) {
+        if ($configuration->createLocatorGeneratorInterface()) {
             $locatorInterfaceGenerator->setConfiguration($this->configuration);
             $locatorInterfaceGenerator->setFileExistsStrategy($this->fileExistsStrategy);
             $locatorInterfaceGenerator->generate();
