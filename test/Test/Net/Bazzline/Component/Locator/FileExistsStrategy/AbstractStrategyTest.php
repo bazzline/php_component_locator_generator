@@ -39,9 +39,10 @@ class AbstractStrategyTest extends LocatorTestCase
      */
     public function testFilePathIsNotADirectory()
     {
-        $strategy = $this->getMockOfAbstractStrategy();
-        $root = vfsStream::setup('root', 0755);
-        $file = vfsStream::newFile('file');
+        $strategy   = $this->getMockOfAbstractStrategy();
+        $root       = vfsStream::setup('root', 0755);
+        $file       = vfsStream::newFile('file');
+
         $root->addChild($file);
 
         $strategy->setFilePath($file->url());
@@ -53,17 +54,20 @@ class AbstractStrategyTest extends LocatorTestCase
      */
     public function testFilePathIsNotAWritableDirectory()
     {
-        $strategy = $this->getMockOfAbstractStrategy();
-        $root = vfsStream::setup('root', 0444);
+        $strategy   = $this->getMockOfAbstractStrategy();
+        $root       = vfsStream::setup('root', 0444);
 
         $strategy->setFilePath($root->url());
     }
 
     public function testValidFilePath()
     {
-        $strategy = $this->getMockOfAbstractStrategy();
-        $root = vfsStream::setup('root', 0700);
+        $strategy   = $this->getMockOfAbstractStrategy();
+        $root       = vfsStream::setup('root', 0700);
+        $directory  = vfsStream::newDirectory('directory');
 
-        $strategy->setFilePath($root->url());
+        $root->addChild($directory);
+
+        $strategy->setFilePath($directory->url());
     }
 }

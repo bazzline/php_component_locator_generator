@@ -34,19 +34,21 @@ class SuffixWithCurrentTimestampStrategyTest extends LocatorTestCase
 
     public function testExecuteWithRenameableFile()
     {
-        $strategy = $this->getSuffixWithCurrentTimestampStrategy();
-        $timestamp = __LINE__;
-        $root = vfsStream::setup('root', 0700);
-        $file = vfsStream::newFile('file', 0700);
+        $strategy   = $this->getSuffixWithCurrentTimestampStrategy();
+        $timestamp  = __LINE__;
+        $root       = vfsStream::setup('root', 0700);
+        $directory  = vfsStream::newDirectory('directory');
+        $file       = vfsStream::newFile('file', 0700);
 
-        $root->addChild($file);
+        $directory->addChild($file);
+        $root->addChild($directory);
 
         $strategy->setCurrentTimeStamp($timestamp);
         $strategy->setFileName('file');
-        $strategy->setFilePath($root->url());
+        $strategy->setFilePath($directory->url());
 
-        $this->assertEquals($root->url() . DIRECTORY_SEPARATOR . 'file', $file->url());
+        $this->assertEquals($directory->url() . DIRECTORY_SEPARATOR . 'file', $file->url());
         $strategy->execute();
-        $this->assertEquals($root->url() . DIRECTORY_SEPARATOR . 'file.' . $timestamp, $file->url());
+        $this->assertEquals($directory->url() . DIRECTORY_SEPARATOR . 'file.' . $timestamp, $file->url());
     }
 }

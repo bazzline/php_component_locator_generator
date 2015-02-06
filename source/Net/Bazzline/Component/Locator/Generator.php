@@ -111,7 +111,6 @@ class Generator extends AbstractGenerator
             $invalidArgumentExceptionGenerator->generate();
         }
 
-echo 'create it: ' . var_export($configuration->createLocatorGeneratorInterface(), true) . PHP_EOL;
         if ($configuration->createLocatorGeneratorInterface()) {
             $locatorInterfaceGenerator->setConfiguration($this->configuration);
             $locatorInterfaceGenerator->setFileExistsStrategy($this->fileExistsStrategy);
