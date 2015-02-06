@@ -28,6 +28,7 @@ class Generator extends AbstractGenerator
     /**
      * @param \Net\Bazzline\Component\Locator\FactoryInterfaceGenerator $factoryInterfaceGenerator
      * @return $this
+     * @todo needed?
      */
     public function setFactoryInterfaceGenerator(FactoryInterfaceGenerator $factoryInterfaceGenerator)
     {

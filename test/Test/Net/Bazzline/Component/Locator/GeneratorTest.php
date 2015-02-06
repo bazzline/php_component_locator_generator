@@ -115,7 +115,6 @@ class GeneratorTest extends LocatorTestCase
      */
     public function testGenerate($hasFactoryInstance, $hasSharedInstances, $createLocatorGeneratorInterface)
     {
-echo var_export(array($hasFactoryInstance, $hasSharedInstances, $createLocatorGeneratorInterface), true) . PHP_EOL;
         $generator          = $this->getGenerator();
         $configuration      = $this->getMockOfConfiguration();
         $fileExistsStrategy = $this->getMockOfFileExistsStrategyInterface();

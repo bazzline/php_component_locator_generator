@@ -86,7 +86,7 @@ abstract class AbstractInterfaceGenerator extends AbstractGenerator
     /**
      * @throws RuntimeException
      */
-    final public function generate()
+    public function generate()
     {
         $this->generateInterface(
             $this->getInterfaceName(),

@@ -242,6 +242,15 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     {
         return Mockery::mock('Net\Bazzline\Component\Locator\LocatorInterfaceGenerator');
     }
+
+    /**
+     * @param string|object $classOrClassName
+     * @return Mockery\MockInterface
+     */
+    protected function getMockOf($classOrClassName)
+    {
+        return Mockery::mock($classOrClassName);
+    }
     //end of locator namespace
 
     //begin of helper
