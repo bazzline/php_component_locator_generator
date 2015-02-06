@@ -12,6 +12,7 @@ use Net\Bazzline\Component\CodeGenerator\Factory\BlockGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\ClassGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\FileGeneratorFactory;
+use Net\Bazzline\Component\CodeGenerator\Factory\InterfaceGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\PropertyGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Indention;
@@ -24,6 +25,7 @@ use Net\Bazzline\Component\Locator\Generator;
 use Net\Bazzline\Component\Locator\GeneratorFactory;
 use Net\Bazzline\Component\Locator\InvalidArgumentExceptionGenerator;
 use Net\Bazzline\Component\Locator\LocatorGenerator;
+use Net\Bazzline\Component\Locator\LocatorInterfaceGenerator;
 use Net\Bazzline\Component\Locator\MethodBodyBuilder\FetchFromFactoryInstancePoolBuilder;
 use Net\Bazzline\Component\Locator\MethodBodyBuilder\FetchFromSharedInstancePoolBuilder;
 use Net\Bazzline\Component\Locator\MethodBodyBuilder\FetchFromSharedInstancePoolOrCreateByFactoryBuilder;
@@ -224,6 +226,22 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     {
         return Mockery::mock('Net\Bazzline\Component\Locator\LocatorGenerator');
     }
+
+    /**
+     * @return LocatorInterfaceGenerator
+     */
+    protected function getLocatorInterfaceGenerator()
+    {
+        return new LocatorInterfaceGenerator();
+    }
+
+    /**
+     * @return LocatorInterfaceGenerator|\Mockery\MockInterface
+     */
+    protected function getMockOfLocatorInterfaceGenerator()
+    {
+        return Mockery::mock('Net\Bazzline\Component\Locator\LocatorInterfaceGenerator');
+    }
     //end of locator namespace
 
     //begin of helper
@@ -277,6 +295,14 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     protected function getClassGeneratorFactory()
     {
         return new ClassGeneratorFactory();
+    }
+
+    /**
+     * @return InterfaceGeneratorFactory
+     */
+    protected function getInterfaceGeneratorFactory()
+    {
+        return new InterfaceGeneratorFactory();
     }
 
     /**

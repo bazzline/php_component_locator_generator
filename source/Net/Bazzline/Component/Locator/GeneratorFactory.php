@@ -10,6 +10,7 @@ use Net\Bazzline\Component\CodeGenerator\Factory\BlockGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\ClassGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\FileGeneratorFactory;
+use Net\Bazzline\Component\CodeGenerator\Factory\InterfaceGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\PropertyGeneratorFactory;
 
@@ -34,13 +35,14 @@ class GeneratorFactory
 
         $blockGeneratorFactory          = new BlockGeneratorFactory();
         $classGeneratorFactory          = new ClassGeneratorFactory();
+        $interfaceGeneratorFactory      = new InterfaceGeneratorFactory();
         $documentationGeneratorFactory  = new DocumentationGeneratorFactory();
         $fileGeneratorFactory           = new FileGeneratorFactory();
         $methodGeneratorFactory         = new MethodGeneratorFactory();
         $propertyGeneratorFactory       = new PropertyGeneratorFactory();
 
         $factoryInterfaceGenerator
-            ->setClassGeneratorFactory($classGeneratorFactory)
+            ->setInterfaceGeneratorFactory($interfaceGeneratorFactory)
             ->setDocumentationGeneratorFactory($documentationGeneratorFactory)
             ->setFileGeneratorFactory($fileGeneratorFactory)
             ->setMethodGeneratorFactory($methodGeneratorFactory);
@@ -59,7 +61,7 @@ class GeneratorFactory
             ->setPropertyGeneratorFactory($propertyGeneratorFactory);
 
         $locatorInterfaceGenerator
-            ->setClassGeneratorFactory($classGeneratorFactory)
+            ->setInterfaceGeneratorFactory($interfaceGeneratorFactory)
             ->setDocumentationGeneratorFactory($documentationGeneratorFactory)
             ->setFileGeneratorFactory($fileGeneratorFactory)
             ->setMethodGeneratorFactory($methodGeneratorFactory);

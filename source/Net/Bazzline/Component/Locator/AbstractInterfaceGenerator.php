@@ -6,9 +6,8 @@
 
 namespace Net\Bazzline\Component\Locator;
 
-
-use Net\Bazzline\Component\CodeGenerator\ClassGenerator;
-use Net\Bazzline\Component\CodeGenerator\Factory\ClassGeneratorFactory;
+use Net\Bazzline\Component\CodeGenerator\InterfaceGenerator;
+use Net\Bazzline\Component\CodeGenerator\Factory\InterfaceGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\FileGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
@@ -21,9 +20,9 @@ use Net\Bazzline\Component\CodeGenerator\FileGenerator;
 abstract class AbstractInterfaceGenerator extends AbstractGenerator
 {
     /**
-     * @var ClassGeneratorFactory
+     * @var InterfaceGeneratorFactory
      */
-    protected $classGeneratorFactory;
+    protected $interfaceGeneratorFactory;
 
     /**
      * @var DocumentationGeneratorFactory
@@ -41,12 +40,12 @@ abstract class AbstractInterfaceGenerator extends AbstractGenerator
     protected $methodGeneratorFactory;
 
     /**
-     * @param \Net\Bazzline\Component\CodeGenerator\Factory\ClassGeneratorFactory $classGeneratorFactory
+     * @param \Net\Bazzline\Component\CodeGenerator\Factory\InterfaceGeneratorFactory $interfaceGeneratorFactory
      * @return $this
      */
-    public function setClassGeneratorFactory(ClassGeneratorFactory $classGeneratorFactory)
+    public function setInterfaceGeneratorFactory(InterfaceGeneratorFactory $interfaceGeneratorFactory)
     {
-        $this->classGeneratorFactory = $classGeneratorFactory;
+        $this->interfaceGeneratorFactory = $interfaceGeneratorFactory;
 
         return $this;
     }
@@ -97,13 +96,13 @@ abstract class AbstractInterfaceGenerator extends AbstractGenerator
 
     /**
      * @param string $name
-     * @param ClassGenerator $classGenerator
+     * @param InterfaceGenerator $interfaceGenerator
      * @param Configuration $configuration
      * @param DocumentationGeneratorFactory $documentationGeneratorFactory
      * @param MethodGeneratorFactory $methodGeneratorFactory
-     * @return ClassGenerator
+     * @return InterfaceGenerator
      */
-    abstract protected function createInterface($name, ClassGenerator $classGenerator, Configuration $configuration, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory);
+    abstract protected function createInterface($name, InterfaceGenerator $interfaceGenerator, Configuration $configuration, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory);
 
     /**
      * @return string
@@ -121,15 +120,15 @@ abstract class AbstractInterfaceGenerator extends AbstractGenerator
         $this->moveOldFileIfExists($this->configuration->getFilePath(), $fileName);
 
         $fileGenerator = $this->createFile($this->fileGeneratorFactory->create());
-        $classGenerator = $this->createInterface(
+        $interfaceGenerator = $this->createInterface(
             $name,
-            $this->classGeneratorFactory->create(),
+            $this->interfaceGeneratorFactory->create(),
             $this->configuration,
             $this->documentationGeneratorFactory,
             $this->methodGeneratorFactory
         );
 
-        $fileGenerator->addClass($classGenerator);
+        $fileGenerator->addInterface($interfaceGenerator);
         $fileContent = $fileGenerator->generate();
 
         $fullQualifiedPathName = $this->configuration->getFilePath() .
