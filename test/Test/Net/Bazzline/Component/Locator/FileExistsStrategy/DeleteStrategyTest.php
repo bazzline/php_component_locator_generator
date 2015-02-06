@@ -17,12 +17,15 @@ class DeleteStrategyTest extends LocatorTestCase
 {
     public function testExecuteWithDeletableFile()
     {
-        $strategy = $this->getDeleteStrategy();
-        $root = vfsStream::setup('root', 0700);
-        $file = vfsStream::newFile('file', 0700);
-        $root->addChild($file);
+        $strategy   = $this->getDeleteStrategy();
+        $root       = vfsStream::setup('root', 0700);
+        $directory  = vfsStream::newDirectory('directory');
+        $file       = vfsStream::newFile('file', 0700);
 
-        $strategy->setFilePath($root->url());
+        $directory->addChild($file);
+        $root->addChild($directory);
+
+        $strategy->setFilePath($directory->url());
         $strategy->setFileName('file');
 
         $strategy->execute();

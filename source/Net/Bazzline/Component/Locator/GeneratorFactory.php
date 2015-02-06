@@ -10,6 +10,7 @@ use Net\Bazzline\Component\CodeGenerator\Factory\BlockGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\ClassGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\FileGeneratorFactory;
+use Net\Bazzline\Component\CodeGenerator\Factory\InterfaceGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\PropertyGeneratorFactory;
 
@@ -24,21 +25,24 @@ class GeneratorFactory
      */
     public function create()
     {
+        //@todo why not rename to GeneratorCollection?
         $generator = new Generator();
 
-        $factoryInterfaceGenerator = new FactoryInterfaceGenerator();
-        $invalidArgumentExceptionGenerator = new InvalidArgumentExceptionGenerator();
-        $locatorGenerator = new LocatorGenerator();
+        $factoryInterfaceGenerator          = new FactoryInterfaceGenerator();
+        $invalidArgumentExceptionGenerator  = new InvalidArgumentExceptionGenerator();
+        $locatorGenerator                   = new LocatorGenerator();
+        $locatorInterfaceGenerator          = new LocatorInterfaceGenerator();
 
-        $blockGeneratorFactory = new BlockGeneratorFactory();
-        $classGeneratorFactory = new ClassGeneratorFactory();
-        $documentationGeneratorFactory = new DocumentationGeneratorFactory();
-        $fileGeneratorFactory = new FileGeneratorFactory();
-        $methodGeneratorFactory = new MethodGeneratorFactory();
-        $propertyGeneratorFactory = new PropertyGeneratorFactory();
+        $blockGeneratorFactory          = new BlockGeneratorFactory();
+        $classGeneratorFactory          = new ClassGeneratorFactory();
+        $interfaceGeneratorFactory      = new InterfaceGeneratorFactory();
+        $documentationGeneratorFactory  = new DocumentationGeneratorFactory();
+        $fileGeneratorFactory           = new FileGeneratorFactory();
+        $methodGeneratorFactory         = new MethodGeneratorFactory();
+        $propertyGeneratorFactory       = new PropertyGeneratorFactory();
 
         $factoryInterfaceGenerator
-            ->setClassGeneratorFactory($classGeneratorFactory)
+            ->setInterfaceGeneratorFactory($interfaceGeneratorFactory)
             ->setDocumentationGeneratorFactory($documentationGeneratorFactory)
             ->setFileGeneratorFactory($fileGeneratorFactory)
             ->setMethodGeneratorFactory($methodGeneratorFactory);
@@ -56,10 +60,17 @@ class GeneratorFactory
             ->setMethodGeneratorFactory($methodGeneratorFactory)
             ->setPropertyGeneratorFactory($propertyGeneratorFactory);
 
+        $locatorInterfaceGenerator
+            ->setInterfaceGeneratorFactory($interfaceGeneratorFactory)
+            ->setDocumentationGeneratorFactory($documentationGeneratorFactory)
+            ->setFileGeneratorFactory($fileGeneratorFactory)
+            ->setMethodGeneratorFactory($methodGeneratorFactory);
+
         $generator
             ->setFactoryInterfaceGenerator($factoryInterfaceGenerator)
             ->setInvalidArgumentExceptionGenerator($invalidArgumentExceptionGenerator)
-            ->setLocatorGenerator($locatorGenerator);
+            ->setLocatorGenerator($locatorGenerator)
+            ->setLocatorInterfaceGenerator($locatorInterfaceGenerator);
 
         return $generator;
     }

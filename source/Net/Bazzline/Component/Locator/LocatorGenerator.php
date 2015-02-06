@@ -128,7 +128,9 @@ class LocatorGenerator extends AbstractGenerator
             $this->configuration->getFileName()
         );
 
-        $fileGenerator = $this->createFile($this->fileGeneratorFactory->create());
+        $fileGenerator = $this->createFile(
+            $this->fileGeneratorFactory->create()
+        );
         $classGenerator = $this->createClass(
             $this->classGeneratorFactory->create(),
             $this->configuration,
@@ -201,6 +203,7 @@ class LocatorGenerator extends AbstractGenerator
     {
         $documentationGenerator = $documentationGeneratorFactory->create();
         $documentationGenerator->setClass($configuration->getClassName());
+
         if ($configuration->hasNamespace()) {
             $documentationGenerator->setPackage($configuration->getNamespace());
         }

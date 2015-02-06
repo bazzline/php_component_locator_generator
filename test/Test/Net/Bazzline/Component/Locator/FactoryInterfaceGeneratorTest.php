@@ -16,7 +16,7 @@ class FactoryInterfaceGeneratorTest extends LocatorTestCase
 {
     public function testSetters()
     {
-        $classGeneratorFactory = $this->getClassGeneratorFactory();
+        $interfaceGeneratorFactory = $this->getInterfaceGeneratorFactory();
         $documentationGeneratorFactory = $this->getDocumentationGeneratorFactory();
         $fileGeneratorFactory = $this->getFileGeneratorFactory();
         $generator = $this->getFactoryInterfaceGenerator();
@@ -24,7 +24,7 @@ class FactoryInterfaceGeneratorTest extends LocatorTestCase
 
         $this->assertEquals(
             $generator,
-            $generator->setClassGeneratorFactory($classGeneratorFactory)
+            $generator->setInterfaceGeneratorFactory($interfaceGeneratorFactory)
         );
         $this->assertEquals(
             $generator,
@@ -42,8 +42,8 @@ class FactoryInterfaceGeneratorTest extends LocatorTestCase
 
     public function testGenerate()
     {
-        $className = 'MyClass';
-        $classGeneratorFactory = $this->getClassGeneratorFactory();
+        $name = 'MyClass';
+        $interfaceGeneratorFactory = $this->getInterfaceGeneratorFactory();
         $configuration = $this->getMockOfConfiguration();
         $documentationGeneratorFactory = $this->getDocumentationGeneratorFactory();
         $fileGeneratorFactory = $this->getFileGeneratorFactory();
@@ -54,7 +54,7 @@ class FactoryInterfaceGeneratorTest extends LocatorTestCase
         $strategy = $this->getDeleteStrategy();
 
         $generator->setConfiguration($configuration);
-        $generator->setClassGeneratorFactory($classGeneratorFactory);
+        $generator->setInterfaceGeneratorFactory($interfaceGeneratorFactory);
         $generator->setDocumentationGeneratorFactory($documentationGeneratorFactory);
         $generator->setFileGeneratorFactory($fileGeneratorFactory);
         $generator->setFileExistsStrategy($strategy);
@@ -62,10 +62,13 @@ class FactoryInterfaceGeneratorTest extends LocatorTestCase
 
         $configuration->shouldReceive('getClassName')
             ->once()
-            ->andReturn($className);
+            ->andReturn($name);
         $configuration->shouldReceive('getFilePath')
             ->twice()
             ->andReturn($root->url());
+        $configuration->shouldReceive('getFileNameExtension')
+            ->once()
+            ->andReturn('.php');
         $configuration->shouldReceive('getNamespace')
             ->once()
             ->andReturn($namespace);
@@ -82,17 +85,17 @@ class FactoryInterfaceGeneratorTest extends LocatorTestCase
             'namespace ' . $namespace . ';' . PHP_EOL .
             '' . PHP_EOL .
             '/**' . PHP_EOL .
-            ' * Class FactoryInterface' . PHP_EOL .
+            ' * Interface FactoryInterface' . PHP_EOL .
             ' *' . PHP_EOL .
             ' * @package ' . $namespace . PHP_EOL .
             ' */' . PHP_EOL .
             'interface FactoryInterface' . PHP_EOL .
             '{' . PHP_EOL .
             '    /**' . PHP_EOL .
-            '     * @param ' . $className . ' $locator' . PHP_EOL .
+            '     * @param ' . $name . ' $locator' . PHP_EOL .
             '     * @return $this' . PHP_EOL .
             '     */' . PHP_EOL .
-            '    public function setLocator(' . $className . ' $locator);' . PHP_EOL .
+            '    public function setLocator(' . $name . ' $locator);' . PHP_EOL .
             '' . PHP_EOL .
             '    /**' . PHP_EOL .
             '     * @return null|object' . PHP_EOL .

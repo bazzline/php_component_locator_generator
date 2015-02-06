@@ -20,6 +20,7 @@ use Net\Bazzline\Component\Locator\MethodBodyBuilder\NewInstanceBuilder;
  */
 class Configuration
 {
+    //begin of properties
     /**
      * @var string
      */
@@ -39,6 +40,11 @@ class Configuration
      * @var string
      */
     private $className;
+
+    /**
+     * @var bool
+     */
+    private $createLocatorGeneratorInterface = false;
 
     /**
      * @var FetchFromFactoryInstancePoolBuilder
@@ -109,7 +115,9 @@ class Configuration
      * @var Uses
      */
     private $uses;
+    //end of properties
 
+    //begin of public methods
     /**
      * @return null|string
      */
@@ -125,7 +133,26 @@ class Configuration
     public function setClassName($name)
     {
         $this->className = (string) $name;
-        $this->fileName = $this->className . '.php';
+        $this->fileName = $this->className . $this->getFileNameExtension();
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function createLocatorGeneratorInterface()
+    {
+        return $this->createLocatorGeneratorInterface;
+    }
+
+    /**
+     * @param bool $flag
+     * @return $this
+     */
+    public function setCreateLocatorGeneratorInterface($flag = false)
+    {
+        $this->createLocatorGeneratorInterface = (bool) $flag;
 
         return $this;
     }
@@ -136,6 +163,14 @@ class Configuration
     public function getFileName()
     {
         return $this->fileName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileNameExtension()
+    {
+        return '.php';
     }
 
     /**
@@ -432,7 +467,9 @@ class Configuration
 
         return $this;
     }
+    //end of public methods
 
+    //begin of private methods
     /**
      * @return Uses
      */
@@ -508,4 +545,5 @@ class Configuration
 
         return $this->methodBodyBuilderInstancePool[$key];
     }
+    //end of private methods
 }
