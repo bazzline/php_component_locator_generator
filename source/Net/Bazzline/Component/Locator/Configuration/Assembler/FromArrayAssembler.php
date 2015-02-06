@@ -22,15 +22,19 @@ class FromArrayAssembler extends AbstractAssembler
     {
         $configuration = $this->getConfiguration();
 
-        $configuration = $this->mapStringPropertiesToConfiguration(
+        $configuration = $this->mapBooleanProperties(
             $data,
             $configuration
         );
-        $configuration = $this->mapInstancePropertiesToConfiguration(
+        $configuration = $this->mapStringProperties(
             $data,
             $configuration
         );
-        $configuration = $this->mapArrayPropertiesToConfiguration(
+        $configuration = $this->mapInstanceProperties(
+            $data,
+            $configuration
+        );
+        $configuration = $this->mapArrayProperties(
             $data,
             $configuration
         );
@@ -85,7 +89,7 @@ class FromArrayAssembler extends AbstractAssembler
      * @param Configuration $configuration
      * @return Configuration
      */
-    private function mapArrayPropertiesToConfiguration(array $data, Configuration $configuration)
+    private function mapArrayProperties(array $data, Configuration $configuration)
     {
         if (isset($data['implements'])) {
             foreach ($data['implements'] as $interfaceName) {
@@ -115,7 +119,7 @@ class FromArrayAssembler extends AbstractAssembler
      * @param Configuration $configuration
      * @return Configuration
      */
-    private function mapInstancePropertiesToConfiguration(array $data, Configuration $configuration)
+    private function mapInstanceProperties(array $data, Configuration $configuration)
     {
         if (isset($data['instances'])) {
             foreach ($data['instances'] as $key => $instance) {

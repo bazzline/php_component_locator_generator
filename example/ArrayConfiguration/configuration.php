@@ -8,6 +8,7 @@ return array(
     'assembler' => '\Net\Bazzline\Component\Locator\Configuration\Assembler\FromArrayAssembler',
     'bootstrap_file' => __DIR__ . '/boostrap.php',
     'class_name' => 'FromArrayConfigurationFileLocator',    //determines file name as well as php class name
+    'create_interface' => true, //create interface for locator generator
     //add class name here, depending on entries in use section, full qualified or not
     'extends' => 'BaseLocator',
     'file_exists_strategy' => '\Net\Bazzline\Component\Locator\FileExistsStrategy\SuffixWithCurrentTimestampStrategy',

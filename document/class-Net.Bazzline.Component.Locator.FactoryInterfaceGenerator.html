@@ -51,6 +51,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Net.Bazzline.Component.Locator.AbstractGenerator.html">AbstractGenerator</a></li>
+				<li><a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html">AbstractInterfaceGenerator</a></li>
 				<li><a href="class-Net.Bazzline.Component.Locator.Command.html">Command</a></li>
 				<li><a href="class-Net.Bazzline.Component.Locator.Configuration.html">Configuration</a></li>
 				<li><a href="class-Net.Bazzline.Component.Locator.ConfigurationFactory.html">ConfigurationFactory</a></li>
@@ -59,6 +60,7 @@
 				<li><a href="class-Net.Bazzline.Component.Locator.GeneratorFactory.html">GeneratorFactory</a></li>
 				<li><a href="class-Net.Bazzline.Component.Locator.InvalidArgumentExceptionGenerator.html">InvalidArgumentExceptionGenerator</a></li>
 				<li><a href="class-Net.Bazzline.Component.Locator.LocatorGenerator.html">LocatorGenerator</a></li>
+				<li><a href="class-Net.Bazzline.Component.Locator.LocatorInterfaceGenerator.html">LocatorInterfaceGenerator</a></li>
 			</ul>
 
 			<h3>Interfaces</h3>
@@ -133,6 +135,13 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by">
+			<a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html"><span>Net\Bazzline\Component\Locator\AbstractInterfaceGenerator</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by">
 <b><span>Net\Bazzline\Component\Locator\FactoryInterfaceGenerator</span></b>			
 			
 			
@@ -152,25 +161,25 @@
 		<b>Namespace:</b> <a href="namespace-Net.html">Net</a>\<a href="namespace-Net.Bazzline.html">Bazzline</a>\<a href="namespace-Net.Bazzline.Component.html">Component</a>\<a href="namespace-Net.Bazzline.Component.Locator.html">Locator</a><br>
 		<b>Package:</b> Net\Bazzline\Component\Locator<br>
 
-		<b>Located at</b> <a href="source-class-Net.Bazzline.Component.Locator.FactoryInterfaceGenerator.html#16-165" title="Go to source code">FactoryInterfaceGenerator.php</a><br>
+		<b>Located at</b> <a href="source-class-Net.Bazzline.Component.Locator.FactoryInterfaceGenerator.html#13-64" title="Go to source code">FactoryInterfaceGenerator.php</a><br>
 	</div>
 
 
 
 	<table class="summary methods" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="setClassGeneratorFactory" id="_setClassGeneratorFactory">
+	<tr data-order="createInterface" id="_createInterface">
 
 		<td class="attributes"><code>
-			 public 
-			mixed
+			 protected 
+			Net\Bazzline\Component\CodeGenerator\InterfaceGenerator
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_setClassGeneratorFactory">#</a>
-		<code><a href="source-class-Net.Bazzline.Component.Locator.FactoryInterfaceGenerator.html#42-51" title="Go to source code">setClassGeneratorFactory</a>( <span>Net\Bazzline\Component\CodeGenerator\Factory\ClassGeneratorFactory <var>$classGeneratorFactory</var></span> )</code>
+		<a class="anchor" href="#_createInterface">#</a>
+		<code><a href="source-class-Net.Bazzline.Component.Locator.FactoryInterfaceGenerator.html#19-55" title="Go to source code">createInterface</a>( <span>string <var>$name</var></span>, <span>Net\Bazzline\Component\CodeGenerator\InterfaceGenerator <var>$interfaceGenerator</var></span>, <span><code><a href="class-Net.Bazzline.Component.Locator.Configuration.html">Net\Bazzline\Component\Locator\Configuration</a></code> <var>$configuration</var></span>, <span>Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory <var>$documentationGeneratorFactory</var></span>, <span>Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory <var>$methodGeneratorFactory</var></span> )</code>
 
 		<div class="description short">
 			
@@ -182,127 +191,21 @@
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$classGeneratorFactory</var></dt>
+					<dt><var>$name</var></dt>
 					<dd></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>mixed</code><br>$this<br>
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="setDocumentationGeneratorFactory" id="_setDocumentationGeneratorFactory">
-
-		<td class="attributes"><code>
-			 public 
-			mixed
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_setDocumentationGeneratorFactory">#</a>
-		<code><a href="source-class-Net.Bazzline.Component.Locator.FactoryInterfaceGenerator.html#53-62" title="Go to source code">setDocumentationGeneratorFactory</a>( <span>Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory <var>$documentationGeneratorFactory</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
+					<dt><var>$interfaceGenerator</var></dt>
+					<dd></dd>
+					<dt><var>$configuration</var></dt>
+					<dd></dd>
 					<dt><var>$documentationGeneratorFactory</var></dt>
 					<dd></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>mixed</code><br>$this<br>
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="setFileGeneratorFactory" id="_setFileGeneratorFactory">
-
-		<td class="attributes"><code>
-			 public 
-			mixed
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_setFileGeneratorFactory">#</a>
-		<code><a href="source-class-Net.Bazzline.Component.Locator.FactoryInterfaceGenerator.html#64-73" title="Go to source code">setFileGeneratorFactory</a>( <span>Net\Bazzline\Component\CodeGenerator\Factory\FileGeneratorFactory <var>$fileGeneratorFactory</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$fileGeneratorFactory</var></dt>
-					<dd></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>mixed</code><br>$this<br>
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="setMethodGeneratorFactory" id="_setMethodGeneratorFactory">
-
-		<td class="attributes"><code>
-			 public 
-			mixed
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_setMethodGeneratorFactory">#</a>
-		<code><a href="source-class-Net.Bazzline.Component.Locator.FactoryInterfaceGenerator.html#75-84" title="Go to source code">setMethodGeneratorFactory</a>( <span>Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory <var>$methodGeneratorFactory</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
 					<dt><var>$methodGeneratorFactory</var></dt>
 					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>$this<br>
+					<code>Net\Bazzline\Component\CodeGenerator\InterfaceGenerator</code><br>InterfaceGenerator<br>
 				</div>
 
 
@@ -311,18 +214,18 @@
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="generate" id="_generate">
+	<tr data-order="getInterfaceName" id="_getInterfaceName">
 
 		<td class="attributes"><code>
-			 public 
-			
+			 protected 
+			string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_generate">#</a>
-		<code><a href="source-class-Net.Bazzline.Component.Locator.FactoryInterfaceGenerator.html#86-108" title="Go to source code">generate</a>( )</code>
+		<a class="anchor" href="#_getInterfaceName">#</a>
+		<code><a href="source-class-Net.Bazzline.Component.Locator.FactoryInterfaceGenerator.html#57-63" title="Go to source code">getInterfaceName</a>( )</code>
 
 		<div class="description short">
 			
@@ -333,11 +236,11 @@
 
 
 
-
-				<h4>Throws</h4>
+				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Net.Bazzline.Component.Locator.RuntimeException.html">Net\Bazzline\Component\Locator\RuntimeException</a></code></code><br>RuntimeException<br>
+					<code>string</code><br>string<br>
 				</div>
+
 
 
 
@@ -347,10 +250,24 @@
 	</table>
 
 	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#methods">Net\Bazzline\Component\Locator\AbstractInterfaceGenerator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#_generate">generate()</a>, 
+			<a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#_generateInterface">generateInterface()</a>, 
+			<a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#_setDocumentationGeneratorFactory">setDocumentationGeneratorFactory()</a>, 
+			<a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#_setFileGeneratorFactory">setFileGeneratorFactory()</a>, 
+			<a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#_setInterfaceGeneratorFactory">setInterfaceGeneratorFactory()</a>, 
+			<a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#_setMethodGeneratorFactory">setMethodGeneratorFactory()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
 	<caption>Methods inherited from <a href="class-Net.Bazzline.Component.Locator.AbstractGenerator.html#methods">Net\Bazzline\Component\Locator\AbstractGenerator</a></caption>
 	<tr>
 		<td><code>
 			<a href="class-Net.Bazzline.Component.Locator.AbstractGenerator.html#_dumpToFile">dumpToFile()</a>, 
+			<a href="class-Net.Bazzline.Component.Locator.AbstractGenerator.html#_getAuthorString">getAuthorString()</a>, 
 			<a href="class-Net.Bazzline.Component.Locator.AbstractGenerator.html#_moveOldFileIfExists">moveOldFileIfExists()</a>, 
 			<a href="class-Net.Bazzline.Component.Locator.AbstractGenerator.html#_setConfiguration">setConfiguration()</a>, 
 			<a href="class-Net.Bazzline.Component.Locator.AbstractGenerator.html#_setFileExistsStrategy">setFileExistsStrategy()</a>
@@ -369,6 +286,17 @@
 
 
 
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#properties">Net\Bazzline\Component\Locator\AbstractInterfaceGenerator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#$documentationGeneratorFactory"><var>$documentationGeneratorFactory</var></a>, 
+			<a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#$fileGeneratorFactory"><var>$fileGeneratorFactory</var></a>, 
+			<a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#$interfaceGeneratorFactory"><var>$interfaceGeneratorFactory</var></a>, 
+			<a href="class-Net.Bazzline.Component.Locator.AbstractInterfaceGenerator.html#$methodGeneratorFactory"><var>$methodGeneratorFactory</var></a>
+		</code></td>
+	</tr>
+	</table>
 	<table class="summary inherited">
 	<caption>Properties inherited from <a href="class-Net.Bazzline.Component.Locator.AbstractGenerator.html#properties">Net\Bazzline\Component\Locator\AbstractGenerator</a></caption>
 	<tr>
@@ -391,6 +319,6 @@
 </div>
 </div>
 <script src="resources/combined.js?2468323958"></script>
-<script src="elementlist.js?1051234268"></script>
+<script src="elementlist.js?3689503531"></script>
 </body>
 </html>
