@@ -38,7 +38,7 @@ class LocatorInterfaceGenerator extends AbstractInterfaceGenerator
                 //@todo bug!
                 //if the class generator is an interface, we have to add
                 // multiple extends
-                $interfaceGenerator->addImplements($interfaceName);
+                $interfaceGenerator->addExtends($interfaceName);
             }
         }
 
