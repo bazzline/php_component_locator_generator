@@ -7,6 +7,7 @@
 return array(
     'assembler' => '\Net\Bazzline\Component\Locator\Configuration\Assembler\FromPropelSchemaXmlAssembler',
     'class_name' => 'FromPropelNamespacedSchemaXmlLocator',    //determines file name as well as php class name
+    'create_interface' => true, //create interface for locator generator
     //add class names here, depending on entries in use section, full qualified or not
     'extends' => 'BaseLocator',
     'file_exists_strategy' => '\Net\Bazzline\Component\Locator\FileExistsStrategy\SuffixWithCurrentTimestampStrategy',

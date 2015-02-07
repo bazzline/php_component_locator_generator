@@ -57,7 +57,7 @@ Take a Look to [configuration file](https://github.com/bazzline/php_component_lo
 
 ```shell
 cd <component root directory>
-php bin/generateLocator.php example/ArrayConfiguration/configuration.php
+./execute_example ArrayConfiguration
 ls data/
 vim data/FromArrayConfigurationFileLocator.php
 ```
@@ -226,10 +226,14 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
 # History
 
 * [upcomming](https://github.com/bazzline/php_component_locator_generator/tree/upcomming) - not yet released
-    * easy up usage of examples (by adding a "run.php" in the directories
+* [1.4.0](https://github.com/bazzline/php_component_locator_generator/tree/1.4.0) - released at 07.02.2015
+    * implemented generation of "LocatorGeneratorInterface"
+    * easy up usage of examples by adding command "execute_example"
     * added example for "method_name_without_namespace"
     * updated api
+    * updated dependencies
 * [1.3.1](https://github.com/bazzline/php_component_locator_generator/tree/1.3.1) - released at 07.02.2015
+    * easy up usage of examples (by adding a "run.php" in the directories
     * updated api
     * updated dependencies
 * [1.3.0](https://github.com/bazzline/php_component_locator_generator/tree/1.3.0) - released at 22.12.2014

@@ -1,0 +1,23 @@
+#!/usr/bin/php
+<?php
+/**
+ * @author stev leibelt <artodeto@bazzline.net>
+ * @since 2015-02-07
+ */
+
+$examples = array(
+    'ArrayConfiguration',
+    'PropelSchemaXml',
+    'PropelWithNamespaceSchemaXml'
+);
+$path = __DIR__ . '/example';
+
+if (($argc != 2)
+    || (!in_array($argv[1], $examples))) {
+    echo 'Usage: ' .  basename(__FILE__) . ' <' . implode('|', $examples) . '>' . PHP_EOL;
+    exit(1);
+}
+
+$example = $argv[1];
+$command = 'php ' . $path . '/' . $example . '/run.php';
+passthru($command);

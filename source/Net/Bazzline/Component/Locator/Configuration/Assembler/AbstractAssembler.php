@@ -124,7 +124,21 @@ abstract class AbstractAssembler implements AssemblerInterface
      * @param Configuration $configuration
      * @return Configuration
      */
-    protected function mapStringPropertiesToConfiguration(array $data, Configuration $configuration)
+    protected function mapBooleanProperties(array $data, Configuration $configuration)
+    {
+        if (isset($data['create_interface'])) {
+            $configuration->setCreateLocatorGeneratorInterface($data['create_interface']);
+        }
+
+        return $configuration;
+    }
+
+    /**
+     * @param array $data
+     * @param Configuration $configuration
+     * @return Configuration
+     */
+    protected function mapStringProperties(array $data, Configuration $configuration)
     {
         $configuration->setClassName($data['class_name'])->setFilePath($data['file_path']);
 
