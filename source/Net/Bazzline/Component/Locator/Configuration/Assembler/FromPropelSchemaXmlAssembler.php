@@ -47,6 +47,10 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
         $validator = new ReadableFilePath();
         $validator->validate($pathToSchemaXml);
 
+        $configuration = $this->mapBooleanProperties(
+            $data,
+            $configuration
+        );
         $configuration = $this->mapStringProperties(
             $data,
             $configuration
