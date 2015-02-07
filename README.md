@@ -57,7 +57,7 @@ Take a Look to [configuration file](https://github.com/bazzline/php_component_lo
 
 ```shell
 cd <component root directory>
-php bin/generateLocator.php example/ArrayConfiguration/configuration.php
+./execute_example ArrayConfiguration
 ls data/
 vim data/FromArrayConfigurationFileLocator.php
 ```
