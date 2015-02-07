@@ -1,3 +1,14 @@
 #!/usr/bin/php
 <?php
-system('php vendor/bin/apigen generate --source source/Net/Bazzline/Component/Locator/ --destination document/ --title "Locator Generator by Bazzline"');
+/**
+ * @author stev leibelt <artodeto@bazzline.net>
+ * @since 2015-02-07
+ */
+
+$options = array(
+    '--source source/Net/Bazzline/Component/Locator/',
+    '--destination document/',
+    '--title "Locator Generator by Bazzline"'
+);
+$command = 'php vendor/bin/apigen generate ' . implode(' ', $options);
+passthru($command);
