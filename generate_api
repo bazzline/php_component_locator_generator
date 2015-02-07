@@ -4,7 +4,11 @@
  * @author stev leibelt <artodeto@bazzline.net>
  * @since 2015-02-07
  */
+//delete
+$command = 'rm -fr document/*';
+passthru($command);
 
+//generate
 $options = array(
     '--source source/Net/Bazzline/Component/Locator/',
     '--destination document/',
