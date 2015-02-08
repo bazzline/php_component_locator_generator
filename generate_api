@@ -4,6 +4,19 @@
  * @author stev leibelt <artodeto@bazzline.net>
  * @since 2015-02-07
  */
+
+if ($argc != 2) {
+    echo 'Usage: ' . basename(__FILE__) . ' <path to apigen>' . PHP_EOL;
+    exit(1);
+}
+
+$pathToApiGen = $argv[1];
+
+if (!is_readable($pathToApiGen)) {
+    echo 'path to apigen "' . $pathToApiGen . ' is not readable' . PHP_EOL;
+    exit(1);
+}
+
 $path = __DIR__;
 //delete
 $command = 'rm -fr ' . $path . '/document/*';
@@ -13,7 +26,7 @@ passthru($command);
 $options = array(
     '--source ' . $path . '/source/Net/Bazzline/Component/Locator/',
     '--destination ' . $path . '/document/',
-    '--title "Locator Generator by Bazzline"'
+    '--title "Zend Framework Console Helper by Bazzline"'
 );
-$command = 'php ' . $path . '/vendor/bin/apigen generate ' . implode(' ', $options);
+$command = 'php ' . $pathToApiGen . ' generate ' . implode(' ', $options);
 passthru($command);
