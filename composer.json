@@ -22,9 +22,9 @@
     },
     "require-dev": {
         "mikey179/vfsstream": "1.5.0",
-        "mockery/mockery": "0.9.3",
+        "mockery/mockery": "0.9.4",
         "phpmd/phpmd": "2.2.2",
-        "phpunit/phpunit": "4.5.0"
+        "phpunit/phpunit": "4.6.1"
     },
     "autoload": {
         "psr-0": {
