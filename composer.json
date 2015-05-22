@@ -18,7 +18,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
-        "net_bazzline/php_component_code_generator": "1.1.4"
+        "net_bazzline/php_component_code_generator": "1.1.5"
     },
     "require-dev": {
         "mikey179/vfsstream": "1.5.0",
