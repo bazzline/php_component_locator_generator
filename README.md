@@ -1,6 +1,6 @@
 # Locator Generator
 
-This component easy up locator generation based on configuration files.
+This free as in freedom component easy up locator generation based on configuration files.
 Out of the box, it creates locator from an array configuration file and from propel1 schema.xml files.
 
 It is using the [php code generator component](https://github.com/bazzline/php_component_code_generator) as a robust base for code generation.

@@ -1,6 +1,6 @@
 {
-    "description": "Generates configuration based hard coded locator",
-    "keywords": ["php", "locator", "configuration", "generator", "propel", "schema.xml", "array"],
+    "description": "Free as in freedom php component that generates configuration based hard coded locator",
+    "keywords": ["php", "locator", "configuration", "generator", "propel", "schema.xml", "array", "lgpl", "free as in freedom"],
     "license": "LGPLv3",
     "name": "net_bazzline/php_component_locator_generator",
     "bin": [
