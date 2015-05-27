@@ -228,7 +228,9 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
 * [upcomming](https://github.com/bazzline/php_component_locator_generator/tree/master)
     * implement usage of php_component_cli_arguments
     * implement usage of php_component_command
+* [1.5.0](https://github.com/bazzline/php_component_locator_generator/tree/1.4.2) - released at 27.05.2015
     * renamed "bin/generateLocator.php" to "bin/generate_locator"
+    * fixed [issue 3](https://github.com/bazzline/php_component_locator_generator/issues/3)
 * [1.4.2](https://github.com/bazzline/php_component_locator_generator/tree/1.4.2) - released at 22.05.2015
     * updated dependencies
 * [1.4.1](https://github.com/bazzline/php_component_locator_generator/tree/1.4.1) - released at 08.02.2015
