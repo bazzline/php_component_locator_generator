@@ -16,14 +16,10 @@ use Net\Bazzline\Component\Locator\Configuration\Validator\ReadableFilePath;
  */
 class Command
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $arguments;
 
-    /**
-     * @var Configuration
-     */
+    /** @var Configuration */
     private $configuration;
 
     /**

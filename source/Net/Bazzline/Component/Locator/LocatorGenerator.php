@@ -385,7 +385,7 @@ class LocatorGenerator extends AbstractGenerator
         $fetchFromSharedInstancePool->markAsFinal();
 
         $fetchFromSharedInstancePoolBody
-            ->add('if ($this->isNotInFactoryInstancePool($className)) {')
+            ->add('if ($this->isNotInSharedInstancePool($className)) {')
             ->startIndention()
                 ->add('if (!class_exists($className)) {')
                 ->startIndention()
@@ -398,7 +398,7 @@ class LocatorGenerator extends AbstractGenerator
                 ->add('}')
                 ->add('')
                 ->add('$instance = new $className();')
-                ->add('$this->addToFactoryInstancePool($className, $instance);')
+                ->add('$this->addToSharedInstancePool($className, $instance);')
             ->stopIndention()
             ->add('}')
             ->add('')
