@@ -159,7 +159,7 @@ The Locator is taking care of the instance pooling.
 
 # Benefits
 
-* on way of calling the locator generator "php bin/generateLocator.php <path to configuration file>"
+* on way of calling the locator generator "php bin/generate_locator <path to configuration file>"
 * assembler, method builder and file exists strategy are configuration based runtime variables
 * highly configurable
     * each configuration file needs to be a simple php array
@@ -228,8 +228,10 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
 * [upcomming](https://github.com/bazzline/php_component_locator_generator/tree/master)
     * implement usage of php_component_cli_arguments
     * implement usage of php_component_command
+    * implement directory creation if it does not exist
 * [1.5.0](https://github.com/bazzline/php_component_locator_generator/tree/1.4.2) - released at 27.05.2015
     * renamed "bin/generateLocator.php" to "bin/generate_locator"
+    * renamed "example/[..]/run.php" to "example/[...]/run"
     * fixed [issue 3](https://github.com/bazzline/php_component_locator_generator/issues/3)
 * [1.4.2](https://github.com/bazzline/php_component_locator_generator/tree/1.4.2) - released at 22.05.2015
     * updated dependencies
