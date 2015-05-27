@@ -4,7 +4,7 @@
     "license": "LGPLv3",
     "name": "net_bazzline/php_component_locator_generator",
     "bin": [
-        "bin/generateLocator.php"
+        "bin/generate_locator"
     ],
     "type": "library",
     "authors": [
