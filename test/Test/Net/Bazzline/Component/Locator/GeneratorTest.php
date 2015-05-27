@@ -71,7 +71,7 @@ class GeneratorTest extends LocatorTestCase
     /**
      * @return array
      */
-    public static function generateTestDataProvider()
+    public function generateTestDataProvider()
     {
         return array(
             'just locator generator' => array(
