@@ -229,6 +229,7 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
     * implement usage of php_component_cli_arguments
     * implement usage of php_component_command
     * implement directory creation if it does not exist
+    * updated dependencies
 * [1.5.1](https://github.com/bazzline/php_component_locator_generator/tree/1.5.1) - released at 27.05.2015
     * fixed broken entry of "bin" in composer.json
 * [1.5.0](https://github.com/bazzline/php_component_locator_generator/tree/1.5.0) - released at 27.05.2015
