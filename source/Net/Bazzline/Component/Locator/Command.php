@@ -38,9 +38,13 @@ class Command
     public function execute()
     {
         $this->validateEnvironment();
+        //bo: exclude in own class, ConfigurationFromFileProvider
         $pathToConfigurationFile = $this->buildPathToConfigurationFromArguments();
         $data = $this->buildDataFromPathToConfigurationFile($pathToConfigurationFile);
+        //eo: exclude in own class
+        //bo: process pipe
         $this->generate($data);
+        //eo: process pipe
     }
 
     /**
