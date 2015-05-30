@@ -226,6 +226,7 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
 # History
 
 * [upcomming](https://github.com/bazzline/php_component_locator_generator/tree/master)
+    * implement "FromPath" assembler that scans the path and iterates through the path and fetches the php class or interfaces
     * implement usage of php_component_cli_arguments
     * implement usage of php_component_command
     * implement directory creation if it does not exist
