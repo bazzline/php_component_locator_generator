@@ -13,7 +13,7 @@ return array(
     'extends' => 'BaseLocator',
     'file_exists_strategy' => '\Net\Bazzline\Component\Locator\FileExistsStrategy\SuffixWithCurrentTimestampStrategy',
     //file path where files will be generated
-    'file_path' => __DIR__ . '/../../data',
+    'file_path' => __DIR__ . '/../../data/ArrayConfiguration',
     //format: array(['alias' => <string>], 'name' => <string>, ['is_factory' => <boolean>], ['is_shared' => <boolean>], ['method_body_builder'] => <string>)
     'instances' => array(
         array(

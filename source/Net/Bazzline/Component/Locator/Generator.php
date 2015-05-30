@@ -85,16 +85,28 @@ class Generator extends AbstractGenerator
         //end of dependencies
 
         //start of validation
-        if (!is_dir($configuration->getFilePath())) {
-            throw new RuntimeException(
-                'provided path "' . $configuration->getFilePath() . '" is not a directory'
-            );
+        $path = $configuration->getFilePath();
+
+        if (is_file($path)) {
+            $message = 'provided path "' . $path . '" is an existing file';
+
+            throw new InvalidArgumentException($message);
         }
 
-        if (!is_writable($configuration->getFilePath())) {
-            throw new RuntimeException(
-                'provided directory "' . $configuration->getFilePath() . '" is not writable'
-            );
+        if (!is_dir($path)) {
+            $couldNotCreateNotExistingDirectory = !(mkdir($path));
+
+            if ($couldNotCreateNotExistingDirectory) {
+                $message = 'could not create directory "' . $configuration->getFilePath() . '"';
+
+                throw new InvalidArgumentException($message);
+            }
+        }
+
+        if (!is_writable($path)) {
+            $message = 'provided directory "' . $configuration->getFilePath() . '" is not writable';
+
+            throw new InvalidArgumentException($message);
         }
         //start of validation
 

@@ -24,8 +24,8 @@ class GeneratorTest extends LocatorTestCase
     }
 
     /**
-     * @expectedException \Net\Bazzline\Component\Locator\RuntimeException
-     * @expectedExceptionMessage provided path "vfs://foo/bar" is not a directory
+     * @expectedException \Net\Bazzline\Component\Locator\InvalidArgumentException
+     * @expectedExceptionMessage provided path "vfs://foo/bar" is an existing file
      */
     public function testGenerateWithInvalidFilePath()
     {
@@ -48,7 +48,7 @@ class GeneratorTest extends LocatorTestCase
     }
 
     /**
-     * @expectedException \Net\Bazzline\Component\Locator\RuntimeException
+     * @expectedException \Net\Bazzline\Component\Locator\InvalidArgumentException
      * @expectedExceptionMessage provided directory "vfs://foo" is not writable
      */
     public function testGenerateWithNotWritableFilePath()
@@ -56,9 +56,9 @@ class GeneratorTest extends LocatorTestCase
         $generator = $this->getGenerator();
         $configuration = $this->getMockOfConfiguration();
 
-        $path = 'foo';
-        $permissions = 0400;
-        $root = vfsStream::setup($path, $permissions);
+        $path           = 'foo';
+        $permissions    = 0400;
+        $root           = vfsStream::setup($path, $permissions);
 
         $configuration->shouldReceive('getFilePath')
             ->andReturn($root->url());
@@ -66,6 +66,69 @@ class GeneratorTest extends LocatorTestCase
         $generator->setConfiguration($configuration);
 
         $generator->generate();
+    }
+
+    /**
+     * @expectedException \Net\Bazzline\Component\Locator\InvalidArgumentException
+     * @expectedExceptionMessage could not create directory "vfs://foo/bar"
+     */
+    public function testGenerateWithNotExistingFilePathInANotWritableDirectory()
+    {
+        $generator      = $this->getGenerator();
+        $configuration  = $this->getMockOfConfiguration();
+
+        $path           = 'foo';
+        $permissions    = 0400;
+        $root           = vfsStream::setup($path, $permissions);
+        $path           = $root->url() . DIRECTORY_SEPARATOR . 'bar';
+
+        $configuration->shouldReceive('getFilePath')
+            ->andReturn($path);
+
+        $generator->setConfiguration($configuration);
+
+        $generator->generate();
+
+        $this->assertTrue(is_dir($path));
+    }
+
+    public function testGenerateWithNotExistingFilePath()
+    {
+        $configuration      = $this->getMockOfConfiguration();
+        $generator          = $this->getGenerator();
+        $fileExistsStrategy = $this->getMockOfFileExistsStrategyInterface();
+        $locatorGenerator   = $this->getMockOfLocatorGenerator();
+
+        $path = 'foo';
+        $permissions = 0755;
+        $root = vfsStream::setup($path, $permissions);
+        $path = $root->url() . DIRECTORY_SEPARATOR . 'bar';
+
+        $configuration->shouldReceive('createLocatorGeneratorInterface')
+            ->andReturn(false);
+        $configuration->shouldReceive('getFilePath')
+            ->andReturn($path);
+        $configuration->shouldReceive('hasFactoryInstances')
+            ->andReturn(false);
+        $configuration->shouldReceive('hasSharedInstances')
+            ->andReturn(false);
+
+        $locatorGenerator->shouldReceive('setConfiguration')
+            ->with($configuration)
+            ->once();
+        $locatorGenerator->shouldReceive('setFileExistsStrategy')
+            ->with($fileExistsStrategy)
+            ->once();
+        $locatorGenerator->shouldReceive('generate')
+            ->once();
+
+        $generator->setConfiguration($configuration);
+        $generator->setFileExistsStrategy($fileExistsStrategy);
+        $generator->setLocatorGenerator($locatorGenerator);
+
+        $generator->generate();
+
+        $this->assertTrue(is_dir($path));
     }
 
     /**
@@ -122,7 +185,7 @@ class GeneratorTest extends LocatorTestCase
 
         $configuration->shouldReceive('getFilePath')
             ->andReturn(sys_get_temp_dir())
-            ->twice();
+            ->once();
         $configuration->shouldReceive('hasFactoryInstances')
             ->andReturn($hasFactoryInstance)
             ->once();

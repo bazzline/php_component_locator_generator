@@ -12,7 +12,7 @@ return array(
     'extends' => 'BaseLocator',
     'file_exists_strategy' => '\Net\Bazzline\Component\Locator\FileExistsStrategy\SuffixWithCurrentTimestampStrategy',
     //file path where files will be generated
-    'file_path' => __DIR__ . '/../../data',
+    'file_path' => __DIR__ . '/../../data/PropelWithNamespaceSchemaXml',
     //add interface names here, depending on entries in use section, full qualified or not
     'implements' => array(
         '\My\Full\QualifiedInterface',
