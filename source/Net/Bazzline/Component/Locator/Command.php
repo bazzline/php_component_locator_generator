@@ -7,6 +7,7 @@
 namespace Net\Bazzline\Component\Locator;
 
 use Exception;
+use Net\Bazzline\Component\Cli\Arguments\Arguments;
 use Net\Bazzline\Component\Locator\Configuration\Validator\ArrayKeyIsValidClassName;
 use Net\Bazzline\Component\Locator\Configuration\Validator\ReadableFilePath;
 
@@ -16,17 +17,17 @@ use Net\Bazzline\Component\Locator\Configuration\Validator\ReadableFilePath;
  */
 class Command
 {
-    /** @var array */
+    /** @var Arguments */
     private $arguments;
 
     /** @var Configuration */
     private $configuration;
 
     /**
-     * @param array $arguments
+     * @param Arguments $arguments
      * @throws Exception
      */
-    public function setArguments(array $arguments)
+    public function setArguments(Arguments $arguments)
     {
         $this->validateArguments($arguments);
         $this->arguments = $arguments;
@@ -70,12 +71,12 @@ class Command
     }
 
     /**
-     * @param array $arguments
+     * @param Arguments $arguments
      * @throws Exception
      */
-    private function validateArguments(array $arguments)
+    private function validateArguments(Arguments $arguments)
     {
-        if (count($arguments) !== 2) {
+        if (count($arguments->getValues()) !== 1) {
             throw new Exception(
                 'called with invalid number of arguments' . PHP_EOL . '   ' . basename(__FILE__) . ' <path to configuration file>'
             );
@@ -88,7 +89,8 @@ class Command
     private function buildPathToConfigurationFromArguments()
     {
         $cwd            = getcwd();
-        $path           = $this->arguments[1];
+        $values         = $this->arguments->getValues();
+        $path           = $values[0];
         $isRelativePath = ($path[0] !== '/');
 
         if ($isRelativePath) {

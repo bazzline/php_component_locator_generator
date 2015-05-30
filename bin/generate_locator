@@ -5,7 +5,7 @@
  * @since 2014-06-10 
  */
 
-use Net\Bazzline\Component\Locator\Command;
+use Net\Bazzline\Component\Locator\Application\ApplicationFactory;
 
 //check if is installed as composer component - taken from pdepend
 if (file_exists(__DIR__ . '/../../../autoload.php')) {
@@ -20,11 +20,9 @@ $usageMessage = 'Usage: ' . PHP_EOL .
     basename(__FILE__) . ' <path to configuration file>' . PHP_EOL;
 
 try {
-    $command = new Command();
-    $command->setArguments($argv);
-    $command->execute();
-    $configuration = $command->getConfiguration();
-    echo 'locator "' . $configuration->getFileName() . '" written into "' . realpath($configuration->getFilePath()) . '"' . PHP_EOL;
+    $factory = new ApplicationFactory();
+
+    echo $factory->create()->run();
     exit(0);
 } catch (Exception $exception) {
     echo $exception->getMessage() . PHP_EOL;
