@@ -228,11 +228,12 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
 * [upcomming](https://github.com/bazzline/php_component_locator_generator/tree/master)
     * @todo
         * implement "FromPath" assembler that scans the path and iterates through the path and fetches the php class or interfaces
-        * implement usage of php_component_cli_arguments
-        * implement usage of php_component_command
         * updated dependencies
     * Generator.php now throws "InvalidArgumentException" instead of "RuntimeException
     * Generator now tries to create the provided directory if it does not exists
+    * fixed [issue/4](https://github.com/bazzline/php_component_locator_generator/issues/4)
+    * implement usage of php_component_cli_arguments
+    * implement usage of php_component_command
 * [1.5.1](https://github.com/bazzline/php_component_locator_generator/tree/1.5.1) - released at 27.05.2015
     * fixed broken entry of "bin" in composer.json
 * [1.5.0](https://github.com/bazzline/php_component_locator_generator/tree/1.5.0) - released at 27.05.2015
