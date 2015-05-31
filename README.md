@@ -229,6 +229,7 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
     * @todo
         * implement "FromPath" assembler that scans the path and iterates through the path and fetches the php class or interfaces
         * updated dependencies
+        * write / update unit tests
     * Generator.php now throws "InvalidArgumentException" instead of "RuntimeException
     * Generator now tries to create the provided directory if it does not exists
     * fixed [issue/4](https://github.com/bazzline/php_component_locator_generator/issues/4)
