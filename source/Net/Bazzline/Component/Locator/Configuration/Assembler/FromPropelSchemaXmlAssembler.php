@@ -18,24 +18,28 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
 {
     /**
      * @param mixed $data
+     * @param Configuration $configuration
+     * @return Configuration
      * @throws RuntimeException
      */
-    protected function map($data)
+    protected function map($data, Configuration $configuration)
     {
         //begin of variable definitions
         $columnClassMethodBodyBuilder =
             (isset($data['column_class_method_body_builder']))
                 ? $data['column_class_method_body_builder']
                 : null;
-        $configuration = $this->getConfiguration();
+
         $locatorNamespace =
             (isset($data['namespace']))
                 ? $data['namespace']
                 : '';
+
         $methodNameWithoutNamespace =
             (isset($data['method_name_without_namespace']))
                 ? $data['method_name_without_namespace']
                 : false;
+
         $pathToSchemaXml = realpath($data['path_to_schema_xml']);
         $queryClassMethodBodyBuilder =
             (isset($data['query_class_method_body_builder']))
@@ -68,7 +72,7 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
             $configuration
         );
 
-        $this->setConfiguration($configuration);
+        return $configuration;
     }
 
     /**
@@ -143,8 +147,8 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
         //begin of xml parsing
         while ($reader->read()) {
             if ($reader->nodeType === XMLREADER::ELEMENT) {
-                $nodeIsADatabase = ($reader->name === 'database');
-                $nodeIsATable = ($reader->name === 'table');
+                $nodeIsADatabase    = ($reader->name === 'database');
+                $nodeIsATable       = ($reader->name === 'table');
 
                 if ($nodeIsADatabase) {
                     $rootNamespace = $reader->getAttribute('namespace');
@@ -195,8 +199,8 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
                     );
                 }
 
-                $alias = (isset($uses['alias'])) ? $uses['alias'] : '';
-                $className = str_replace('\\\\', '\\', $uses['class_name']);
+                $alias      = (isset($uses['alias'])) ? $uses['alias'] : '';
+                $className  = str_replace('\\\\', '\\', $uses['class_name']);
                 $configuration->addUses($className, $alias);
             }
         }
@@ -244,22 +248,25 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
             $tableNamespace .= $namespace . '\\';
         }
 
-        $hasDifferentNamespaceThanLocator = ($locatorNamespace !== $tableNamespace);
-        $hasTableNamespace  = (strlen($tableNamespace) > 0);
-        $fullQualifiedClassName = $this->createFullQualifiedClassName(
+        $hasDifferentNamespaceThanLocator   = ($locatorNamespace !== $tableNamespace);
+        $hasTableNamespace                  = (strlen($tableNamespace) > 0);
+        $fullQualifiedClassName             = $this->createFullQualifiedClassName(
             $hasPhpName,
             $phpName,
             $tableName,
             $hasTableNamespace,
             $tableNamespace
         );
+
         $classNameAlias = ($methodNameWithoutNamespace)
             ? $this->createClassNameAlias($hasPhpName, $phpName, $tableName)
             : null;
+
         $queryClassNameAlias =
             (!is_null($classNameAlias))
                 ? $classNameAlias . 'Query'
                 : null;
+
         $fullQualifiedQueryClassName = $fullQualifiedClassName . 'Query';
         //end of class name building
 
@@ -286,6 +293,7 @@ class FromPropelSchemaXmlAssembler extends AbstractAssembler
             $useClassName = ($this->startsWith($fullQualifiedClassName, '\\'))
                 ? substr($fullQualifiedClassName, 1)
                 : $fullQualifiedClassName;
+
             $useQueryClassName = ($this->startsWith($fullQualifiedQueryClassName, '\\'))
                 ? substr($fullQualifiedQueryClassName, 1)
                 : $fullQualifiedQueryClassName;

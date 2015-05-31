@@ -16,7 +16,7 @@ class ReadableFilePath
     {
         if (!is_file($path)) {
             throw new RuntimeException(
-                'provided schema xml path "' . $path . '" is not a file'
+                'provided path "' . $path . '" is not a file'
             );
         }
 

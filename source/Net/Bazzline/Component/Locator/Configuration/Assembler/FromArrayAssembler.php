@@ -16,12 +16,12 @@ class FromArrayAssembler extends AbstractAssembler
 {
     /**
      * @param mixed $data
+     * @param Configuration $configuration
+     * @return Configuration
      * @throws RuntimeException
      */
-    protected function map($data)
+    protected function map($data, Configuration $configuration)
     {
-        $configuration = $this->getConfiguration();
-
         $configuration = $this->mapBooleanProperties(
             $data,
             $configuration
@@ -39,7 +39,7 @@ class FromArrayAssembler extends AbstractAssembler
             $configuration
         );
 
-        $this->setConfiguration($configuration);
+        return $configuration;
     }
 
     /**
@@ -105,8 +105,8 @@ class FromArrayAssembler extends AbstractAssembler
                     );
                 }
 
-                $alias = (isset($uses['alias'])) ? $uses['alias'] : '';
-                $class = $uses['class_name'];
+                $alias  = (isset($uses['alias'])) ? $uses['alias'] : '';
+                $class  = $uses['class_name'];
                 $configuration->addUses($class, $alias);
             }
         }
@@ -127,12 +127,12 @@ class FromArrayAssembler extends AbstractAssembler
                     throw new RuntimeException('instance entry with key "' . $key . '" needs to have a key "class_name"');
                 }
 
-                $alias = (isset($instance['alias'])) ? $instance['alias'] : null;
-                $class = $instance['class_name'];
-                $isFactory = (isset($instance['is_factory'])) ? $instance['is_factory'] : false;
-                $isShared = (isset($instance['is_shared'])) ? $instance['is_shared'] : true;
-                $methodBodyBuilder = (isset($instance['method_body_builder'])) ? $instance['method_body_builder'] : null;
-                $returnValue = (isset($instance['return_value'])) ? $instance['return_value'] : $class;
+                $alias              = (isset($instance['alias'])) ? $instance['alias'] : null;
+                $class              = $instance['class_name'];
+                $isFactory          = (isset($instance['is_factory'])) ? $instance['is_factory'] : false;
+                $isShared           = (isset($instance['is_shared'])) ? $instance['is_shared'] : true;
+                $methodBodyBuilder  = (isset($instance['method_body_builder'])) ? $instance['method_body_builder'] : null;
+                $returnValue        = (isset($instance['return_value'])) ? $instance['return_value'] : $class;
 
                 $configuration->addInstance($class, $isFactory, $isShared, $returnValue, $alias, $methodBodyBuilder);
             }

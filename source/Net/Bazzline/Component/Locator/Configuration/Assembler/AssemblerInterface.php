@@ -15,21 +15,11 @@ use Net\Bazzline\Component\Locator\Configuration;
 interface AssemblerInterface
 {
     /**
-     * @return Configuration
-     * @throws RuntimeException
-     */
-    public function getConfiguration();
-
-    /**
-     * @param Configuration $configuration
-     * @return $this
-     */
-    public function setConfiguration(Configuration $configuration);
-
-    /**
      * @param mixed $data
+     * @param Configuration $configuration
      * @throws InvalidArgumentException
      * @throws RuntimeException
+     * @return Configuration
      */
-    public function assemble($data);
+    public function assemble($data, Configuration $configuration);
 } 

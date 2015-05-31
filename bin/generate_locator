@@ -5,7 +5,7 @@
  * @since 2014-06-10 
  */
 
-use Net\Bazzline\Component\Locator\Application\ApplicationFactory;
+use Net\Bazzline\Component\Locator\ProcessPipeFactory;
 
 //check if is installed as composer component - taken from pdepend
 if (file_exists(__DIR__ . '/../../../autoload.php')) {
@@ -14,17 +14,15 @@ if (file_exists(__DIR__ . '/../../../autoload.php')) {
     require_once __DIR__ . '/../vendor/autoload.php';
 }
 
-global $argc, $argv;
-
-$usageMessage = 'Usage: ' . PHP_EOL .
-    basename(__FILE__) . ' <path to configuration file>' . PHP_EOL;
-
 try {
-    $factory = new ApplicationFactory();
-
-    echo $factory->create()->run();
+    $factory        = new ProcessPipeFactory();
+    /** @var \Net\Bazzline\Component\Locator\Configuration $configuration */
+    $configuration  = $factory->create()->execute($argv);
+    echo $configuration->getClassName() . ' created in ' . $configuration->getFilePath() . PHP_EOL;
     exit(0);
 } catch (Exception $exception) {
     echo $exception->getMessage() . PHP_EOL;
+    echo '----------------' . PHP_EOL;
+    echo $exception->getTraceAsString() . PHP_EOL;
     exit(1);
 }

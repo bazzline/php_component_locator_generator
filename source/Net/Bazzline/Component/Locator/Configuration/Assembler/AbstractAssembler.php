@@ -15,53 +15,27 @@ use Net\Bazzline\Component\Locator\Configuration;
 abstract class AbstractAssembler implements AssemblerInterface
 {
     /**
-     * @var Configuration
+     * @param mixed $data
+     * @param Configuration $configuration
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @return Configuration
      */
-    private $configuration;
+    final public function assemble($data, Configuration $configuration)
+    {
+        $this->validateData($data);
+        $configuration = $this->map($data, $configuration);
+
+        return $configuration;
+    }
 
     /**
+     * @param mixed $data
+     * @param Configuration $configuration
      * @return Configuration
      * @throws RuntimeException
      */
-    final public function getConfiguration()
-    {
-        if (is_null($this->configuration)) {
-            throw new RuntimeException(
-                'configuration is mandatory'
-            );
-        }
-
-        return $this->configuration;
-    }
-
-    /**
-     * @param Configuration $configuration
-     * @return $this
-     */
-    final public function setConfiguration(Configuration $configuration)
-    {
-        $this->configuration = $configuration;
-
-        return $this;
-    }
-
-    /**
-     * @param mixed $data
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
-     */
-    final public function assemble($data)
-    {
-        $this->assertMandatoryProperties();
-        $this->validateData($data);
-        $this->map($data);
-    }
-
-    /**
-     * @param mixed $data
-     * @throws RuntimeException
-     */
-    abstract protected function map($data);
+    abstract protected function map($data, Configuration $configuration);
 
     /**
      * @param mixed $data
@@ -97,24 +71,6 @@ abstract class AbstractAssembler implements AssemblerInterface
         foreach ($keysToExpectedValueType as $key => $expectedType) {
             if (isset($data[$key])) {
                 $this->validateExpectedDataKeyType($data, $key, $expectedType);
-            }
-        }
-    }
-
-    /**
-     * @throws RuntimeException
-     */
-    private function assertMandatoryProperties()
-    {
-        $propertyNames = array(
-            'configuration',
-        );
-
-        foreach ($propertyNames as $propertyName) {
-            if (is_null($this->configuration)) {
-                throw new RuntimeException(
-                    $propertyName . ' is mandatory'
-                );
             }
         }
     }

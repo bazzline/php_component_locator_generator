@@ -170,7 +170,7 @@ class FromArrayAssemblerTest extends LocatorTestCase
         $methodPrefix = 'test';
         $namespace = 'Test\Namespace';
         $uses = array(
-            array('class_name' => 'My\Foo', 'alias' => 'Foo')
+            array('class_name' => 'My\Foo', 'alias' => 'FileGenerator')
         );
 
         $configuration = $this->getConfiguration();
