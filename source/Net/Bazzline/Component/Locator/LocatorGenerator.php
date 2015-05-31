@@ -17,7 +17,7 @@ use Net\Bazzline\Component\CodeGenerator\Factory\PropertyGeneratorFactory;
 use Net\Bazzline\Component\Locator\Configuration\Instance;
 
 /**
- * Class LocatorGenerator
+ * Class LocatorFileGenerator
  * @package Net\Bazzline\Component\Locator
  */
 class LocatorGenerator extends AbstractGenerator

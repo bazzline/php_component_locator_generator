@@ -8,10 +8,15 @@ namespace Net\Bazzline\Component\Locator;
 
 use Net\Bazzline\Component\Locator\Process\Transformer\ArgumentsGenerator;
 use Net\Bazzline\Component\Locator\Process\Transformer\ConfigurationAssembler;
-use Net\Bazzline\Component\Locator\Process\Transformer\FileGenerator;
+use Net\Bazzline\Component\Locator\Process\Transformer\FactoryGenerator;
+use Net\Bazzline\Component\Locator\Process\Transformer\FileExistsStrategyGenerator;
+use Net\Bazzline\Component\Locator\Process\Transformer\InvalidArgumentExceptionFileGenerator;
 use Net\Bazzline\Component\Locator\Process\Transformer\LoadBootstrapIfAvailable;
 use Net\Bazzline\Component\Locator\Process\Transformer\LoadConfiguration;
+use Net\Bazzline\Component\Locator\Process\Transformer\LocatorFileGenerator;
+use Net\Bazzline\Component\Locator\Process\Transformer\LocatorInterfaceFileGenerator;
 use Net\Bazzline\Component\Locator\Process\Validator\ArgumentsValidator;
+use Net\Bazzline\Component\Locator\Process\Validator\ConfigurationDataValidator;
 use Net\Bazzline\Component\Locator\Process\Validator\ConfigurationValidator;
 use Net\Bazzline\Component\Locator\Process\Validator\IsCommandLineValidator;
 use Net\Bazzline\Component\ProcessPipe\Pipe;
@@ -24,23 +29,24 @@ class ProcessPipeFactory
     public function create()
     {
         $configurationFactory   = new ConfigurationFactory();
-        $generatorFactory       = new GeneratorFactory();
 
         $configurationAssembler = new ConfigurationAssembler();
         $configurationAssembler->setConfiguration($configurationFactory->create());
-
-        $fileGenerator  = new FileGenerator();
-        $fileGenerator->setGenerator($generatorFactory->create());
 
         $pipe = new Pipe(
             new IsCommandLineValidator(),
             new ArgumentsGenerator(),
             new ArgumentsValidator(),
             new LoadConfiguration(),
-            new ConfigurationValidator(),
+            new ConfigurationDataValidator(),
             new LoadBootstrapIfAvailable(),
             $configurationAssembler,
-            $fileGenerator
+            new FileExistsStrategyGenerator(),
+            new ConfigurationValidator(),
+            new FactoryGenerator(),
+            new LocatorFileGenerator(),
+            new InvalidArgumentExceptionFileGenerator(),
+            new LocatorInterfaceFileGenerator()
         );
 
         return $pipe;
