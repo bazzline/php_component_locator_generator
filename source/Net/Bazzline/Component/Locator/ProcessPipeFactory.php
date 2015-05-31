@@ -33,6 +33,26 @@ class ProcessPipeFactory
         $configurationAssembler = new ConfigurationAssembler();
         $configurationAssembler->setConfiguration($configurationFactory->create());
 
+//--------------------------------
+//bin/generator
+// -> fetch cli arguments
+// -> fetch configuration as object
+// -> generate
+//generate
+// -> setup
+// -> assemble data
+// -> generate files
+//assemble
+// -> assert mandatory properties
+// -> validate data
+// -> map data
+//generate
+// -> validate output path
+// -> generate locator
+// -> generate factory interface
+// -> generate exception
+//--------------------------------
+
         $pipe = new Pipe(
             new IsCommandLineValidator(),
             new ArgumentsGenerator(),
