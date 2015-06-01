@@ -4,7 +4,7 @@
  * @since 2015-05-31 
  */
 
-namespace Net\Bazzline\Component\Locator\Process\Transformer;
+namespace Net\Bazzline\Component\Locator\Process\Transformer\Generator;
 
 use Net\Bazzline\Component\Locator\Configuration;
 use Net\Bazzline\Component\Locator\InvalidArgumentExceptionGenerator;

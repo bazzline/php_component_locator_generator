@@ -6,15 +6,15 @@
 
 namespace Net\Bazzline\Component\Locator;
 
-use Net\Bazzline\Component\Locator\Process\Transformer\ArgumentsGenerator;
+use Net\Bazzline\Component\Locator\Process\Transformer\Generator\ArgumentsGenerator;
 use Net\Bazzline\Component\Locator\Process\Transformer\ConfigurationAssembler;
-use Net\Bazzline\Component\Locator\Process\Transformer\FactoryGenerator;
-use Net\Bazzline\Component\Locator\Process\Transformer\FileExistsStrategyGenerator;
-use Net\Bazzline\Component\Locator\Process\Transformer\InvalidArgumentExceptionFileGenerator;
+use Net\Bazzline\Component\Locator\Process\Transformer\Generator\FactoryGenerator;
+use Net\Bazzline\Component\Locator\Process\Transformer\Generator\FileExistsStrategyGenerator;
+use Net\Bazzline\Component\Locator\Process\Transformer\Generator\InvalidArgumentExceptionFileGenerator;
 use Net\Bazzline\Component\Locator\Process\Transformer\LoadBootstrapIfAvailable;
 use Net\Bazzline\Component\Locator\Process\Transformer\LoadConfiguration;
-use Net\Bazzline\Component\Locator\Process\Transformer\LocatorFileGenerator;
-use Net\Bazzline\Component\Locator\Process\Transformer\LocatorInterfaceFileGenerator;
+use Net\Bazzline\Component\Locator\Process\Transformer\Generator\LocatorFileGenerator;
+use Net\Bazzline\Component\Locator\Process\Transformer\Generator\LocatorInterfaceFileGenerator;
 use Net\Bazzline\Component\Locator\Process\Validator\ArgumentsValidator;
 use Net\Bazzline\Component\Locator\Process\Validator\ConfigurationDataValidator;
 use Net\Bazzline\Component\Locator\Process\Validator\ConfigurationValidator;

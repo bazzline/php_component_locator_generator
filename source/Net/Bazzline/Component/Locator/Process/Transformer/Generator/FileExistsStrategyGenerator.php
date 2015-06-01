@@ -4,7 +4,7 @@
  * @since 2015-05-31 
  */
 
-namespace Net\Bazzline\Component\Locator\Process\Transformer;
+namespace Net\Bazzline\Component\Locator\Process\Transformer\Generator;
 
 use Net\Bazzline\Component\ProcessPipe\ExecutableException;
 use Net\Bazzline\Component\ProcessPipe\ExecutableInterface;
