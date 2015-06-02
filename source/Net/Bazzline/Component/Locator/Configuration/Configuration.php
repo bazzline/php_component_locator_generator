@@ -240,7 +240,7 @@ class Configuration
         $instance = $this->getNewInstance();
 
         if ($isFactory) {
-            $this->hasFactoryInstances = true;
+            $this->enableHasFactoryInstances();
         }
 
         if ($isShared) {
@@ -454,10 +454,10 @@ class Configuration
      */
     private function tryToDetermineMethodBodyBuilder(Instance $instance)
     {
-        $isUniqueInvokableInstance = ((!$instance->isFactory()) && (!$instance->isShared()));
-        $isUniqueInvokableFactorizedInstance = (($instance->isFactory()) && (!$instance->isShared()));
-        $isSharedInvokableInstance = ((!$instance->isFactory()) && ($instance->isShared()));
-        $isSharedInvokableFactorizedInstance = (($instance->isFactory()) && ($instance->isShared()));
+        $isUniqueInvokableInstance              = ((!$instance->isFactory()) && (!$instance->isShared()));
+        $isUniqueInvokableFactorizedInstance    = (($instance->isFactory()) && (!$instance->isShared()));
+        $isSharedInvokableInstance              = ((!$instance->isFactory()) && ($instance->isShared()));
+        $isSharedInvokableFactorizedInstance    = (($instance->isFactory()) && ($instance->isShared()));
 
         if ($isUniqueInvokableInstance) {
             $instance->setMethodBodyBuilder($this->newInstanceBuilder);
@@ -505,6 +505,14 @@ class Configuration
         }
 
         return $this->methodBodyBuilderInstancePool[$key];
+    }
+
+    private function enableHasFactoryInstances()
+    {
+        if (!$this->hasFactoryInstances) {
+            $this->hasFactoryInstances = true;
+            $this->addUses('Net\Bazzline\Component\Locator\FactoryInterface');
+        }
     }
     //end of private methods
 }
