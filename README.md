@@ -232,6 +232,7 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
         * write / update unit tests
     * Generator.php now throws "InvalidArgumentException" instead of "RuntimeException
     * Generator now tries to create the provided directory if it does not exists
+    * fixed [issue/2](https://github.com/bazzline/php_component_locator_generator/issues/2)
     * fixed [issue/4](https://github.com/bazzline/php_component_locator_generator/issues/4)
     * implement usage of php_component_cli_arguments
     * implement usage of php_component_command
