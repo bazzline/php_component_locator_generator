@@ -7,12 +7,12 @@
 namespace Net\Bazzline\Component\Locator;
 
 use Net\Bazzline\Component\Locator\Process\Transformer\Generator\ArgumentsGenerator;
-use Net\Bazzline\Component\Locator\Process\Transformer\ConfigurationAssembler;
+use Net\Bazzline\Component\Locator\Process\Transformer\Assembler\ConfigurationAssembler;
 use Net\Bazzline\Component\Locator\Process\Transformer\Generator\FactoryGenerator;
 use Net\Bazzline\Component\Locator\Process\Transformer\Generator\FileExistsStrategyGenerator;
 use Net\Bazzline\Component\Locator\Process\Transformer\Generator\InvalidArgumentExceptionFileGenerator;
-use Net\Bazzline\Component\Locator\Process\Transformer\LoadBootstrapIfAvailable;
-use Net\Bazzline\Component\Locator\Process\Transformer\LoadConfiguration;
+use Net\Bazzline\Component\Locator\Process\Transformer\FileLoader\IfAvailableBootstrapFileLoader;
+use Net\Bazzline\Component\Locator\Process\Transformer\FileLoader\ConfigurationFileLoader;
 use Net\Bazzline\Component\Locator\Process\Transformer\Generator\LocatorFileGenerator;
 use Net\Bazzline\Component\Locator\Process\Transformer\Generator\LocatorInterfaceFileGenerator;
 use Net\Bazzline\Component\Locator\Process\Validator\ArgumentsValidator;
@@ -57,9 +57,9 @@ class ProcessPipeFactory
             new IsCommandLineValidator(),
             new ArgumentsGenerator(),
             new ArgumentsValidator(),
-            new LoadConfiguration(),
+            new ConfigurationFileLoader(),
             new ConfigurationDataValidator(),
-            new LoadBootstrapIfAvailable(),
+            new IfAvailableBootstrapFileLoader(),
             $configurationAssembler,
             new FileExistsStrategyGenerator(),
             new ConfigurationValidator(),

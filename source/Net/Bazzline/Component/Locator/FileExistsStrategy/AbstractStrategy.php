@@ -12,14 +12,10 @@ namespace Net\Bazzline\Component\Locator\FileExistsStrategy;
  */
 abstract class AbstractStrategy implements FileExistsStrategyInterface
 {
-    /**
-     * @var null|string
-     */
+    /** @var null|string */
     private $fileName;
 
-    /**
-     * @var null|string
-     */
+    /** @var null|string */
     private $filePath;
 
     /**

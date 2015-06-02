@@ -22,34 +22,22 @@ use Net\Bazzline\Component\Locator\Configuration\Instance;
  */
 class LocatorGenerator extends AbstractGenerator
 {
-    /**
-     * @var BlockGeneratorFactory
-     */
+    /** @var BlockGeneratorFactory */
     protected $blockGeneratorFactory;
 
-    /**
-     * @var ClassGeneratorFactory
-     */
+    /** @var ClassGeneratorFactory */
     private $classGeneratorFactory;
 
-    /**
-     * @var DocumentationGeneratorFactory
-     */
+    /** @var DocumentationGeneratorFactory */
     private $documentationGeneratorFactory;
 
-    /**
-     * @var FileGeneratorFactory
-     */
+    /** @var FileGeneratorFactory */
     private $fileGeneratorFactory;
 
-    /**
-     * @var MethodGeneratorFactory
-     */
+    /** @var MethodGeneratorFactory */
     protected $methodGeneratorFactory;
 
-    /**
-     * @var PropertyGeneratorFactory
-     */
+    /** @var PropertyGeneratorFactory */
     protected $propertyGeneratorFactory;
 
     /**

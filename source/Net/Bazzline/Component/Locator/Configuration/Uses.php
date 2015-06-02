@@ -12,14 +12,10 @@ namespace Net\Bazzline\Component\Locator\Configuration;
  */
 class Uses
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $alias;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $className;
 
     /**

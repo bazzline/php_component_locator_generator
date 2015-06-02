@@ -18,19 +18,13 @@ use Net\Bazzline\Component\CodeGenerator\Factory\FileGeneratorFactory;
  */
 class InvalidArgumentExceptionGenerator extends AbstractGenerator
 {
-    /**
-     * @var ClassGeneratorFactory
-     */
+    /** @var ClassGeneratorFactory */
     private $classGeneratorFactory;
 
-    /**
-     * @var DocumentationGeneratorFactory
-     */
+    /** @var DocumentationGeneratorFactory */
     private $documentationGeneratorFactory;
 
-    /**
-     * @var FileGeneratorFactory
-     */
+    /** @var FileGeneratorFactory */
     private $fileGeneratorFactory;
 
     /**

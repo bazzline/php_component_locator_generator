@@ -4,12 +4,12 @@
  * @since 2015-05-31 
  */
 
-namespace Net\Bazzline\Component\Locator\Process\Transformer;
+namespace Net\Bazzline\Component\Locator\Process\Transformer\FileLoader;
 
 use Net\Bazzline\Component\ProcessPipe\ExecutableException;
 use Net\Bazzline\Component\ProcessPipe\ExecutableInterface;
 
-class LoadBootstrapIfAvailable implements ExecutableInterface
+class IfAvailableBootstrapFileLoader implements ExecutableInterface
 {
     /**
      * @param array $input

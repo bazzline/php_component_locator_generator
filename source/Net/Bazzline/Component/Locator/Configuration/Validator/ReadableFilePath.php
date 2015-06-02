@@ -12,6 +12,12 @@ namespace Net\Bazzline\Component\Locator\Configuration\Validator;
  */
 class ReadableFilePath
 {
+    /**
+     * @param string $path
+     * @throws RuntimeException
+     * @todo add interface
+     * @todo replace RuntimeException with InvalidArgumentException
+     */
     public function validate($path)
     {
         if (!is_file($path)) {

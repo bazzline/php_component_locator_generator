@@ -14,14 +14,10 @@ use Net\Bazzline\Component\Locator\FileExistsStrategy\FileExistsStrategyInterfac
  */
 abstract class AbstractGenerator implements GeneratorInterface
 {
-    /**
-     * @var \Net\Bazzline\Component\Locator\Configuration
-     */
+    /** @var \Net\Bazzline\Component\Locator\Configuration */
     protected $configuration;
 
-    /**
-     * @var FileExistsStrategyInterface
-     */
+    /** @var FileExistsStrategyInterface */
     protected $fileExistsStrategy;
 
     /**

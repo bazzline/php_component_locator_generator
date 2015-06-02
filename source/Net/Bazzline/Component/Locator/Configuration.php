@@ -21,99 +21,61 @@ use Net\Bazzline\Component\Locator\MethodBodyBuilder\NewInstanceBuilder;
 class Configuration
 {
     //begin of properties
-    /**
-     * @var string
-     */
+    /** @var string */
     private $extends;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $instances = array();
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $implements = array();
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $className;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $createLocatorGeneratorInterface = false;
 
-    /**
-     * @var FetchFromFactoryInstancePoolBuilder
-     */
+    /** @var FetchFromFactoryInstancePoolBuilder */
     private $fetchFromFactoryInstancePoolBuilder;
 
-    /**
-     * @var FetchFromSharedInstancePoolBuilder
-     */
+    /** @var FetchFromSharedInstancePoolBuilder */
     private $fetchFromSharedInstancePoolBuilder;
 
-    /**
-     * @var FetchFromSharedInstancePoolOrCreateByFactoryBuilder
-     */
+    /** @var FetchFromSharedInstancePoolOrCreateByFactoryBuilder */
     private $fetchFromSharedInstancePoolOrCreateByFactoryBuilder;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $hasFactoryInstances = false;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $hasSharedInstances = false;
 
-    /**
-     * @var Instance
-     */
+    /** @var Instance */
     private $instance;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $namespace;
 
-    /**
-     * @var NewInstanceBuilder
-     */
+    /** @var NewInstanceBuilder */
     private $newInstanceBuilder;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $methodPrefix;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $methodBodyBuilderInstancePool = array();
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $fileName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $filePath;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $useCollection = array();
 
-    /**
-     * @var Uses
-     */
+    /** @var Uses */
     private $uses;
     //end of properties
 

@@ -19,24 +19,16 @@ use Net\Bazzline\Component\CodeGenerator\FileGenerator;
  */
 abstract class AbstractInterfaceGenerator extends AbstractGenerator
 {
-    /**
-     * @var InterfaceGeneratorFactory
-     */
+    /** @var InterfaceGeneratorFactory */
     protected $interfaceGeneratorFactory;
 
-    /**
-     * @var DocumentationGeneratorFactory
-     */
+    /** @var DocumentationGeneratorFactory */
     protected $documentationGeneratorFactory;
 
-    /**
-     * @var FileGeneratorFactory
-     */
+    /** @var FileGeneratorFactory */
     protected $fileGeneratorFactory;
 
-    /**
-     * @var MethodGeneratorFactory
-     */
+    /** @var MethodGeneratorFactory */
     protected $methodGeneratorFactory;
 
     /**

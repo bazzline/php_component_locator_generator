@@ -15,9 +15,7 @@ use Net\Bazzline\Component\Locator\Configuration\Instance;
  */
 abstract class AbstractMethodBodyBuilder implements MethodBodyBuilderInterface
 {
-    /**
-     * @var Instance
-     */
+    /** @var Instance */
     protected $instance;
 
     public function __clone()

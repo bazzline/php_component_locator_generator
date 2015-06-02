@@ -14,34 +14,22 @@ use Net\Bazzline\Component\Locator\MethodBodyBuilder\MethodBodyBuilderInterface;
  */
 class Instance
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $alias;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $className;
 
-    /**
-     * @var boolean
-     */
+    /** @var boolean */
     private $isFactory = false;
 
-    /**
-     * @var boolean
-     */
+    /** @var boolean */
     private $isShared = true;
 
-    /**
-     * @var MethodBodyBuilderInterface
-     */
+    /** @var MethodBodyBuilderInterface */
     private $methodBodyBuilder;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $returnValue;
 
     /**
