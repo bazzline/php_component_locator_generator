@@ -222,12 +222,12 @@ Thanks to [apigen](https://github.com/apigen/apigen), the api is available in th
 * add "verify" method to configuration that throws an error if not all mandatory parameters are set
 * implement validation of used interface- or class names by adding "autoloader class path"
 * implement a flag to create a LocatorInterface out of the written Locator
+* implement "FromPath" assembler that scans the path and iterates through the path and fetches the php class or interfaces
 
 # History
 
 * [upcomming](https://github.com/bazzline/php_component_locator_generator/tree/master)
     * @todo
-        * implement "FromPath" assembler that scans the path and iterates through the path and fetches the php class or interfaces
         * updated dependencies
         * write / update unit tests
     * Generator.php now throws "InvalidArgumentException" instead of "RuntimeException
