@@ -17,15 +17,15 @@ use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\PropertyGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Indention;
 use Net\Bazzline\Component\CodeGenerator\LineGenerator;
-use Net\Bazzline\Component\Locator\Configuration;
-use Net\Bazzline\Component\Locator\FactoryInterfaceGenerator;
+use Net\Bazzline\Component\Locator\Configuration\Configuration;
+use Net\Bazzline\Component\Locator\Generator\FactoryInterfaceGenerator;
 use Net\Bazzline\Component\Locator\FileExistsStrategy\DeleteStrategy;
 use Net\Bazzline\Component\Locator\FileExistsStrategy\SuffixWithCurrentTimestampStrategy;
 use Net\Bazzline\Component\Locator\Generator;
 use Net\Bazzline\Component\Locator\GeneratorFactory;
-use Net\Bazzline\Component\Locator\InvalidArgumentExceptionGenerator;
-use Net\Bazzline\Component\Locator\LocatorGenerator;
-use Net\Bazzline\Component\Locator\LocatorInterfaceGenerator;
+use Net\Bazzline\Component\Locator\Generator\InvalidArgumentExceptionGenerator;
+use Net\Bazzline\Component\Locator\Generator\LocatorGenerator;
+use Net\Bazzline\Component\Locator\Generator\LocatorInterfaceGenerator;
 use Net\Bazzline\Component\Locator\MethodBodyBuilder\FetchFromFactoryInstancePoolBuilder;
 use Net\Bazzline\Component\Locator\MethodBodyBuilder\FetchFromSharedInstancePoolBuilder;
 use Net\Bazzline\Component\Locator\MethodBodyBuilder\FetchFromSharedInstancePoolOrCreateByFactoryBuilder;
@@ -156,7 +156,7 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Mockery\MockInterface|\Net\Bazzline\Component\Locator\AbstractGenerator
+     * @return Mockery\MockInterface|\Net\Bazzline\Component\Locator\Generator\AbstractGenerator
      */
     protected function getMockOfAbstractGenerator()
     {

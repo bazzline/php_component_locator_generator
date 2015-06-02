@@ -4,7 +4,7 @@
  * @since 2014-06-17 
  */
 
-namespace Net\Bazzline\Component\Locator;
+namespace Net\Bazzline\Component\Locator\Generator;
 
 use Net\Bazzline\Component\CodeGenerator\ClassGenerator;
 use Net\Bazzline\Component\CodeGenerator\FileGenerator;
@@ -14,11 +14,15 @@ use Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\FileGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\PropertyGeneratorFactory;
+use Net\Bazzline\Component\Locator\Configuration\Configuration;
 use Net\Bazzline\Component\Locator\Configuration\Instance;
+use Net\Bazzline\Component\Locator\Generator\AbstractGenerator;
+use Net\Bazzline\Component\Locator\RuntimeException;
 
 /**
  * Class LocatorFileGenerator
  * @package Net\Bazzline\Component\Locator
+ * @todo split up into sub processes
  */
 class LocatorGenerator extends AbstractGenerator
 {

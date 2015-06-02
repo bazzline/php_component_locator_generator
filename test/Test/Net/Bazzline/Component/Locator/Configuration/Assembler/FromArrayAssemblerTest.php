@@ -7,7 +7,7 @@
 namespace Test\Net\Bazzline\Component\Locator\Configuration\Assembler;
 
 use Test\Net\Bazzline\Component\Locator\LocatorTestCase;
-use Net\Bazzline\Component\Locator\Configuration;
+use Net\Bazzline\Component\Locator\Configuration\Configuration;
 
 /**
  * Class FromArrayAssemblerTest

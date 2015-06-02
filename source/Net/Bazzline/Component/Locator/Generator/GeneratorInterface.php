@@ -4,7 +4,9 @@
  * @since 2014-06-14 
  */
 
-namespace Net\Bazzline\Component\Locator;
+namespace Net\Bazzline\Component\Locator\Generator;
+
+use Net\Bazzline\Component\Locator\RuntimeException;
 
 /**
  * Interface GeneratorInterface

@@ -6,9 +6,9 @@
 
 namespace Net\Bazzline\Component\Locator\Process\Transformer\Generator;
 
-use Net\Bazzline\Component\Locator\Configuration;
+use Net\Bazzline\Component\Locator\Configuration\Configuration;
 use Net\Bazzline\Component\Locator\FileExistsStrategy\FileExistsStrategyInterface;
-use Net\Bazzline\Component\Locator\LocatorInterfaceGenerator;
+use Net\Bazzline\Component\Locator\Generator\LocatorInterfaceGenerator;
 use Net\Bazzline\Component\ProcessPipe\ExecutableException;
 use Net\Bazzline\Component\ProcessPipe\ExecutableInterface;
 

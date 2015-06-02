@@ -4,7 +4,7 @@
  * @since 2014-12-23 
  */
 
-namespace Net\Bazzline\Component\Locator;
+namespace Net\Bazzline\Component\Locator\Generator;
 
 use Net\Bazzline\Component\CodeGenerator\InterfaceGenerator;
 use Net\Bazzline\Component\CodeGenerator\Factory\InterfaceGeneratorFactory;
@@ -12,6 +12,9 @@ use Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\FileGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\FileGenerator;
+use Net\Bazzline\Component\Locator\Configuration\Configuration;
+use Net\Bazzline\Component\Locator\Generator\AbstractGenerator;
+use Net\Bazzline\Component\Locator\RuntimeException;
 
 /**
  * Class AbstractInterfaceGenerator

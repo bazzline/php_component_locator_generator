@@ -6,7 +6,7 @@
 
 namespace Net\Bazzline\Component\Locator\Configuration\Assembler;
 
-use Net\Bazzline\Component\Locator\Configuration;
+use Net\Bazzline\Component\Locator\Configuration\Configuration;
 
 /**
  * Class AbstractAssembler

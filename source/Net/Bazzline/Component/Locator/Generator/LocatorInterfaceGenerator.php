@@ -4,11 +4,13 @@
  * @since 2015-01-02 
  */
 
-namespace Net\Bazzline\Component\Locator;
+namespace Net\Bazzline\Component\Locator\Generator;
 
 use Net\Bazzline\Component\CodeGenerator\InterfaceGenerator;
 use Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
+use Net\Bazzline\Component\Locator\Configuration\Configuration;
+use Net\Bazzline\Component\Locator\Generator\AbstractInterfaceGenerator;
 
 /**
  * Class LocatorInterfaceGenerator
@@ -52,8 +54,8 @@ class LocatorInterfaceGenerator extends AbstractInterfaceGenerator
                     $methodName = (str_replace('\\', '' , $instance->getClassName()));
                 }
 
-                $methodName = $configuration->getMethodPrefix() . ucfirst($methodName);
-                $returnValue = ($instance->hasReturnValue()) ? $instance->getReturnValue() : $instance->getClassName();
+                $methodName     = $configuration->getMethodPrefix() . ucfirst($methodName);
+                $returnValue    = ($instance->hasReturnValue()) ? $instance->getReturnValue() : $instance->getClassName();
 
                 $method->setDocumentation($documentationGeneratorFactory->create());
                 $method->setName($methodName);

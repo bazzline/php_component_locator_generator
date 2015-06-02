@@ -4,9 +4,12 @@
  * @since 2014-06-14 
  */
 
-namespace Net\Bazzline\Component\Locator;
+namespace Net\Bazzline\Component\Locator\Generator;
 
+use Net\Bazzline\Component\Locator\Configuration\Configuration;
 use Net\Bazzline\Component\Locator\FileExistsStrategy\FileExistsStrategyInterface;
+use Net\Bazzline\Component\Locator\Generator\GeneratorInterface;
+use Net\Bazzline\Component\Locator\RuntimeException;
 
 /**
  * Class AbstractGenerator
@@ -14,14 +17,14 @@ use Net\Bazzline\Component\Locator\FileExistsStrategy\FileExistsStrategyInterfac
  */
 abstract class AbstractGenerator implements GeneratorInterface
 {
-    /** @var \Net\Bazzline\Component\Locator\Configuration */
+    /** @var \Net\Bazzline\Component\Locator\Configuration\Configuration */
     protected $configuration;
 
     /** @var FileExistsStrategyInterface */
     protected $fileExistsStrategy;
 
     /**
-     * @param \Net\Bazzline\Component\Locator\Configuration $configuration
+     * @param \Net\Bazzline\Component\Locator\Configuration\Configuration $configuration
      * @return $this
      */
     public function setConfiguration(Configuration $configuration)

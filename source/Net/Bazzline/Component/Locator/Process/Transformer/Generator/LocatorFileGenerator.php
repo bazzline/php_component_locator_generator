@@ -6,7 +6,7 @@
 
 namespace Net\Bazzline\Component\Locator\Process\Transformer\Generator;
 
-use Net\Bazzline\Component\Locator\LocatorGenerator;
+use Net\Bazzline\Component\Locator\Generator\LocatorGenerator;
 use Net\Bazzline\Component\ProcessPipe\ExecutableException;
 use Net\Bazzline\Component\ProcessPipe\ExecutableInterface;
 

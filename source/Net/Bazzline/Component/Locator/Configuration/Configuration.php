@@ -4,15 +4,14 @@
  * @since 2014-05-26 
  */
 
-namespace Net\Bazzline\Component\Locator;
+namespace Net\Bazzline\Component\Locator\Configuration;
 
-use Net\Bazzline\Component\Locator\Configuration\Instance;
-use Net\Bazzline\Component\Locator\Configuration\Uses;
 use Net\Bazzline\Component\Locator\MethodBodyBuilder\FetchFromFactoryInstancePoolBuilder;
 use Net\Bazzline\Component\Locator\MethodBodyBuilder\FetchFromSharedInstancePoolBuilder;
 use Net\Bazzline\Component\Locator\MethodBodyBuilder\FetchFromSharedInstancePoolOrCreateByFactoryBuilder;
 use Net\Bazzline\Component\Locator\MethodBodyBuilder\MethodBodyBuilderInterface;
 use Net\Bazzline\Component\Locator\MethodBodyBuilder\NewInstanceBuilder;
+use Net\Bazzline\Component\Locator\RuntimeException;
 
 /**
  * Interface Configuration

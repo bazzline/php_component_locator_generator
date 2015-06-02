@@ -6,6 +6,7 @@
 
 namespace Net\Bazzline\Component\Locator;
 
+use Net\Bazzline\Component\Locator\Configuration\ConfigurationFactory;
 use Net\Bazzline\Component\Locator\Process\Transformer\Generator\ArgumentsGenerator;
 use Net\Bazzline\Component\Locator\Process\Transformer\Assembler\ConfigurationAssembler;
 use Net\Bazzline\Component\Locator\Process\Transformer\Generator\FactoryGenerator;

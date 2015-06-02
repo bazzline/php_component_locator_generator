@@ -4,11 +4,13 @@
  * @since 2014-06-17 
  */
 
-namespace Net\Bazzline\Component\Locator;
+namespace Net\Bazzline\Component\Locator\Generator;
 
 use Net\Bazzline\Component\CodeGenerator\InterfaceGenerator;
 use Net\Bazzline\Component\CodeGenerator\Factory\DocumentationGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
+use Net\Bazzline\Component\Locator\Configuration\Configuration;
+use Net\Bazzline\Component\Locator\Generator\AbstractInterfaceGenerator;
 
 /**
  * Class FactoryInterfaceGenerator

@@ -17,7 +17,7 @@ if (file_exists(__DIR__ . '/../../../autoload.php')) {
 try {
     $factory        = new ProcessPipeFactory();
     $output         = $factory->create()->execute($argv);
-    /** @var \Net\Bazzline\Component\Locator\Configuration $configuration */
+    /** @var \Net\Bazzline\Component\Locator\Configuration\Configuration $configuration */
     $configuration  = $output['configuration'];
     echo $configuration->getClassName() . ' created in ' . $configuration->getFilePath() . PHP_EOL;
     exit(0);
