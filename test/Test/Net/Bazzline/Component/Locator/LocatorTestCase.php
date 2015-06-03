@@ -17,12 +17,11 @@ use Net\Bazzline\Component\CodeGenerator\Factory\MethodGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Factory\PropertyGeneratorFactory;
 use Net\Bazzline\Component\CodeGenerator\Indention;
 use Net\Bazzline\Component\CodeGenerator\LineGenerator;
-use Net\Bazzline\Component\Locator\Configuration\Configuration;
+use Net\Bazzline\Component\Locator\Configuration;
 use Net\Bazzline\Component\Locator\Generator\FactoryInterfaceGenerator;
 use Net\Bazzline\Component\Locator\FileExistsStrategy\DeleteStrategy;
 use Net\Bazzline\Component\Locator\FileExistsStrategy\SuffixWithCurrentTimestampStrategy;
 use Net\Bazzline\Component\Locator\Generator;
-use Net\Bazzline\Component\Locator\GeneratorFactory;
 use Net\Bazzline\Component\Locator\Generator\InvalidArgumentExceptionGenerator;
 use Net\Bazzline\Component\Locator\Generator\LocatorGenerator;
 use Net\Bazzline\Component\Locator\Generator\LocatorInterfaceGenerator;
@@ -37,7 +36,7 @@ use PHPUnit_Framework_TestCase;
  * Class LocatorTestCase
  * @package Test\Net\Bazzline\Component
  */
-class LocatorTestCase extends PHPUnit_Framework_TestCase
+abstract class LocatorTestCase extends PHPUnit_Framework_TestCase
 {
     protected function tearDown()
     {
@@ -131,11 +130,11 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
 
     //begin of locator namespace
     /**
-     * @return Configuration
+     * @return Configuration\Configuration
      */
     protected function getConfiguration()
     {
-        $configuration = new Configuration();
+        $configuration = new Configuration\Configuration();
 
         $configuration->setFetchFromFactoryInstancePoolBuilder($this->getFetchFromFactoryInstancePoolBuilder());
         $configuration->setFetchFromSharedInstancePoolBuilder($this->getFetchFromSharedInstancePoolBuilder());
@@ -148,11 +147,11 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Configuration|\Mockery\MockInterface
+     * @return Configuration\Configuration|\Mockery\MockInterface
      */
     protected function getMockOfConfiguration()
     {
-        return Mockery::mock('Net\Bazzline\Component\Locator\Configuration');
+        return Mockery::mock('Net\Bazzline\Component\Locator\Configuration\Configuration');
     }
 
     /**
@@ -160,7 +159,7 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
      */
     protected function getMockOfAbstractGenerator()
     {
-        return Mockery::mock('Net\Bazzline\Component\Locator\AbstractGenerator[generate]');
+        return Mockery::mock('Net\Bazzline\Component\Locator\Generator\AbstractGenerator[generate]');
     }
 
     /**
@@ -193,22 +192,6 @@ class LocatorTestCase extends PHPUnit_Framework_TestCase
     protected function getMockOfInvalidArgumentExceptionGenerator()
     {
         return Mockery::mock('Net\Bazzline\Component\Locator\InvalidArgumentExceptionGenerator');
-    }
-
-    /**
-     * @return Generator
-     */
-    protected function getGenerator()
-    {
-        return new Generator();
-    }
-
-    /**
-     * @return GeneratorFactory
-     */
-    protected function getGeneratorFactory()
-    {
-        return new GeneratorFactory();
     }
 
     /**

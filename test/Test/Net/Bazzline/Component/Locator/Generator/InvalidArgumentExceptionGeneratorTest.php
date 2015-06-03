@@ -4,9 +4,10 @@
  * @since 2014-08-07 
  */
 
-namespace Test\Net\Bazzline\Component\Locator;
+namespace Test\Net\Bazzline\Component\Locator\Generator;
 
 use org\bovigo\vfs\vfsStream;
+use Test\Net\Bazzline\Component\Locator\LocatorTestCase;
 
 /**
  * Class InvalidArgumentExceptionGeneratorTest
@@ -16,10 +17,10 @@ class InvalidArgumentExceptionGeneratorTest extends LocatorTestCase
 {
     public function testSetters()
     {
-        $classGeneratorFactory = $this->getClassGeneratorFactory();
-        $documentationGeneratorFactory = $this->getDocumentationGeneratorFactory();
-        $fileGeneratorFactory = $this->getFileGeneratorFactory();
-        $generator = $this->getInvalidArgumentExceptionGenerator();
+        $classGeneratorFactory          = $this->getClassGeneratorFactory();
+        $documentationGeneratorFactory  = $this->getDocumentationGeneratorFactory();
+        $fileGeneratorFactory           = $this->getFileGeneratorFactory();
+        $generator                      = $this->getInvalidArgumentExceptionGenerator();
 
         $this->assertEquals(
             $generator,
@@ -37,14 +38,14 @@ class InvalidArgumentExceptionGeneratorTest extends LocatorTestCase
 
     public function testGenerate()
     {
-        $classGeneratorFactory = $this->getClassGeneratorFactory();
-        $configuration = $this->getMockOfConfiguration();
-        $documentationGeneratorFactory = $this->getDocumentationGeneratorFactory();
-        $fileGeneratorFactory = $this->getFileGeneratorFactory();
-        $generator = $this->getInvalidArgumentExceptionGenerator();
-        $namespace = 'My\Namespace';
-        $root = vfsStream::setup('root', 0777);
-        $strategy = $this->getDeleteStrategy();
+        $classGeneratorFactory          = $this->getClassGeneratorFactory();
+        $configuration                  = $this->getMockOfConfiguration();
+        $documentationGeneratorFactory  = $this->getDocumentationGeneratorFactory();
+        $fileGeneratorFactory           = $this->getFileGeneratorFactory();
+        $generator                      = $this->getInvalidArgumentExceptionGenerator();
+        $namespace                      = 'My\Namespace';
+        $root                           = vfsStream::setup('root', 0777);
+        $strategy                       = $this->getDeleteStrategy();
 
         $generator->setConfiguration($configuration);
         $generator->setClassGeneratorFactory($classGeneratorFactory);

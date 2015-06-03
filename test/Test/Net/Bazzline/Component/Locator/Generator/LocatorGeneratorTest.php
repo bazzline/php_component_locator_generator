@@ -4,9 +4,10 @@
  * @since 2014-06-09 
  */
 
-namespace Test\Net\Bazzline\Component\Locator;
+namespace Test\Net\Bazzline\Component\Locator\Generator;
 
 use org\bovigo\vfs\vfsStream;
+use Test\Net\Bazzline\Component\Locator\LocatorTestCase;
 
 /**
  * Class LocatorGeneratorTest
@@ -16,14 +17,14 @@ class LocatorGeneratorTest extends LocatorTestCase
 {
     public function testSetter()
     {
-        $blockGeneratorFactory = $this->getBlockGeneratorFactory();
-        $classGeneratorFactory = $this->getClassGeneratorFactory();
-        $deleteStrategy = $this->getDeleteStrategy();
-        $documentationGeneratorFactory = $this->getDocumentationGeneratorFactory();
-        $fileGeneratorFactory = $this->getFileGeneratorFactory();
-        $generator = $this->getLocatorGenerator();
-        $methodGeneratorFactory = $this->getMethodGeneratorFactory();
-        $propertyGeneratorFactory = $this->getPropertyGeneratorFactory();
+        $blockGeneratorFactory          = $this->getBlockGeneratorFactory();
+        $classGeneratorFactory          = $this->getClassGeneratorFactory();
+        $deleteStrategy                 = $this->getDeleteStrategy();
+        $documentationGeneratorFactory  = $this->getDocumentationGeneratorFactory();
+        $fileGeneratorFactory           = $this->getFileGeneratorFactory();
+        $generator                      = $this->getLocatorGenerator();
+        $methodGeneratorFactory         = $this->getMethodGeneratorFactory();
+        $propertyGeneratorFactory       = $this->getPropertyGeneratorFactory();
 
         $this->assertEquals(
             $generator,
@@ -57,15 +58,15 @@ class LocatorGeneratorTest extends LocatorTestCase
 
     public function testGenerate()
     {
-        $blockGeneratorFactory = $this->getBlockGeneratorFactory();
-        $configuration = $this->getMockOfConfiguration();
-        $classGeneratorFactory = $this->getClassGeneratorFactory();
-        $deleteStrategy = $this->getDeleteStrategy();
-        $documentationGeneratorFactory = $this->getDocumentationGeneratorFactory();
-        $fileGeneratorFactory = $this->getFileGeneratorFactory();
-        $generator = $this->getLocatorGenerator();
-        $methodGeneratorFactory = $this->getMethodGeneratorFactory();
-        $propertyGeneratorFactory = $this->getPropertyGeneratorFactory();
+        $blockGeneratorFactory          = $this->getBlockGeneratorFactory();
+        $configuration                  = $this->getMockOfConfiguration();
+        $classGeneratorFactory          = $this->getClassGeneratorFactory();
+        $deleteStrategy                 = $this->getDeleteStrategy();
+        $documentationGeneratorFactory  = $this->getDocumentationGeneratorFactory();
+        $fileGeneratorFactory           = $this->getFileGeneratorFactory();
+        $generator                      = $this->getLocatorGenerator();
+        $methodGeneratorFactory         = $this->getMethodGeneratorFactory();
+        $propertyGeneratorFactory       = $this->getPropertyGeneratorFactory();
         $root = vfsStream::setup('root', 0777);
 
         $generator->setBlockGeneratorFactory($blockGeneratorFactory);
@@ -77,9 +78,9 @@ class LocatorGeneratorTest extends LocatorTestCase
         $generator->setMethodGeneratorFactory($methodGeneratorFactory);
         $generator->setPropertyGeneratorFactory($propertyGeneratorFactory);
 
-        $className = 'MyLocator';
-        $extends = 'BaseLocator';
-        $fileName = 'MyGenerator.php';
+        $className  = 'MyLocator';
+        $extends    = 'BaseLocator';
+        $fileName   = 'MyGenerator.php';
         $implements = array('MyInterface');
 
         $instance = $this->getInstance();
@@ -91,8 +92,8 @@ class LocatorGeneratorTest extends LocatorTestCase
         $instance->setReturnValue('MyInstance');
         $instances = array($instance);
 
-        $methodPrefix = 'myMethodPrefix';
-        $namespace = 'My\Namespace';
+        $methodPrefix   = 'myMethodPrefix';
+        $namespace      = 'My\Namespace';
 
         $use = $this->getUses();
         $use->setAlias('AliasOfMyUse');

@@ -22,8 +22,8 @@ class AbstractMethodBodyBuilderTest extends LocatorTestCase
 
     public function extend()
     {
-        $builder = $this->getAbstractMethodBodyBuilder();
-        $documentation = $this->getMockOfDocumentationGenerator();
+        $builder        = $this->getAbstractMethodBodyBuilder();
+        $documentation  = $this->getMockOfDocumentationGenerator();
 
         $this->assertEquals($documentation, $builder->extend($documentation));
     }

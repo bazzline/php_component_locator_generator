@@ -16,11 +16,11 @@ class FactoryInterfaceGeneratorTest extends LocatorTestCase
 {
     public function testSetters()
     {
-        $interfaceGeneratorFactory = $this->getInterfaceGeneratorFactory();
-        $documentationGeneratorFactory = $this->getDocumentationGeneratorFactory();
-        $fileGeneratorFactory = $this->getFileGeneratorFactory();
-        $generator = $this->getFactoryInterfaceGenerator();
-        $methodGeneratorFactory = $this->getMethodGeneratorFactory();
+        $interfaceGeneratorFactory      = $this->getInterfaceGeneratorFactory();
+        $documentationGeneratorFactory  = $this->getDocumentationGeneratorFactory();
+        $fileGeneratorFactory           = $this->getFileGeneratorFactory();
+        $generator                      = $this->getFactoryInterfaceGenerator();
+        $methodGeneratorFactory         = $this->getMethodGeneratorFactory();
 
         $this->assertEquals(
             $generator,
@@ -42,16 +42,16 @@ class FactoryInterfaceGeneratorTest extends LocatorTestCase
 
     public function testGenerate()
     {
-        $name = 'MyClass';
-        $interfaceGeneratorFactory = $this->getInterfaceGeneratorFactory();
-        $configuration = $this->getMockOfConfiguration();
-        $documentationGeneratorFactory = $this->getDocumentationGeneratorFactory();
-        $fileGeneratorFactory = $this->getFileGeneratorFactory();
-        $generator = $this->getFactoryInterfaceGenerator();
-        $methodGeneratorFactory = $this->getMethodGeneratorFactory();
-        $namespace = 'My\Namespace';
-        $root = vfsStream::setup('root', 0777);
-        $strategy = $this->getDeleteStrategy();
+        $name                           = 'MyClass';
+        $interfaceGeneratorFactory      = $this->getInterfaceGeneratorFactory();
+        $configuration                  = $this->getMockOfConfiguration();
+        $documentationGeneratorFactory  = $this->getDocumentationGeneratorFactory();
+        $fileGeneratorFactory           = $this->getFileGeneratorFactory();
+        $generator                      = $this->getFactoryInterfaceGenerator();
+        $methodGeneratorFactory         = $this->getMethodGeneratorFactory();
+        $namespace                      = 'My\Namespace';
+        $root                           = vfsStream::setup('root', 0777);
+        $strategy                       = $this->getDeleteStrategy();
 
         $generator->setConfiguration($configuration);
         $generator->setInterfaceGeneratorFactory($interfaceGeneratorFactory);

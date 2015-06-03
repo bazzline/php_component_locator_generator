@@ -39,10 +39,10 @@ class PropelQueryCreateBuilderTest extends LocatorTestCase
 
     public function testBuild()
     {
-        $block = $this->getBlockGenerator();
-        $builder = $this->getPropelQueryCreateBuilder();
-        $instance = $this->getMockOfInstance();
-        $className = 'FooBar';
+        $block      = $this->getBlockGenerator();
+        $builder    = $this->getPropelQueryCreateBuilder();
+        $instance   = $this->getMockOfInstance();
+        $className  = 'FooBar';
 
         $builder->setInstance($instance);
 

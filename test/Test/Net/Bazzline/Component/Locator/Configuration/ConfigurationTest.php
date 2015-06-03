@@ -4,7 +4,9 @@
  * @since 2014-06-09 
  */
 
-namespace Test\Net\Bazzline\Component\Locator;
+namespace Test\Net\Bazzline\Component\Locator\Configuration;
+
+use Test\Net\Bazzline\Component\Locator\LocatorTestCase;
 
 /**
  * Class ConfigurationTest
@@ -21,8 +23,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testSetClassName()
     {
-        $configuration = $this->getConfiguration();
-        $className = 'foo';
+        $configuration  = $this->getConfiguration();
+        $className      = 'foo';
 
         $this->assertEquals(
             $configuration,
@@ -40,8 +42,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testGetFileNameExtension()
     {
-        $configuration = $this->getConfiguration();
-        $expectedExtension = '.php';
+        $configuration      = $this->getConfiguration();
+        $expectedExtension  = '.php';
 
         $this->assertEquals(
             $expectedExtension,
@@ -58,8 +60,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testSetFilePath()
     {
-        $configuration = $this->getConfiguration();
-        $filePath = 'foo';
+        $configuration  = $this->getConfiguration();
+        $filePath       = 'foo';
 
         $this->assertEquals(
             $configuration,
@@ -73,8 +75,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testGetNamespace()
     {
-        $configuration = $this->getConfiguration();
-        $namespace = 'foo';
+        $configuration  = $this->getConfiguration();
+        $namespace      = 'foo';
 
         $this->assertEquals(
             $configuration,
@@ -88,9 +90,9 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testHasNamespace()
     {
-        $configuration = $this->getConfiguration();
-        $invalidNamespace = '';
-        $validNamespace = 'foo';
+        $configuration      = $this->getConfiguration();
+        $invalidNamespace   = '';
+        $validNamespace     = 'foo';
 
         $this->assertFalse($configuration->hasNamespace());
 
@@ -103,8 +105,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testSetNamespace()
     {
-        $configuration = $this->getConfiguration();
-        $namespace = 'foo';
+        $configuration  = $this->getConfiguration();
+        $namespace      = 'foo';
 
         $this->assertEquals(
             $configuration,
@@ -114,8 +116,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testSetMethodPrefix()
     {
-        $configuration = $this->getConfiguration();
-        $methodPrefix = 'foo';
+        $configuration  = $this->getConfiguration();
+        $methodPrefix   = 'foo';
 
         $this->assertEquals(
             $configuration,
@@ -125,8 +127,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testGetMethodPrefix()
     {
-        $configuration = $this->getConfiguration();
-        $methodPrefix = 'foo';
+        $configuration  = $this->getConfiguration();
+        $methodPrefix   = 'foo';
 
         $this->assertNull($configuration->getMethodPrefix());
 
@@ -139,12 +141,12 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testAddInstance()
     {
-        $configuration = $this->getConfiguration();
-        $alias = 'bar';
-        $className = 'foo';
-        $isFactory = true;
-        $isShared = true;
-        $returnValue = 'string';
+        $configuration  = $this->getConfiguration();
+        $alias          = 'bar';
+        $className      = 'foo';
+        $isFactory      = true;
+        $isShared       = true;
+        $returnValue    = 'string';
 
         $this->assertEquals(
             $configuration,
@@ -156,12 +158,12 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testGetInstances()
     {
-        $configuration = $this->getConfiguration();
-        $alias = 'bar';
-        $className = 'foo';
-        $isFactory = true;
-        $isShared = true;
-        $returnValue = 'string';
+        $configuration  = $this->getConfiguration();
+        $alias          = 'bar';
+        $className      = 'foo';
+        $isFactory      = true;
+        $isShared       = true;
+        $returnValue    = 'string';
 
         $this->assertEmpty($configuration->getInstances());
 
@@ -178,13 +180,13 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testHasInstances()
     {
-        $configuration = $this->getConfiguration();
+        $configuration  = $this->getConfiguration();
 
-        $alias = 'bar';
-        $className = 'foo';
-        $isFactory = true;
-        $isShared = true;
-        $returnValue = 'string';
+        $alias          = 'bar';
+        $className      = 'foo';
+        $isFactory      = true;
+        $isShared       = true;
+        $returnValue    = 'string';
 
         $this->assertFalse($configuration->hasInstances());
 
@@ -200,13 +202,13 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testHasFactoryInstances()
     {
-        $configuration = $this->getConfiguration();
+        $configuration  = $this->getConfiguration();
 
-        $alias = 'bar';
-        $className = 'foo';
-        $isFactory = true;
-        $isShared = false;
-        $returnValue = 'string';
+        $alias          = 'bar';
+        $className      = 'foo';
+        $isFactory      = true;
+        $isShared       = false;
+        $returnValue    = 'string';
 
         $this->assertFalse($configuration->hasFactoryInstances());
 
@@ -221,11 +223,11 @@ class ConfigurationTest extends LocatorTestCase
     {
         $configuration = $this->getConfiguration();
 
-        $alias = 'bar';
-        $className = 'foo';
-        $isFactory = false;
-        $isShared = true;
-        $returnValue = 'string';
+        $alias          = 'bar';
+        $className      = 'foo';
+        $isFactory      = false;
+        $isShared       = true;
+        $returnValue    = 'string';
 
         $this->assertFalse($configuration->hasSharedInstances());
 
@@ -238,8 +240,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testAddImplements()
     {
-        $configuration = $this->getConfiguration();
-        $interfaceName = 'foo';
+        $configuration  = $this->getConfiguration();
+        $interfaceName  = 'foo';
 
         $this->assertEquals(
             $configuration,
@@ -249,8 +251,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testGetImplements()
     {
-        $configuration = $this->getConfiguration();
-        $interfaceName = 'foo';
+        $configuration  = $this->getConfiguration();
+        $interfaceName  = 'foo';
 
         $this->assertEmpty($configuration->getImplements());
 
@@ -261,8 +263,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testHasImplements()
     {
-        $configuration = $this->getConfiguration();
-        $interfaceName = 'foo';
+        $configuration  = $this->getConfiguration();
+        $interfaceName  = 'foo';
 
         $this->assertFalse($configuration->hasImplements());
 
@@ -272,8 +274,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testSetExtends()
     {
-        $configuration = $this->getConfiguration();
-        $parentClassName = 'foo';
+        $configuration      = $this->getConfiguration();
+        $parentClassName    = 'foo';
 
         $this->assertEquals(
             $configuration,
@@ -283,8 +285,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testHasExtends()
     {
-        $configuration = $this->getConfiguration();
-        $parentClassName = 'foo';
+        $configuration      = $this->getConfiguration();
+        $parentClassName    = 'foo';
 
         $this->assertFalse($configuration->hasExtends());
 
@@ -294,8 +296,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testGetExtends()
     {
-        $configuration = $this->getConfiguration();
-        $parentClassName = 'foo';
+        $configuration      = $this->getConfiguration();
+        $parentClassName    = 'foo';
 
         $this->assertNull($configuration->getExtends());
 
@@ -308,8 +310,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testAddUses()
     {
-        $configuration = $this->getConfiguration();
-        $className = 'foo';
+        $configuration  = $this->getConfiguration();
+        $className      = 'foo';
 
         $this->assertEquals(
             $configuration,
@@ -319,8 +321,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testHasUses()
     {
-        $configuration = $this->getConfiguration();
-        $className = 'foo';
+        $configuration  = $this->getConfiguration();
+        $className      = 'foo';
 
         $this->assertFalse($configuration->hasUses());
 
@@ -330,8 +332,8 @@ class ConfigurationTest extends LocatorTestCase
 
     public function testGetUses()
     {
-        $configuration = $this->getConfiguration();
-        $className = 'foo';
+        $configuration  = $this->getConfiguration();
+        $className      = 'foo';
 
         $this->assertEmpty($configuration->getUseCollection());
 

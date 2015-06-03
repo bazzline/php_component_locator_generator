@@ -17,40 +17,26 @@ class FromArrayAssemblerTest extends LocatorTestCase
 {
     //begin of test
     /**
-     * @expectedException \Net\Bazzline\Component\Locator\Configuration\Assembler\RuntimeException
-     * @expectedExceptionMessage configuration is mandatory
-     */
-    public function testAssembleMissingProperties()
-    {
-        $assembler = $this->getFromArrayAssembler();
-
-        $assembler->assemble(null);
-    }
-
-    /**
      * @expectedException \Net\Bazzline\Component\Locator\Configuration\Assembler\InvalidArgumentException
      * @expectedExceptionMessage data must be an array
      */
-    public function testAssembleWithNoArrayAsData()
+    public function testAssembleWithNoContent()
     {
-        $assembler = $this->getFromArrayAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromArrayAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
-            ->assemble(null);
+        $assembler->assemble(null, $configuration);
     }
-
     /**
      * @expectedException \Net\Bazzline\Component\Locator\Configuration\Assembler\InvalidArgumentException
      * @expectedExceptionMessage data array must contain content
      */
     public function testAssembleWithEmptyDataArray()
     {
-        $assembler = $this->getFromArrayAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromArrayAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
-            ->assemble(array());
+        $assembler->assemble(array(), $configuration);
     }
 
     /**
@@ -59,11 +45,10 @@ class FromArrayAssemblerTest extends LocatorTestCase
      */
     public function testAssembleWithMissingMandatoryDataKeyClassName()
     {
-        $assembler = $this->getFromArrayAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromArrayAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
-            ->assemble(array('key' => null));
+        $assembler->assemble(array('key' => null), $configuration);
     }
 
     /**
@@ -72,11 +57,10 @@ class FromArrayAssemblerTest extends LocatorTestCase
      */
     public function testAssembleWithWrongMandatoryDataKeyClassNameValueType()
     {
-        $assembler = $this->getFromArrayAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromArrayAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
-            ->assemble(array('class_name' => 1));
+        $assembler->assemble(array('class_name' => 1), $configuration);
     }
 
     /**
@@ -85,11 +69,10 @@ class FromArrayAssemblerTest extends LocatorTestCase
      */
     public function testAssembleWithMissingMandatoryDataKeyFilePath()
     {
-        $assembler = $this->getFromArrayAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromArrayAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
-            ->assemble(array('class_name' => 'class name'));
+        $assembler->assemble(array('class_name' => 'class name'), $configuration);
     }
 
     /**
@@ -98,23 +81,24 @@ class FromArrayAssemblerTest extends LocatorTestCase
      */
     public function testAssembleWithWrongOptionalDataKeyClassNameValueType()
     {
-        $assembler = $this->getFromArrayAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromArrayAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
+        $assembler
             ->assemble(
             array(
                 'class_name'    => 'class name',
                 'file_path'     => '/file/path',
                 'extends'       => array('your argument is invalid')
-            )
+            ),
+            $configuration
         );
     }
 
     public function testAssembleWithValidMandatoryData()
     {
-        $assembler = $this->getFromArrayAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromArrayAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
         $configuration->shouldReceive('setClassName')
             ->with('my_class')
@@ -129,15 +113,14 @@ class FromArrayAssemblerTest extends LocatorTestCase
             'file_path'     => '/my/file/path'
         );
 
-        $assembler->setConfiguration($configuration)
-            ->assemble($data);
+        $assembler->assemble($data, $configuration);
     }
 
     public function testAssembleWithValidAllData()
     {
-        $className = 'TestName';
-        $extends = 'Bar';
-        $filePath = '/test/name';
+        $className  = 'TestName';
+        $extends    = 'Bar';
+        $filePath   = '/test/name';
         $implements = array(
                 'BarInterface',
                 'FooInterface',
@@ -167,9 +150,9 @@ class FromArrayAssemblerTest extends LocatorTestCase
                     'return_value'  => '\Application\Model\ExampleSharedFactorizedInstance'
                 )
         );
-        $methodPrefix = 'test';
-        $namespace = 'Test\Namespace';
-        $uses = array(
+        $methodPrefix   = 'test';
+        $namespace      = 'Test\Namespace';
+        $uses           = array(
             array('class_name' => 'My\Foo', 'alias' => 'FileGenerator')
         );
 
@@ -186,10 +169,12 @@ class FromArrayAssemblerTest extends LocatorTestCase
         );
 
         $assembler = $this->getFromArrayAssembler();
-        $assembler->setConfiguration($configuration);
-        $assembler->assemble($data);
+        $assembler->assemble($data, $configuration);
 
-        $expectedUseCollection = array();
+        $item = $this->getUses();
+        $item->setAlias('');
+        $item->setClassName('Net\Bazzline\Component\Locator\FactoryInterface');
+        $expectedUseCollection = array($item);
         foreach ($uses as $use) {
             $item = $this->getUses();
             $item->setAlias($use['alias']);

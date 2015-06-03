@@ -16,8 +16,8 @@ class UsesTest  extends LocatorTestCase
 {
     public function testAlias()
     {
-        $uses = $this->getUses();
-        $alias = 'foo';
+        $uses   = $this->getUses();
+        $alias  = 'foo';
 
         $this->assertNull($uses->getAlias());
         $this->assertEquals(
@@ -32,8 +32,8 @@ class UsesTest  extends LocatorTestCase
 
     public function testClassName()
     {
-        $uses = $this->getUses();
-        $className = 'foo';
+        $uses       = $this->getUses();
+        $className  = 'foo';
 
         $this->assertNull($uses->getClassName());
         $this->assertEquals(

@@ -38,10 +38,10 @@ class NewInstanceBuilderTest extends LocatorTestCase
 
     public function testBuild()
     {
-        $block = $this->getBlockGenerator();
-        $builder = $this->getNewInstanceBuilder();
-        $instance = $this->getMockOfInstance();
-        $className = 'FooBar';
+        $block      = $this->getBlockGenerator();
+        $builder    = $this->getNewInstanceBuilder();
+        $instance   = $this->getMockOfInstance();
+        $className  = 'FooBar';
 
         $builder->setInstance($instance);
 

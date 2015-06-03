@@ -16,8 +16,8 @@ class InstanceTest extends LocatorTestCase
 {
     public function testWithInvalidAlias()
     {
-        $instance = $this->getInstance();
-        $alias = '';
+        $instance   = $this->getInstance();
+        $alias      = '';
 
         $this->assertFalse($instance->hasAlias());
         $this->assertNull($instance->getAlias());
@@ -31,8 +31,8 @@ class InstanceTest extends LocatorTestCase
 
     public function testWithValidAlias()
     {
-        $instance = $this->getInstance();
-        $alias = 'foo';
+        $instance   = $this->getInstance();
+        $alias      = 'foo';
 
         $this->assertFalse($instance->hasAlias());
         $this->assertNull($instance->getAlias());
@@ -49,8 +49,8 @@ class InstanceTest extends LocatorTestCase
 
     public function testClassName()
     {
-        $instance = $this->getInstance();
-        $className = 'foo';
+        $instance   = $this->getInstance();
+        $className  = 'foo';
 
         $this->assertNull($instance->getClassName());
         $this->assertEquals(
@@ -99,8 +99,8 @@ class InstanceTest extends LocatorTestCase
 
     public function testWithInvalidReturnValue()
     {
-        $instance = $this->getInstance();
-        $returnValue = '';
+        $instance       = $this->getInstance();
+        $returnValue    = '';
 
         $this->assertFalse($instance->hasReturnValue());
         $this->assertNull($instance->getReturnValue());
@@ -114,8 +114,8 @@ class InstanceTest extends LocatorTestCase
 
     public function testWithValidReturnValue()
     {
-        $instance = $this->getInstance();
-        $returnValue = 'foo';
+        $instance       = $this->getInstance();
+        $returnValue    = 'foo';
 
         $this->assertFalse($instance->hasReturnValue());
         $this->assertNull($instance->getReturnValue());

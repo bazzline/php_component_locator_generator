@@ -17,27 +17,15 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
 {
     //begin of test
     /**
-     * @expectedException \Net\Bazzline\Component\Locator\Configuration\Assembler\RuntimeException
-     * @expectedExceptionMessage configuration is mandatory
-     */
-    public function testAssembleMissingProperties()
-    {
-        $assembler = $this->getFromPropelSchemaXmlAssembler();
-
-        $assembler->assemble(null);
-    }
-
-    /**
      * @expectedException \Net\Bazzline\Component\Locator\Configuration\Assembler\InvalidArgumentException
      * @expectedExceptionMessage data must be an array
      */
     public function testAssembleWithNoArrayAsData()
     {
-        $assembler = $this->getFromPropelSchemaXmlAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromPropelSchemaXmlAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
-            ->assemble(null);
+        $assembler->assemble(null, $configuration);
     }
 
     /**
@@ -46,11 +34,10 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
      */
     public function testAssembleWithEmptyDataArray()
     {
-        $assembler = $this->getFromPropelSchemaXmlAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromPropelSchemaXmlAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
-            ->assemble(array());
+        $assembler->assemble(array(), $configuration);
     }
 
     /**
@@ -59,11 +46,10 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
      */
     public function testAssembleWithMissingMandatoryDataKeyClassName()
     {
-        $assembler = $this->getFromPropelSchemaXmlAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromPropelSchemaXmlAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
-            ->assemble(array('key' => null));
+        $assembler->assemble(array('key' => null), $configuration);
     }
 
     /**
@@ -72,11 +58,10 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
      */
     public function testAssembleWithWrongMandatoryDataKeyClassNameValueType()
     {
-        $assembler = $this->getFromPropelSchemaXmlAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromPropelSchemaXmlAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
-            ->assemble(array('class_name' => 1));
+        $assembler->assemble(array('class_name' => 1), $configuration);
     }
 
     /**
@@ -85,11 +70,10 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
      */
     public function testAssembleWithMissingMandatoryDataKeyFilePath()
     {
-        $assembler = $this->getFromPropelSchemaXmlAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromPropelSchemaXmlAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
-            ->assemble(array('class_name' => 'class name'));
+        $assembler->assemble(array('class_name' => 'class name'), $configuration);
     }
 
     /**
@@ -98,23 +82,24 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
      */
     public function testAssembleWithWrongOptionalDataKeyClassNameValueType()
     {
-        $assembler = $this->getFromPropelSchemaXmlAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromPropelSchemaXmlAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
-        $assembler->setConfiguration($configuration)
+        $assembler
             ->assemble(
             array(
                 'class_name'    => 'class name',
                 'file_path'     => '/file/path',
                 'extends'       => array('your argument is invalid')
-            )
+            ),
+            $configuration
         );
     }
 
     public function testAssembleWithValidMandatoryData()
     {
-        $assembler = $this->getFromPropelSchemaXmlAssembler();
-        $configuration = $this->getMockOfConfiguration();
+        $assembler      = $this->getFromPropelSchemaXmlAssembler();
+        $configuration  = $this->getMockOfConfiguration();
 
         $configuration->shouldReceive('setClassName')
             ->with('my_class')
@@ -134,25 +119,24 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
             'path_to_schema_xml'    => __DIR__ . DIRECTORY_SEPARATOR . 'schema.xml' //can not be replaced by vfsStream because of realpath usage
         );
 
-        $assembler->setConfiguration($configuration)
-            ->assemble($data);
+        $assembler->assemble($data, $configuration);
     }
 
     public function testAssembleWithValidAllData()
     {
-        $className = 'TestName';
-        $extends = 'Bar';
-        $filePath = '/test/name';
-        $implements = array();
-        $instances = array(
+        $className      = 'TestName';
+        $extends        = 'Bar';
+        $filePath       = '/test/name';
+        $implements     = array();
+        $instances      = array(
             'table_one_class',
             'table_one_query_class',
             'table_two_class',
             'table_two_query_class'
         );
-        $methodPrefix = 'test';
-        $namespace = 'Test\Namespace';
-        $uses = array(
+        $methodPrefix   = 'test';
+        $namespace      = 'Test\Namespace';
+        $uses           = array(
             array(
                 'class_name'    => 'My\Tables\One\MyTableOne',
                 'alias'         => ''
@@ -171,8 +155,8 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
             )
         );
 
-        $configuration = $this->getConfiguration();
-        $data = array(
+        $configuration  = $this->getConfiguration();
+        $data           = array(
             'class_name'            => $className,
             'extends'               => $extends,
             'file_path'             => $filePath,
@@ -182,8 +166,7 @@ class FromPropelSchemaXmlAssemblerTest extends LocatorTestCase
         );
 
         $assembler = $this->getFromPropelSchemaXmlAssembler();
-        $assembler->setConfiguration($configuration);
-        $assembler->assemble($data);
+        $assembler->assemble($data, $configuration);
 
         $expectedUseCollection = array();
 

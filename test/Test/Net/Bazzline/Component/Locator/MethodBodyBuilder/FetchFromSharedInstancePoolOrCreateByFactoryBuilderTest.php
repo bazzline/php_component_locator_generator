@@ -42,9 +42,9 @@ class FetchFromSharedInstancePoolOrCreateByFactoryBuilderTest extends LocatorTes
      */
     public function testBuildWithInvalidInstance()
     {
-        $block = $this->getBlockGenerator();
-        $builder = $this->getFetchFromSharedInstancePoolOrCreateByFactoryBuilder();
-        $instance = $this->getMockOfInstance();
+        $block      = $this->getBlockGenerator();
+        $builder    = $this->getFetchFromSharedInstancePoolOrCreateByFactoryBuilder();
+        $instance   = $this->getMockOfInstance();
 
         $instance->shouldReceive('hasReturnValue')
             ->once()
@@ -58,11 +58,11 @@ class FetchFromSharedInstancePoolOrCreateByFactoryBuilderTest extends LocatorTes
 
     public function testBuild()
     {
-        $block = $this->getBlockGenerator();
-        $builder = $this->getFetchFromSharedInstancePoolOrCreateByFactoryBuilder();
-        $className = 'FooBar';
-        $instance = $this->getMockOfInstance();
-        $returnValue = 'Bar';
+        $block          = $this->getBlockGenerator();
+        $builder        = $this->getFetchFromSharedInstancePoolOrCreateByFactoryBuilder();
+        $className      = 'FooBar';
+        $instance       = $this->getMockOfInstance();
+        $returnValue    = 'Bar';
 
         $expectedGeneratedBlockContent = '$className = \'' . $returnValue . '\';' . PHP_EOL .
             PHP_EOL .

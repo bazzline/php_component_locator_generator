@@ -4,7 +4,9 @@
  * @since 2014-08-30 
  */
 
-namespace Test\Net\Bazzline\Component\Locator;
+namespace Test\Net\Bazzline\Component\Locator\Generator;
+
+use Test\Net\Bazzline\Component\Locator\LocatorTestCase;
 
 /**
  * Class AbstractGeneratorTest
@@ -14,9 +16,9 @@ class AbstractGeneratorTest extends LocatorTestCase
 {
     public function testSetters()
     {
-        $generator = $this->getMockOfAbstractGenerator();
-        $configuration = $this->getMockOfConfiguration();
-        $strategy = $this->getMockOfAbstractStrategy();
+        $generator      = $this->getMockOfAbstractGenerator();
+        $configuration  = $this->getMockOfConfiguration();
+        $strategy       = $this->getMockOfAbstractStrategy();
 
         $this->assertEquals(
             $generator,
