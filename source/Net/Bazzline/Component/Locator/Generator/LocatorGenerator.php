@@ -191,7 +191,11 @@ class LocatorGenerator extends AbstractGenerator
      * @param DocumentationGeneratorFactory $documentationGeneratorFactory
      * @return ClassGenerator
      */
-    private function createClass(ClassGenerator $classGenerator, Configuration $configuration, DocumentationGeneratorFactory $documentationGeneratorFactory)
+    private function createClass(
+        ClassGenerator $classGenerator,
+        Configuration $configuration,
+        DocumentationGeneratorFactory $documentationGeneratorFactory
+    )
     {
         $documentationGenerator = $documentationGeneratorFactory->create();
         $documentationGenerator->setClass($configuration->getClassName());
@@ -234,7 +238,13 @@ class LocatorGenerator extends AbstractGenerator
      * @param PropertyGeneratorFactory $propertyGeneratorFactory
      * @return ClassGenerator
      */
-    private function addFactoryInstancePooling(BlockGeneratorFactory $blockGeneratorFactory, ClassGenerator $classGenerator, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory, PropertyGeneratorFactory $propertyGeneratorFactory)
+    private function addFactoryInstancePooling(
+        BlockGeneratorFactory $blockGeneratorFactory,
+        ClassGenerator $classGenerator,
+        DocumentationGeneratorFactory $documentationGeneratorFactory,
+        MethodGeneratorFactory $methodGeneratorFactory,
+        PropertyGeneratorFactory $propertyGeneratorFactory
+    )
     {
         //begin of property
         $factoryInstancePool = $propertyGeneratorFactory->create();
@@ -247,8 +257,8 @@ class LocatorGenerator extends AbstractGenerator
 
         //begin of methods
         //begin of fetch from factory instance pool
-        $fetchFromFactoryInstancePoolBody = $blockGeneratorFactory->create();
-        $fetchFromFactoryInstancePool = $methodGeneratorFactory->create();
+        $fetchFromFactoryInstancePoolBody   = $blockGeneratorFactory->create();
+        $fetchFromFactoryInstancePool       = $methodGeneratorFactory->create();
 
         $fetchFromFactoryInstancePool->setDocumentation($documentationGeneratorFactory->create());
         $fetchFromFactoryInstancePool->setName('fetchFromFactoryInstancePool');
@@ -283,8 +293,8 @@ class LocatorGenerator extends AbstractGenerator
         //end of fetch from factory instance pool
 
         //begin of fetch from factory instance pool
-        $addToFactoryInstancePoolBody = $blockGeneratorFactory->create();
-        $addToFactoryInstancePool = $methodGeneratorFactory->create();
+        $addToFactoryInstancePoolBody   = $blockGeneratorFactory->create();
+        $addToFactoryInstancePool       = $methodGeneratorFactory->create();
 
         $addToFactoryInstancePool->setDocumentation($documentationGeneratorFactory->create());
         $addToFactoryInstancePool->setName('addToFactoryInstancePool');
@@ -302,7 +312,7 @@ class LocatorGenerator extends AbstractGenerator
 
         //begin of get from factory instance pool
         $getFromFactoryInstancePoolBody = $blockGeneratorFactory->create();
-        $getFromFactoryInstancePool = $methodGeneratorFactory->create();
+        $getFromFactoryInstancePool     = $methodGeneratorFactory->create();
 
         $getFromFactoryInstancePool->setDocumentation($documentationGeneratorFactory->create());
         $getFromFactoryInstancePool->setName('getFromFactoryInstancePool');
@@ -353,7 +363,13 @@ class LocatorGenerator extends AbstractGenerator
      * @param PropertyGeneratorFactory $propertyGeneratorFactory
      * @return ClassGenerator
      */
-    private function addSharedInstancePooling(BlockGeneratorFactory $blockGeneratorFactory, ClassGenerator $classGenerator, DocumentationGeneratorFactory $documentationGeneratorFactory, MethodGeneratorFactory $methodGeneratorFactory, PropertyGeneratorFactory $propertyGeneratorFactory)
+    private function addSharedInstancePooling(
+        BlockGeneratorFactory $blockGeneratorFactory,
+        ClassGenerator $classGenerator,
+        DocumentationGeneratorFactory $documentationGeneratorFactory,
+        MethodGeneratorFactory $methodGeneratorFactory,
+        PropertyGeneratorFactory $propertyGeneratorFactory
+    )
     {
         //begin of property
         $sharedInstancePool = $propertyGeneratorFactory->create();
@@ -367,8 +383,8 @@ class LocatorGenerator extends AbstractGenerator
         //begin of methods
         //begin of fetch from shared instance pool
         //end of fetch from shared instance pool
-        $fetchFromSharedInstancePoolBody = $blockGeneratorFactory->create();
-        $fetchFromSharedInstancePool = $methodGeneratorFactory->create();
+        $fetchFromSharedInstancePoolBody    = $blockGeneratorFactory->create();
+        $fetchFromSharedInstancePool        = $methodGeneratorFactory->create();
 
         $fetchFromSharedInstancePool->setDocumentation($documentationGeneratorFactory->create());
         $fetchFromSharedInstancePool->setName('fetchFromSharedInstancePool');
@@ -399,8 +415,8 @@ class LocatorGenerator extends AbstractGenerator
         $fetchFromSharedInstancePool->setBody($fetchFromSharedInstancePoolBody, array('object'));
         $fetchFromSharedInstancePool->getDocumentation()->addThrows('InvalidArgumentException');
         //begin of add to shared instance pool
-        $addToSharedInstancePoolBody = $blockGeneratorFactory->create();
-        $addToSharedInstancePool = $methodGeneratorFactory->create();
+        $addToSharedInstancePoolBody    = $blockGeneratorFactory->create();
+        $addToSharedInstancePool        = $methodGeneratorFactory->create();
 
         $addToSharedInstancePool->setDocumentation($documentationGeneratorFactory->create());
         $addToSharedInstancePool->setName('addToSharedInstancePool');
@@ -476,14 +492,15 @@ class LocatorGenerator extends AbstractGenerator
     )
     {
         foreach ($configuration->getInstances() as $instance) {
-            $body = $blockGeneratorFactory->create();
-            $documentation = $documentationGeneratorFactory->create();
-            $method = $methodGeneratorFactory->create();
-            $methodBuilder = $instance->getMethodBodyBuilder();
-            $returnValue = ($instance->hasReturnValue()) ? $instance->getReturnValue() : $instance->getClassName();
+            $body           = $blockGeneratorFactory->create();
+            $documentation  = $documentationGeneratorFactory->create();
+            $method         = $methodGeneratorFactory->create();
+            $methodBuilder  = $instance->getMethodBodyBuilder();
+            $returnValue    = ($instance->hasReturnValue()) ? $instance->getReturnValue() : $instance->getClassName();
 
-            $body = $methodBuilder->build($body);
-            $documentation = $methodBuilder->extend($documentation);
+            $methodBuilder->setInstance($instance);
+            $body           = $methodBuilder->build($body);
+            $documentation  = $methodBuilder->extend($documentation);
             $method->setBody($body, array($returnValue));
 
             if ($instance->hasAlias()) {
