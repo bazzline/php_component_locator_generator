@@ -214,23 +214,25 @@ The Locator is taking care of the instance pooling.
 
 # API
 
-Thanks to [apigen](https://github.com/apigen/apigen), the api is available in the [document](https://github.com/bazzline/php_component_locator_generator/blob/master/document/index.html) section or [online](http://code.bazzline.net/).
-
-# Future Improvements
-
-* added unit test for
-    * Command
-    * Configuration/Validator/*
-    * Generator
-    * Process/*
-* add "verify" method to configuration that throws an error if not all mandatory parameters are set
-* implement validation of used interface- or class names by adding "autoloader class path"
-* implement a flag to create a LocatorInterface out of the written Locator
-* implement "FromPath" assembler that scans the path and iterates through the path and fetches the php class or interfaces
+The API is available at [www.bazzline.net](http://bazzline.net/46d8f78c8f722a707d9bdafb4ec708ca2d74d121/index.html), thanks to [apigen](https://github.com/apigen/apigen) and the [api document builder](https://github.com/bazzline/api_document_builder).
 
 # History
 
 * [upcomming](https://github.com/bazzline/php_component_locator_generator/tree/master)
+    * @todo
+        * added unit test for
+            * Command
+            * Configuration/Validator/*
+            * Generator
+            * Process/*
+        * add "verify" method to configuration that throws an error if not all mandatory parameters are set
+        * implement validation of used interface- or class names by adding "autoloader class path"
+        * implement a flag to create a LocatorInterface out of the written Locator
+        * implement "FromPath" assembler that scans the path and iterates through the path and fetches the php class or interfaces
+        * add "default" section in the configuration for "is_shared" and "is_factory" (and maybe more)
+        * split readme into multiple files
+    * move documentation to [www.bazzline.net](http://bazzline.net/)
+    * updated dependencies
 * [2.0.0](https://github.com/bazzline/php_component_locator_generator/tree/2.0.0) - released at 03.06.2015
     * Generator.php now throws "InvalidArgumentException" instead of "RuntimeException
     * Generator now tries to create the provided directory if it does not exists
