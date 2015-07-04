@@ -233,6 +233,8 @@ The API is available at [www.bazzline.net](http://bazzline.net/46d8f78c8f722a707
         * split readme into multiple files
     * move documentation to [www.bazzline.net](http://bazzline.net/)
     * updated dependencies
+* [2.0.1](https://github.com/bazzline/php_component_locator_generator/tree/2.0.1) - released at 04.07.2015
+    * updated depenceny
 * [2.0.0](https://github.com/bazzline/php_component_locator_generator/tree/2.0.0) - released at 03.06.2015
     * Generator.php now throws "InvalidArgumentException" instead of "RuntimeException
     * Generator now tries to create the provided directory if it does not exists
