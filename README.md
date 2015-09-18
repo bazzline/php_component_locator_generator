@@ -233,6 +233,8 @@ The API is available at [www.bazzline.net](http://bazzline.net/46d8f78c8f722a707
         * split readme into multiple files
     * move documentation to [www.bazzline.net](http://bazzline.net/)
     * updated dependencies
+* [2.0.3](https://github.com/bazzline/php_component_locator_generator/tree/2.0.3) - released at 18.09.2015
+    * updated depenceny
 * [2.0.2](https://github.com/bazzline/php_component_locator_generator/tree/2.0.2) - released at 28.08.2015
     * updated depenceny
 * [2.0.1](https://github.com/bazzline/php_component_locator_generator/tree/2.0.1) - released at 04.07.2015
