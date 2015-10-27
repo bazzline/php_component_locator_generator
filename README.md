@@ -231,6 +231,8 @@ The API is available at [www.bazzline.net](http://bazzline.net/46d8f78c8f722a707
         * implement "FromPath" assembler that scans the path and iterates through the path and fetches the php class or interfaces
         * add "default" section in the configuration for "is_shared" and "is_factory" (and maybe more)
         * split readme into multiple files
+        * use "net_bazzline/php_component_cli_environment" to create "net_bazzline_generate_locator"
+        * use "net_bazzline/php_component_cli_environment" to create "net_bazzline_generate_locator_configuration <Array|PropelSchemaXml|PropelWithNamespaceSchemaXml> <output file path>"
     * move documentation to [www.bazzline.net](http://bazzline.net/)
     * updated dependencies
 * [2.0.4](https://github.com/bazzline/php_component_locator_generator/tree/2.0.4) - released at 19.09.2015
