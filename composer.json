@@ -24,9 +24,9 @@
         "net_bazzline/php_component_process_pipe": "1.0.*"
     },
     "require-dev": {
-        "mikey179/vfsstream": "1.5.0",
+        "mikey179/vfsstream": "1.6.0",
         "mockery/mockery": "0.9.4",
-        "phpunit/phpunit": "4.8.*"
+        "phpunit/phpunit": ">=4.8.16"
     },
     "autoload": {
         "psr-0": {
