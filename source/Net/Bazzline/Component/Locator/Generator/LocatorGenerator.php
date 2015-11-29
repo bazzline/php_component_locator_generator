@@ -139,6 +139,9 @@ class LocatorGenerator extends AbstractGenerator
             );
 
             if ($this->configuration->hasFactoryInstances()) {
+                $classGenerator = $this->addImplementsLocatorInterface(
+                    $classGenerator
+                );
                 $classGenerator = $this->addFactoryInstancePooling(
                     $this->blockGeneratorFactory,
                     $classGenerator,
@@ -517,6 +520,20 @@ class LocatorGenerator extends AbstractGenerator
 
             $classGenerator->addMethod($method);
         }
+
+        return $classGenerator;
+    }
+
+    /**
+     * @param ClassGenerator $classGenerator
+     * @return ClassGenerator
+     */
+    private function addImplementsLocatorInterface(
+        ClassGenerator $classGenerator
+    )
+    {
+        $classGenerator->addUse('Net\Bazzline\Component\Locator\LocatorInterface', 'LocatorInterface');
+        $classGenerator->addImplements('LocatorInterface');
 
         return $classGenerator;
     }
