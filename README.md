@@ -233,6 +233,8 @@ The API is available at [www.bazzline.net](http://bazzline.net/46d8f78c8f722a707
         * split readme into multiple files
         * use "net_bazzline/php_component_cli_environment" to create "net_bazzline_generate_locator"
         * use "net_bazzline/php_component_cli_environment" to create "net_bazzline_generate_locator_configuration <Array|PropelSchemaXml|PropelWithNamespaceSchemaXml> <output file path>"
+* [2.0.7](https://github.com/bazzline/php_component_locator_generator/tree/2.0.7) - released at 01.12.2015
+    * updated dependencies
 * [2.0.6](https://github.com/bazzline/php_component_locator_generator/tree/2.0.6) - released at 29.11.2015
     * fixed issue [6](https://github.com/bazzline/php_component_locator_generator/issues/6)
     * fixed issue [7](https://github.com/bazzline/php_component_locator_generator/issues/7)
