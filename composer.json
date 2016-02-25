@@ -37,7 +37,7 @@
         "net_bazzline/php_component_process_pipe": "1.0.*"
     },
     "require-dev": {
-        "mikey179/vfsstream": "1.6.1",
+        "mikey179/vfsstream": "1.6.2",
         "mockery/mockery": "0.9.4",
         "phpunit/phpunit": "~4.8||~5.1"
     },
