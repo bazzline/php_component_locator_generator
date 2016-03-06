@@ -147,14 +147,14 @@ The Locator is taking care of the instance pooling.
 # Terms
 
 * Assembler
-    * implements the [AssemblerInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Net/Bazzline/Component/Locator/Configuration/Assembler/AssemblerInterface.php)
-    * implements the way the [Configuration](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Net/Bazzline/Component/Locator/Configuration.php) is filled with data
+    * implements the [AssemblerInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Configuration/Assembler/AssemblerInterface.php)
+    * implements the way the [Configuration](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Configuration.php) is filled with data
 * MethodBodyBuilder
-    * implements the [MethodBodyBuilderInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Net/Bazzline/Component/Locator/MethodBodyBuilder/MethodBodyBuilderInterface.php)
+    * implements the [MethodBodyBuilderInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/MethodBodyBuilder/MethodBodyBuilderInterface.php)
     * provides a way to extend a instance creation method body
     * provides a way to extend the method documentation
 * FileExistsStrategy
-    * implements the [FileExistsStrategyInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Net/Bazzline/Component/Locator/FileExistsStrategy/FileExistsStrategyInterface.php)
+    * implements the [FileExistsStrategyInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/FileExistsStrategy/FileExistsStrategyInterface.php)
     * provides a way to deal with the fact a generated file exists already
 
 # Benefits
@@ -169,7 +169,7 @@ The Locator is taking care of the instance pooling.
     * optional array key is
         * boostrap_file
     * rest of configuration is based on the given assembler
-* shipped with two [assembler](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Net/Bazzline/Component/Locator/Configuration/Assembler) implementations
+* shipped with two [assembler](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Configuration/Assembler) implementations
     * FromArrayAssembler
         * mandatory array keys
             * class_name <string>
@@ -197,19 +197,19 @@ The Locator is taking care of the instance pooling.
             * namespace <string> (can be empty)
             * path_to_schema_xml <string>
             * uses <array> (can be empty)
-    * implement the [AssemblerInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Net/Bazzline/Component/Locator/Configuration/Assembler/AssemblerInterface.php) to write your own assembler
+    * implement the [AssemblerInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Configuration/Assembler/AssemblerInterface.php) to write your own assembler
 * shipped with two file exists strategies
     * DeleteStrategy
     * SuffixWithCurrentTimestampStrategy
-    * implement the [FileExistsStrategyInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Net/Bazzline/Component/Locator/FileExistsStrategy/FileExistsStrategyInterface.php) to write your own strategy
-* shipped with five [method body builder](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Net/Bazzline/Component/Locator/MethodBodyBuilder) implementations
+    * implement the [FileExistsStrategyInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/FileExistsStrategy/FileExistsStrategyInterface.php) to write your own strategy
+* shipped with five [method body builder](https://github.com/bazzline/php_component_locator_generator/blob/master/source/MethodBodyBuilder) implementations
     * FetchFromFactoryInstancePoolBuilder used internally by the generated locator
     * FetchFromSharedInstancePoolBuilder used internally by the generated locator
     * FetchFromSharedInstancePoolOrCreateByFactoryBuilder used internally by the generated locator
     * NewInstanceBuilder used internally by the generated locator
     * PropelQueryCreateBuilder as an example to use your own method body builder
     * [ValidatedInstanceCreationBuilder](https://github.com/bazzline/php_component_locator_generator/blob/master/example/ArrayConfiguration/ValidatedInstanceCreationBuilder.php) as an additional example how to use the power of the method body builder support to generate own instance creation code
-    * implement the [MethodBodyBuilderInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/Net/Bazzline/Component/Locator/MethodBodyBuilder/MethodBodyBuilderInterface.php) to write your own method body builder
+    * implement the [MethodBodyBuilderInterface](https://github.com/bazzline/php_component_locator_generator/blob/master/source/MethodBodyBuilder/MethodBodyBuilderInterface.php) to write your own method body builder
 * uses separate [component](https://github.com/stevleibelt/php_component_code_generator) for php code generation
 
 # API
