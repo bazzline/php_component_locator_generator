@@ -1,7 +1,3 @@
-# Full Stop
-
-I still like the idea but there is currently no use case to develop it anymore.
-
 # Locator Generator
 
 This free as in freedom component easy up locator generation based on configuration files.
